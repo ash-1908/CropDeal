@@ -17,7 +17,7 @@ import com.demo.cropdeal.cropitems.service.CropitemService;
 
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/crops")
 public class CropitemController {
 
 	private CropitemService cropitemService;
