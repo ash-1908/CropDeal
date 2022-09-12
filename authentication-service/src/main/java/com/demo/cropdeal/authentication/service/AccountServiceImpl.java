@@ -15,6 +15,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class AccountServiceImpl implements UserDetailsService, IAccountService {
@@ -36,11 +37,11 @@ public class AccountServiceImpl implements UserDetailsService, IAccountService {
 	
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UserNotFoundException {
-		Account user = repository.findByEmail(email);
-		if (user == null) {
+		Optional<Account> user = repository.findByEmail(email);
+		if (user.isEmpty()) {
 			throw new UserNotFoundException("User not found with given email: " + email);
 		}
-		return user;
+		return user.get();
 	}
 	
 	@Override
@@ -50,8 +51,8 @@ public class AccountServiceImpl implements UserDetailsService, IAccountService {
 		}
 		
 		// check if account object already exist in database
-		Account dataFromDb = repository.findByEmail(req.getEmail());
-		if (Objects.isNull(dataFromDb)) {
+		Optional<Account> dataFromDb = repository.findByEmail(req.getEmail());
+		if (dataFromDb.isEmpty()) {
 			// if account object doesn't already exist in database
 			// save the account object into database
 			String encryptedPwd = passwordEncoder.encode(req.getPassword());
@@ -73,8 +74,9 @@ public class AccountServiceImpl implements UserDetailsService, IAccountService {
 		}
 		
 		// check if account object exist in database
-		Account account = repository.findByEmail(req.getEmail());
-		if (!Objects.isNull(account)) {
+		Optional<Account> accountData = repository.findByEmail(req.getEmail());
+		if (accountData.isPresent()) {
+			Account account = accountData.get();
 			// check if password is correct
 			if (passwordEncoder.matches(req.getPassword(), account.getPassword())) {
 				String JWT_TOKEN = jwtUtil.generateToken(account);
@@ -91,8 +93,8 @@ public class AccountServiceImpl implements UserDetailsService, IAccountService {
 	public Boolean validateOTP(MyRequestModel req) {
 		String otp = req.getResetCode();
 		if (otp != null && !otp.isBlank()) {
-			Account account = repository.findByResetCode(otp);
-			return account != null;
+			Optional<Account> accountData = repository.findByResetCode(otp);
+			return accountData.isPresent();
 		}
 		return false;
 	}
@@ -105,9 +107,10 @@ public class AccountServiceImpl implements UserDetailsService, IAccountService {
 		
 		String password = req.getPassword();
 		
-		Account account = repository.findByResetCode(resetToken);
+		Optional<Account> accountData = repository.findByResetCode(resetToken);
 		
-		if (account != null && account.getResetCode().equals(resetToken)) {
+		if (accountData.isPresent() && accountData.get().getResetCode().equals(resetToken)) {
+			Account account = accountData.get();
 			String encryptedPassword = passwordEncoder.encode(password);
 			account.setPassword(encryptedPassword);
 			account.setResetCode(null);
@@ -123,10 +126,11 @@ public class AccountServiceImpl implements UserDetailsService, IAccountService {
 	public String forgotPassword(String url, String email, String method) {
 		if (email == null || email.isBlank()) throw new InvalidCredentialsException("Email field cannot be empty.");
 		
-		Account account = repository.findByEmail(email);
+		Optional<Account> accountData = repository.findByEmail(email);
 		
-		if (account == null) throw new UserNotFoundException("User with email: " + email + " not found.");
+		if (accountData.isEmpty()) throw new UserNotFoundException("User with email: " + email + " not found.");
 
+		Account account = accountData.get();
 //		if method value is otp, only then we will send sms, else we will send email
 		if (method.equalsIgnoreCase("otp")) {
 			
@@ -161,11 +165,14 @@ public class AccountServiceImpl implements UserDetailsService, IAccountService {
 //		get the subject from token
 		String subject = jwtUtil.getUsernameFromToken(token);
 //		fetch the data from backend
-		Account account = repository.findByEmail(subject);
+		Optional<Account> accountData = repository.findByEmail(subject);
+		if(accountData.isPresent()) {
+			Account account = accountData.get();
 //		validate
-		if (jwtUtil.validateToken(token, account)) {
-			account.setPassword(null);
-			return new MyResponseModel(jwtUtil.generateToken(account));
+			if (jwtUtil.validateToken(token, account)) {
+				account.setPassword(null);
+				return new MyResponseModel(jwtUtil.generateToken(account));
+			}
 		}
 		throw new UserNotFoundException("Invalid token");
 	}

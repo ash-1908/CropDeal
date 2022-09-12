@@ -37,7 +37,7 @@ public class AuthRestController {
 //	SIGN UP EMAIL
 	
 	@Operation(summary = "Sign up using email", description = "User can sign up using an email, password, and full name" +
-		". On successful sign in, this route returns a jwt token.", tags = {"Sign up"})
+		". On successful sign in, this route returns a jwt token.", tags = {"Authentication"})
 	@PostMapping("/signup")
 	public ResponseEntity<MyResponseModel> signUpWithEmail(@RequestBody MyRequestModel req) {
 		
@@ -47,7 +47,7 @@ public class AuthRestController {
 //	SIGN IN EMAIL
 	
 	@Operation(summary = "Sign in using email", description = "User can sign in using an email and password. On " +
-		"successful sign in, this route returns a jwt token.", tags = {"Sign in"})
+		"successful sign in, this route returns a jwt token.", tags = {"Authentication"})
 	@PostMapping("/signin")
 	public ResponseEntity<MyResponseModel> signInWithEmail(@RequestBody MyRequestModel req) {
 		
@@ -77,13 +77,15 @@ public class AuthRestController {
 	
 	//	VALIDATE OTP
 	@Operation(summary = "Validate OTP", description = "This route is for password reset using SMS.",
-		tags = {"Reset " + "password"})
+		tags = {"Reset password"})
 	@PostMapping("/otp-reset")
 	public ResponseEntity<Boolean> validateOTP(@RequestBody MyRequestModel req) {
 		
 		return ResponseEntity.ok(accountServiceImpl.validateOTP(req));
 	}
 	
+	@Operation(summary = "Validate JWT token", description = "This route is for validating JWT token.",
+		tags = {"Validation"})
 	@PostMapping("/validate-token")
 	public ResponseEntity<MyResponseModel> validateToken(@RequestParam String token) {
 		return ResponseEntity.ok(accountServiceImpl.validateToken(token));
