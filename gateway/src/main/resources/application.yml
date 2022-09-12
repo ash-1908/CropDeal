@@ -1,0 +1,28 @@
+server.port: 8090
+#API GATEWAY CONFIG
+spring:
+  application.name: gateway
+  cloud.gateway:
+    discovery.locator:
+      lower-case-service-id: true
+      enabled: true
+    routes:
+    - id: crops-id
+      uri: http://cropitem-ms
+      predicates:
+        Path=/crop/**
+    - id: user-id
+      uri: http://user
+      predicates:
+        Path=/user/**
+    - id: auth-id
+      uri: http://auth
+      predicates:
+        Path=/auth
+
+#EUREKA CLIENT CONFIG
+eureka:
+  client:
+    service-url:
+      default-zone: 'http://localhost:8761/eureka'
+  instance.prefer-ip-address: true

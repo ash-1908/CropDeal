@@ -1,0 +1,57 @@
+<div class="positition-relative">
+  <div
+    class="position-absolute top-50 start-50 translate-middle bg-secondary rounded p-4 w-auto"
+    style="--bs-bg-opacity: 0.3"
+  >
+    <header>
+      <h3>Sign in</h3>
+    </header>
+    <main>
+      <div>
+        <form action="">
+          <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label"
+              >Email</label
+            >
+            <input
+              type="email"
+              class="form-control form-control-sm"
+              id="exampleFormControlInput1"
+              placeholder="name@example.com"
+            />
+          </div>
+          <div class="mb-1">
+            <label for="exampleFormControlTextarea1" class="form-label"
+              >Password</label
+            >
+            <input
+              type="password"
+              class="form-control form-control-sm"
+              id="exampleFormControlTextarea1"
+              placeholder="password"
+            />
+          </div>
+          <div class="mb-2">
+            <small>
+              <a [routerLink]="['../forgot-password']">Forgot password ?</a>
+            </small>
+          </div>
+          <div>
+            <button type="button" class="btn btn-primary mb-3 w-100">
+              Sign in
+            </button>
+          </div>
+        </form>
+      </div>
+    </main>
+    <footer class="d-flex flex-column align-items-center">
+      
+      <div>
+        <small>
+          Don't have an account ? Click here to
+          <span><a [routerLink]="['../signup']">Sign up</a></span>
+        </small>
+      </div>
+    </footer>
+  </div>
+</div>
