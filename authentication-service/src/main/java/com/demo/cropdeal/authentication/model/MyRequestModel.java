@@ -68,12 +68,13 @@ public class MyRequestModel {
 	//	util methods to validate
 	public Boolean signUpValidation() {
 		// returns true if object is valid
-		return !email.isBlank() && !password.isBlank() && !fullName.isBlank() && active && !roles.isBlank();
+		return (email != null && !email.isBlank()) && (password != null && !password.isBlank()) &&
+			(fullName != null && !fullName.isBlank()) && (active != null && active) && (roles != null && !roles.isBlank());
 	}
 	
 	public Boolean signInValidation() {
 		// returns true if object is valid
-		return !email.isBlank() && !password.isBlank();
+		return (email != null && !email.isBlank()) && (password!= null && !password.isBlank());
 	}
 	
 	public Boolean resetPasswordValidation() {
