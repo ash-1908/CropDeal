@@ -1,4 +1,4 @@
-package com.demo.cropdeal.cropitems;
+package com.demo.cropdeal.cropitems.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
