@@ -16,7 +16,7 @@ import com.cropdeal.billservice1.entity.Bill;
 import com.cropdeal.billservice1.service.BillService;
 
 @RestController
-@RequestMapping("/bills")
+@RequestMapping("/bill")
 public class BillRestController {
 
         @Autowired

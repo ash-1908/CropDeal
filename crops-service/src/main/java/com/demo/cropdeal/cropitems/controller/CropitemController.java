@@ -17,7 +17,7 @@ import com.demo.cropdeal.cropitems.service.CropitemService;
 
 
 @RestController
-@RequestMapping("/crops")
+@RequestMapping("/crop")
 public class CropitemController {
 
 	private CropitemService cropitemService;
@@ -28,27 +28,27 @@ public class CropitemController {
 	}
 	
 	// build create cropitem REST API
-	@PostMapping("/cropitems/")
+	@PostMapping("/items")
 	public ResponseEntity<Cropitem> savecropItem(@RequestBody Cropitem cropitem){
 	return new ResponseEntity<Cropitem>(cropitemService.savecropItem(cropitem),HttpStatus.CREATED);	
 	}
 	
 	// build get all cropitems REST API
-	@GetMapping("/cropitems/")
+	@GetMapping("/items")
 	public List<Cropitem> getAllcropItems(){
 		return cropitemService.getAllcropItems();
 	}
 	
 	// build get cropitem by id REST API
 		// http://localhost:8085/api/cropitems/1
-	@GetMapping("/cropitems/{cropid}")
+	@GetMapping("/items/{cropid}")
 	public ResponseEntity<Cropitem> getcropItemById(@PathVariable("cropid")long cropitemId){
 		return new ResponseEntity<Cropitem>(cropitemService.getcropItemById(cropitemId),HttpStatus.OK);
 	}
 	
 	// build update cropitem REST API
 		// http://localhost:8085/api/cropitems/1
-	@PutMapping("/cropitems/{cropid}")
+	@PutMapping("/items/{cropid}")
 	public ResponseEntity<Cropitem> updatecropItem(@PathVariable("cropid") long cropid
 			             ,@RequestBody Cropitem cropitem){
 		return new ResponseEntity<Cropitem>(cropitemService.updatecropItem(cropitem,cropid),HttpStatus.OK);
