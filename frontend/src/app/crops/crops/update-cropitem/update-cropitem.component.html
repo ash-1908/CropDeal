@@ -1,0 +1,40 @@
+
+<div class="row">
+    <div class="card col-md-6 offset-md-3 offset-md-3">
+        <div class="row">
+<h3 class="text-center"> Update Cropitem </h3>
+    <hr />
+    <div class="card-body">
+    <form (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label> Crop Name</label>
+            <input type="text" class="form-control" id="cropname" [(ngModel)]="cropitem.cropname"
+                name="cropname">
+        </div>
+
+        <div class="form-group">
+            <label> Crop Type</label>
+            <input type="text" class="form-control" id="croptype" [(ngModel)]="cropitem.croptype"
+                name="croptype">
+        </div>
+
+        <div class="form-group">
+            <label> Crop Quantity</label>
+            <input type="text" class="form-control" id="cropqnt" [(ngModel)]="cropitem.cropqnt"
+                name="cropqnt">
+        </div>
+
+        <div class="form-group">
+            <label> Crop Price</label>
+            <input type="text" class="form-control" id="cropprice" [(ngModel)]="cropitem.cropprice"
+                name="cropprice">
+        </div>
+
+        <br />
+        <button class="btn btn-success" type="submit">Submit</button>
+    </form>
+
+    </div>
+</div>
+</div>
+</div>
