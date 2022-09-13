@@ -59,6 +59,7 @@ public class AccountServiceImpl implements UserDetailsService, IAccountService {
 			req.setPassword(encryptedPwd);
 			Account account = new Account(req);
 			repository.save(account);
+			account.setPassword(null);
 			String JWT_TOKEN = jwtUtil.generateToken(account);
 			return new MyResponseModel(JWT_TOKEN);
 		}
@@ -79,6 +80,7 @@ public class AccountServiceImpl implements UserDetailsService, IAccountService {
 			Account account = accountData.get();
 			// check if password is correct
 			if (passwordEncoder.matches(req.getPassword(), account.getPassword())) {
+				account.setPassword(null);
 				String JWT_TOKEN = jwtUtil.generateToken(account);
 				return new MyResponseModel(JWT_TOKEN);
 			}
@@ -115,6 +117,7 @@ public class AccountServiceImpl implements UserDetailsService, IAccountService {
 			account.setPassword(encryptedPassword);
 			account.setResetCode(null);
 			repository.save(account);
+			account.setPassword(null);
 			String JWT_TOKEN = jwtUtil.generateToken(account);
 			return new MyResponseModel(JWT_TOKEN);
 		}
@@ -160,20 +163,21 @@ public class AccountServiceImpl implements UserDetailsService, IAccountService {
 	
 	@Override
 	//	helper method for api gateway to validate token
-	public MyResponseModel validateToken(String token) {
-		if (token == null || token.isBlank()) throw new InvalidCredentialsException("Token cannot be empty.");
+	public void validateToken(String token) {
+		if (token == null || token.isBlank()) throw new InvalidSessionException("Unauthenticated.");
 //		get the subject from token
 		String subject = jwtUtil.getUsernameFromToken(token);
+		if(subject == null) throw new InvalidSessionException("Invalid session.");
 //		fetch the data from backend
 		Optional<Account> accountData = repository.findByEmail(subject);
 		if(accountData.isPresent()) {
 			Account account = accountData.get();
 //		validate
-			if (jwtUtil.validateToken(token, account)) {
-				account.setPassword(null);
-				return new MyResponseModel(jwtUtil.generateToken(account));
+			if (!jwtUtil.validateToken(token, account)) {
+				throw new InvalidSessionException("Data out of sync.");
 			}
 		}
-		throw new UserNotFoundException("Invalid token");
+		else
+			throw new InvalidSessionException("Invalid session");
 	}
 }

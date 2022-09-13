@@ -1,5 +1,6 @@
 package com.demo.cropdeal.authentication.security.filters;
 
+import com.demo.cropdeal.authentication.model.Account;
 import com.demo.cropdeal.authentication.security.jwt.JwtUtil;
 import com.demo.cropdeal.authentication.service.AccountServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,10 +42,10 @@ public class MyJwtFilter extends OncePerRequestFilter {
 		}
 //		check validity of the jwt token
 		if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-			UserDetails userDetails = accountServiceImpl.loadUserByUsername(username);
-			if (jwtUtil.validateToken(jwt_token, userDetails)) {
+			Account account = (Account) accountServiceImpl.loadUserByUsername(username);
+			if (jwtUtil.validateToken(jwt_token, account)) {
 				UsernamePasswordAuthenticationToken authToken =
-					new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+					new UsernamePasswordAuthenticationToken(account, null, account.getAuthorities());
 				
 				authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 				

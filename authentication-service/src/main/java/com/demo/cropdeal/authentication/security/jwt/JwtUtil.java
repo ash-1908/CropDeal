@@ -1,5 +1,6 @@
 package com.demo.cropdeal.authentication.security.jwt;
 
+import com.demo.cropdeal.authentication.model.Account;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -53,9 +54,10 @@ public class JwtUtil {
 	}
 	
 	//generate token for user
-	public String generateToken(UserDetails userDetails) {
+	public String generateToken(Account account) {
 		Map<String, Object> claims = new HashMap<>();
-		return doGenerateToken(claims, userDetails.getUsername());
+		claims.put("accountInfo", account);
+		return doGenerateToken(claims, account.getUsername());
 	}
 	
 	//while creating the token -
@@ -73,8 +75,8 @@ public class JwtUtil {
 	}
 	
 	//validate token
-	public Boolean validateToken(String token, UserDetails userDetails) {
+	public Boolean validateToken(String token, Account account) {
 		final String username = getUsernameFromToken(token);
-		return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
+		return (username.equals(account.getUsername()) && !isTokenExpired(token));
 	}
 }

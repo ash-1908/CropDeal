@@ -1,6 +1,7 @@
 package com.demo.cropdeal.authentication.service;
 
 
+import com.demo.cropdeal.authentication.model.Account;
 import com.demo.cropdeal.authentication.model.MyRequestModel;
 import com.demo.cropdeal.authentication.model.MyResponseModel;
 
@@ -15,7 +16,7 @@ interface IAccountService {
 	
 	String forgotPassword(String url, String email, String method);
 	
-	MyResponseModel validateToken(String token);
+	void validateToken(String token);
 	
 	
 }
