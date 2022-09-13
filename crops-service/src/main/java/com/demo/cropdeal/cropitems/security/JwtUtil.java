@@ -1,18 +1,15 @@
-package com.demo.cropdeal.authentication.security.jwt;
+package com.demo.cropdeal.cropitems.security;
 
-import com.demo.cropdeal.authentication.model.Account;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
@@ -42,7 +39,7 @@ public class JwtUtil {
 		return claimsResolver.apply(claims);
 	}
 	
-	private Claims getAllClaimsFromToken(String token) {
+	protected Claims getAllClaimsFromToken(String token) {
 		SecretKey signingKey = getSigningKey();
 		return Jwts.parserBuilder().setSigningKey(signingKey).build().parseClaimsJws(token).getBody();
 	}
@@ -54,11 +51,11 @@ public class JwtUtil {
 	}
 	
 	//generate token for user
-	public String generateToken(Account account) {
-		Map<String, Object> claims = new HashMap<>();
-		claims.put("accountInfo", account);
-		return doGenerateToken(claims, account.getUsername());
-	}
+//	public String generateToken(Account account) {
+//		Map<String, Object> claims = new HashMap<>();
+//		claims.put("accountInfo", account);
+//		return doGenerateToken(claims, account.getUsername());
+//	}
 	
 	//while creating the token -
 	//1. Define  claims of the token, like Issuer, Expiration, Subject, and the ID
@@ -68,15 +65,14 @@ public class JwtUtil {
 	private String doGenerateToken(Map<String, Object> claims, String subject) {
 		SecretKey signingKey = getSigningKey();
 //		5 hours expiration time
-		return Jwts.builder().setClaims(claims).setSubject(subject)
-			.setIssuedAt(new Date(System.currentTimeMillis()))
+		return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
 			.setExpiration(new Date(System.currentTimeMillis() + (5 * 60 * 60 * 1000)))
 			.signWith(signingKey, SignatureAlgorithm.HS256).compact();
 	}
 	
 	//validate token
-	public Boolean validateToken(String token, Account account) {
-		final String username = getUsernameFromToken(token);
-		return (username.equals(account.getUsername()) && !isTokenExpired(token));
-	}
+//	public Boolean validateToken(String token, Account account) {
+//		final String username = getUsernameFromToken(token);
+//		return (username.equals(account.getUsername()) && !isTokenExpired(token));
+//	}
 }

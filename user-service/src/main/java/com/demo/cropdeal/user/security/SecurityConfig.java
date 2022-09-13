@@ -1,4 +1,4 @@
-package com.cropdeal.billservice1.security;
+package com.demo.cropdeal.user.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -11,11 +11,11 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @EnableWebSecurity
 @Configuration
-public class SecurityConfiguration {
+public class SecurityConfig {
 	private final JwtFilter myJwtFilter;
 	
 	@Autowired
-	public SecurityConfiguration(JwtFilter myJwtFilter) {
+	public SecurityConfig(JwtFilter myJwtFilter) {
 		this.myJwtFilter = myJwtFilter;
 	}
 	
@@ -27,3 +27,5 @@ public class SecurityConfiguration {
 		return http.build();
 	}
 }
+
+

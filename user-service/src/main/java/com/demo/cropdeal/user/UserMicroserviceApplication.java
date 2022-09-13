@@ -26,7 +26,7 @@ public class UserMicroserviceApplication {
 	public Docket swaggerConfiguration() {
 		return new Docket(DocumentationType.SWAGGER_2)
 				.select()
-				.paths(PathSelectors.ant("/users/**"))
+				.paths(PathSelectors.ant("/user/**"))
 				.apis(RequestHandlerSelectors.basePackage("com.demo.cropdeal"))
 				.build()
 				.apiInfo(apiDetails());

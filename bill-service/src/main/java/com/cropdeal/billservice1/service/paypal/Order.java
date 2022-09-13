@@ -1,4 +1,4 @@
-package com.cropdeal.billservice1;
+package com.cropdeal.billservice1.service.paypal;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

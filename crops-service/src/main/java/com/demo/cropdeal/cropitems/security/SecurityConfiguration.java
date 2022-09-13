@@ -1,4 +1,4 @@
-package com.cropdeal.billservice1.security;
+package com.demo.cropdeal.cropitems.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

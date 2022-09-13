@@ -1,5 +1,6 @@
 package com.demo.cropdeal.authentication.controller;
 
+import com.demo.cropdeal.authentication.model.Account;
 import com.demo.cropdeal.authentication.model.MyRequestModel;
 import com.demo.cropdeal.authentication.model.MyResponseModel;
 import com.demo.cropdeal.authentication.security.MyAuthenticationManager;
@@ -87,7 +88,7 @@ public class AuthRestController {
 	@Operation(summary = "Validate JWT token", description = "This route is for validating JWT token.",
 		tags = {"Validation"})
 	@PostMapping("/validate-token")
-	public ResponseEntity<MyResponseModel> validateToken(@RequestParam String token) {
-		return ResponseEntity.ok(accountServiceImpl.validateToken(token));
+	public void validateToken(@RequestParam String token) {
+		accountServiceImpl.validateToken(token);
 	}
 }

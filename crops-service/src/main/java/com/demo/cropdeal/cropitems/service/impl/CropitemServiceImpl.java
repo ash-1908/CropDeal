@@ -8,7 +8,7 @@ import com.demo.cropdeal.cropitems.service.CropitemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.demo.cropdeal.cropitems.EmailSenderService;
+import com.demo.cropdeal.cropitems.service.EmailSenderService;
 import com.demo.cropdeal.cropitems.model.Cropitem;
 
 

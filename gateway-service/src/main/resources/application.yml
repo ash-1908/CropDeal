@@ -8,18 +8,21 @@ spring:
       enabled: true
     routes:
     - id: crops-id
-      uri: http://cropitem-ms
+      uri: http://crops
       predicates:
-        Path=/crop/**
+        Path=/crops/**
     - id: user-id
-      uri: http://user
+      uri: http://users
       predicates:
         Path=/user/**
     - id: auth-id
       uri: http://auth
       predicates:
-        Path=/auth
-
+        Path=/auth/**
+    - id: bill-id
+      uri: http://bills
+      predicates:
+        Path=/bills/**
 #EUREKA CLIENT CONFIG
 eureka:
   client:
