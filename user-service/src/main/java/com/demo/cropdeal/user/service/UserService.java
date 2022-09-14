@@ -111,13 +111,48 @@ public class UserService implements IUserService{
 		return null;
 	}
 	
+	
+	public User getUserByEmail(String email) {
+		
+		/*
+		 * if user data is present in database then return user
+		 * 
+		 * For this fetch user using the given email id
+		 * check if user is not null 
+		 *   -if not null then return user data
+		 * 
+		 */
+		
+		var user = userRepository.getByEmailId(email);
+		if(user!=null) {
+			return user; 
+		}
+		
+		return null;
+	}
+	
+	
+public User getUserByUsername(String username) {
+		
+
+		var user = userRepository.getByUserName(username);
+		if(user!=null) {
+			return user; 
+		}
+		
+		return null;
+	}
+	
+	
+	
+	
 	public List<User> getAllUsers() {
 		List<User> users=userRepository.findAll();
-		if(users!=null) {
+	if(users!=null) {
 			return users;
-		}
-		else
-			return new ArrayList<>();
+	}
+	else
+		return new ArrayList<>();
 		
 	}
 	
@@ -156,7 +191,7 @@ public class UserService implements IUserService{
        */
         
 		if(user!=null) {
-		if(user.getEmailId()!=null ) {
+		if(user.getEmailId()!=null && user.getEmailId().isBlank()==false ) {
 			user1.setEmailId(user.getEmailId());
 		}
 		if((user.getMobileNo()!=0)) {
@@ -165,7 +200,7 @@ public class UserService implements IUserService{
 		if(user.getPassword()!=null ) {
 			user1.setPassword(user.getPassword());
 		}
-		if(user.getUserFullName()!=null ) {
+		if(user.getUserFullName().length()!=0 ) {
 			user1.setUserFullName(user.getUserFullName());
 		}
 		if(user.getUserType()!=null ) {
@@ -199,24 +234,24 @@ public class UserService implements IUserService{
 		var bank1=user1.getBank();
 	    if(user.getBank()!=null) {
 		
-		if(user.getBank().getAccountHolderName()!=null ) {
+		if(user.getBank().getAccountHolderName()!=null &&user.getBank().getAccountHolderName().isBlank()==false) {
 		bank1.setAccountHolderName(user.getBank().getAccountHolderName());
 		}
 		
-		if(user.getBank().getAccountNo()!=null ) {
+		if(user.getBank().getAccountNo()!=null &&user.getBank().getAccountNo()!=0) {
 		bank1.setAccountNo(user.getBank().getAccountNo());
 		}
 		
-		if(user.getBank().getBankBranch()!=null ) {
+		if(user.getBank().getBankBranch()!=null &&user.getBank().getBankBranch().isBlank()==false) {
 		bank1.setBankBranch(user.getBank().getBankBranch());
 		}
 		
 		
-         if(user.getBank().getBankIFSC()!=null ) {
+         if(user.getBank().getBankIFSC()!=null &&user.getBank().getBankIFSC().isBlank()==false) {
         	 bank1.setBankIFSC(user.getBank().getBankIFSC());
 		}
 
-         if(user.getBank().getBankName()!=null ) { 
+         if(user.getBank().getBankName()!=null&&user.getBank().getBankName().isBlank()==false ) { 
     	   bank1.setBankName(user.getBank().getBankName());
          }
          
@@ -234,21 +269,21 @@ public class UserService implements IUserService{
          var address1 =user1.getAddress();
          if(user.getAddress()!=null) {
          
-		    if(user.getAddress().getCity()!=null ) {
+		    if(user.getAddress().getCity()!=null && user.getAddress().getCity().isBlank()==false) {
 		    	address1.setCity(user.getAddress().getCity());
 		    }
         
-		    if(user.getAddress().getCountry()!=null ) {
+		    if(user.getAddress().getCountry()!=null && user.getAddress().getCountry().isBlank()==false) {
 		    	address1.setCountry(user.getAddress().getCountry());
 		    }
  
           
-		    if(user.getAddress().getHouseNo()!=null ) {
+		    if(user.getAddress().getHouseNo()!=null && user.getAddress().getHouseNo().isBlank()==false) {
 		    	address1.setHouseNo(user.getAddress().getHouseNo());
 		    }
 		
 
-		    if(user.getAddress().getLocalityName()!=null ) {
+		    if(user.getAddress().getLocalityName()!=null && user.getAddress().getLocalityName().isBlank()==false) {
 		    	address1.setLocalityName(user.getAddress().getLocalityName());
 		    }
         
@@ -257,12 +292,12 @@ public class UserService implements IUserService{
 		    }
 
 		
-		    if(user.getAddress().getState()!=null ) {
+		    if(user.getAddress().getState()!=null && user.getAddress().getState().isBlank()==false ) {
 		    	address1.setState(user.getAddress().getState());
         
 		    }
         
-		    if(user.getAddress().getStreetName()!=null ) {
+		    if(user.getAddress().getStreetName()!=null && user.getAddress().getStreetName().isBlank()==false) {
 		    	address1.setStreetName(user.getAddress().getStreetName());
 		    }
 		

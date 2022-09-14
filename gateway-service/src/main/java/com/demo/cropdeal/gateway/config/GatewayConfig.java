@@ -10,7 +10,7 @@ public class GatewayConfig {
 	@Bean
 	public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
 		http
-			.csrf(csrf -> csrf.disable());
+			.csrf(csrf -> csrf.disable()).cors().disable();
 		return http.build();
 	}
 }

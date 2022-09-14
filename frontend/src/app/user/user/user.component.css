@@ -1,0 +1,20 @@
+img{
+    width:150px;
+   padding-left: 40px;
+   padding-top: 40px;
+}
+
+.card{
+    margin-top: 20px;
+    margin-left: 20px;
+    box-shadow: 8px 6px rgb(175, 174, 174);
+}
+
+h2{
+    padding-left: 20px;
+}
+
+.h4{
+    padding-left: 45px;
+  
+}
