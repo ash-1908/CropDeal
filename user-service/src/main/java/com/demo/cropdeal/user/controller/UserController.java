@@ -14,6 +14,7 @@ import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("/user")
+@CrossOrigin("*")
 public class UserController {
 	
 	@Autowired
@@ -52,6 +53,20 @@ public class UserController {
 	public ResponseEntity<List<User>> getAllUsers() {
 		
 		return new ResponseEntity<>(userService.getAllUsers(),
+				 HttpStatus.OK);
+	}
+	
+	@GetMapping("/get-user-by-email/{email}")
+	public ResponseEntity<User> getUserByEmail(@PathVariable String email ) {
+		
+		return new ResponseEntity<>(userService.getUserByEmail(email),
+				 HttpStatus.OK);
+	}
+	
+	@GetMapping("/get-user-username/{username}")
+	public ResponseEntity<User> getUserByUsername(@PathVariable String username ) {
+		
+		return new ResponseEntity<>(userService.getUserByUsername(username),
 				 HttpStatus.OK);
 	}
 	
