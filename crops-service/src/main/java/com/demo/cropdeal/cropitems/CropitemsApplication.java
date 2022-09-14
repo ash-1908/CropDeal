@@ -28,7 +28,7 @@ public class CropitemsApplication {
 	public Docket swaggerConfiguration() {
 		return new Docket(DocumentationType.SWAGGER_2)
 				.select()
-				.paths(PathSelectors.ant("/crop/*/*"))
+				.paths(PathSelectors.ant("/api/v1/**"))
 				.apis(RequestHandlerSelectors.basePackage("com.demo.cropdeal"))
 				.build()
 				.apiInfo(apiDetails());

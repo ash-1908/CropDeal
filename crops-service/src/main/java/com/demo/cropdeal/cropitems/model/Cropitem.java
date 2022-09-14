@@ -27,8 +27,6 @@ public class Cropitem {
 	@Column(name = "crop_price")
 	private String cropprice;
 	
-	
-
 	/*public long getId() {
 		return cropid;
 	}

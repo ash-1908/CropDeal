@@ -8,7 +8,7 @@ import { Cropitem } from './cropitem';
 })
 export class CropitemService {
 
-  private baseURL = "http://localhost:8084/api/v1/cropitems/";
+  private baseURL = "http://localhost:8083/api/v1/cropitems/";
 
   constructor(private httpClient:HttpClient) { }
 
