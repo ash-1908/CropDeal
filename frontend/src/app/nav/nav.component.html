@@ -1,4 +1,7 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light position-relative" style="z-index: 1;">
+<nav
+  class="navbar navbar-expand-lg navbar-light bg-light position-relative"
+  style="z-index: 1"
+>
   <div class="container-fluid">
     <a class="navbar-brand" routerLink="">Crop Deal</a>
     <a
@@ -19,13 +22,9 @@
     >
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
+    <!-- buttons for authenticated user -->
+    <div *ngIf="authenticated" class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
-          <a class="nav-link" routerLink="auth" routerLinkActive="active-link"
-            >Auth</a
-          >
-        </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="user" routerLinkActive="active-link"
             >User</a
@@ -33,7 +32,7 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="bill" routerLinkActive="active-link"
-            >Bill</a
+            >Bills</a
           >
         </li>
         <li class="nav-item">
@@ -41,9 +40,14 @@
             >Crops</a
           >
         </li>
+      </ul>
+    </div>
+    <!-- buttons for un-authenticated user -->
+    <div *ngIf="!authenticated" class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
         <li class="nav-item">
-          <a class="nav-link" routerLink="rating" routerLinkActive="active-link"
-            >Rating</a
+          <a class="nav-link" routerLink="auth" routerLinkActive="active-link"
+            >Sign in</a
           >
         </li>
       </ul>
