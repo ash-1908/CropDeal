@@ -1,4 +1,4 @@
-package com.demo.cropdeal.authentication.security.jwt;
+package com.demo.cropdeal.authentication.security.util;
 
 import com.demo.cropdeal.authentication.model.Account;
 import io.jsonwebtoken.Claims;
@@ -7,7 +7,6 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
@@ -30,6 +29,10 @@ public class JwtUtil {
 	//retrieve username from jwt token
 	public String getUsernameFromToken(String token) {
 		return getClaimFromToken(token, Claims::getSubject);
+	}
+	
+	public String getRoleFromToken(String token) {
+		return getAllClaimsFromToken(token).get("role", String.class);
 	}
 	
 	//retrieve expiration date from jwt token
@@ -56,7 +59,8 @@ public class JwtUtil {
 	//generate token for user
 	public String generateToken(Account account) {
 		Map<String, Object> claims = new HashMap<>();
-		claims.put("accountInfo", account);
+		claims.put("role", account.getRoles());
+		claims.put("name", account.getFullName());
 		return doGenerateToken(claims, account.getUsername());
 	}
 	
@@ -77,6 +81,8 @@ public class JwtUtil {
 	//validate token
 	public Boolean validateToken(String token, Account account) {
 		final String username = getUsernameFromToken(token);
-		return (username.equals(account.getUsername()) && !isTokenExpired(token));
+		final String roles = getRoleFromToken(token);
+		
+		return (username.equals(account.getUsername()) && account.getRoles().equals(roles) && !isTokenExpired(token));
 	}
 }

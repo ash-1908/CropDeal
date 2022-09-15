@@ -1,10 +1,9 @@
 package com.demo.cropdeal.authentication.controller;
 
-import com.demo.cropdeal.authentication.model.Account;
 import com.demo.cropdeal.authentication.model.MyRequestModel;
 import com.demo.cropdeal.authentication.model.MyResponseModel;
 import com.demo.cropdeal.authentication.security.MyAuthenticationManager;
-import com.demo.cropdeal.authentication.security.jwt.JwtUtil;
+import com.demo.cropdeal.authentication.security.util.JwtUtil;
 import com.demo.cropdeal.authentication.service.AccountServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,7 +87,8 @@ public class AuthRestController {
 	@Operation(summary = "Validate JWT token", description = "This route is for validating JWT token.",
 		tags = {"Validation"})
 	@PostMapping("/validate-token")
-	public void validateToken(@RequestParam String token) {
-		accountServiceImpl.validateToken(token);
+	public Boolean validateToken(@RequestBody MyResponseModel token) {
+		accountServiceImpl.validateToken(token.getJwt());
+		return true;
 	}
 }

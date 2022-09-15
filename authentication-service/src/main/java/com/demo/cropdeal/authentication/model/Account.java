@@ -1,5 +1,8 @@
 package com.demo.cropdeal.authentication.model;
 
+import org.bson.codecs.pojo.annotations.BsonProperty;
+import org.bson.types.ObjectId;
+import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -9,22 +12,17 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
-@Entity
+@Document("user")
 public class Account implements UserDetails {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
-	@Column(length = 60)
+	private ObjectId id;
 	private String email;
-	@Column(length = 60)
 	private String password;
 	private String fullName;
-	private Boolean active;
+	private Boolean active = true;
 	private String roles;
-	@Column(length = 13)
 	private String phoneNumber;
-	@Column(length = 20)
 	private String resetCode = null;
 	
 	public Account() {

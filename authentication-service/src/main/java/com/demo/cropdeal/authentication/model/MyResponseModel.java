@@ -4,6 +4,8 @@ public class MyResponseModel {
 	
 	private String jwt;
 	
+	public MyResponseModel(){}
+	
 	public MyResponseModel(String jwt) {
 		this.jwt = jwt;
 	}

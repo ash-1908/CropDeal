@@ -6,7 +6,7 @@ import com.demo.cropdeal.authentication.exception.handler.PhoneNumberNotFoundExc
 import com.demo.cropdeal.authentication.model.Account;
 import com.demo.cropdeal.authentication.model.MyRequestModel;
 import com.demo.cropdeal.authentication.model.MyResponseModel;
-import com.demo.cropdeal.authentication.security.jwt.JwtUtil;
+import com.demo.cropdeal.authentication.security.util.JwtUtil;
 import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,7 +14,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -129,7 +128,7 @@ public class AccountServiceImpl implements UserDetailsService, IAccountService {
 	public String forgotPassword(String url, String email, String method) {
 		if (email == null || email.isBlank()) throw new InvalidCredentialsException("Email field cannot be empty.");
 		
-		Optional<Account> accountData = repository.findByEmail(email);
+		Optional<Account> accountData =repository.findByEmail(email);
 		
 		if (accountData.isEmpty()) throw new UserNotFoundException("User with email: " + email + " not found.");
 
@@ -169,7 +168,7 @@ public class AccountServiceImpl implements UserDetailsService, IAccountService {
 		String subject = jwtUtil.getUsernameFromToken(token);
 		if(subject == null) throw new InvalidSessionException("Invalid session.");
 //		fetch the data from backend
-		Optional<Account> accountData = repository.findByEmail(subject);
+		Optional<Account> accountData =repository.findByEmail(subject);
 		if(accountData.isPresent()) {
 			Account account = accountData.get();
 //		validate
