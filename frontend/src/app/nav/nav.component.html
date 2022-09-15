@@ -1,51 +1,52 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light position-relative" style="z-index: 1;">
   <div class="container-fluid">
     <a class="navbar-brand" routerLink="">Crop Deal</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <a
+      class="nav-link"
+      routerLink=""
+      routerLinkActive="active-link"
+      [routerLinkActiveOptions]="{ exact: true }"
+      >Home</a
+    >
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
-          <a class="nav-link" routerLink=""  routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}" >Home</a>
+          <a class="nav-link" routerLink="auth" routerLinkActive="active-link"
+            >Auth</a
+          >
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="auth" routerLinkActive="active-link">Auth</a>
+          <a class="nav-link" routerLink="user" routerLinkActive="active-link"
+            >User</a
+          >
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="user" routerLinkActive="active-link">User</a>
+          <a class="nav-link" routerLink="bill" routerLinkActive="active-link"
+            >Bill</a
+          >
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="bill" routerLinkActive="active-link">Bill</a>
+          <a class="nav-link" routerLink="crops" routerLinkActive="active-link"
+            >Crops</a
+          >
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="crops" routerLinkActive="active-link">Crops</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="rating" routerLinkActive="active-link">Rating</a>
+          <a class="nav-link" routerLink="rating" routerLinkActive="active-link"
+            >Rating</a
+          >
         </li>
       </ul>
     </div>
   </div>
 </nav>
-
-<style>
-  img.one{
-      height: 600px;
-      width:1365px;
-  }
-</style>
-
-<div>
-  <img class="one" src="../assets/img/banner.jpg" alt="">
-</div>
-
-
-<footer class = "footer">
-  <div class = "container">
-      <span></span>
-  </div>
-</footer>
-
-
-

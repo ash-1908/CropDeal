@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { HomeComponent } from './home/home.component';
 import { NavComponent } from './nav/nav.component';
 
 const routes: Routes = [
   {
-    path: '', component: NavComponent
+    path: '', component: HomeComponent
   },
   {
     path: 'auth', loadChildren: () => import("./auth/auth.module").then(m => m.AuthModule) 
