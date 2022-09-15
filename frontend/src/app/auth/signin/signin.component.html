@@ -8,28 +8,49 @@
     </header>
     <main>
       <div>
-        <form action="">
-          <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label"
-              >Email</label
-            >
+        <form class="col py-2" #loginForm="ngForm" (ngSubmit)="submitForm()">
+          <div class="row-md-6 mb-4">
+            <label for="email" class="form-label">Email</label>
             <input
               type="email"
+              required
+              [class.is-invalid]="email.touched && email.invalid"
+              [class.is-valid]="email.touched && email.valid"
               class="form-control form-control-sm"
-              id="exampleFormControlInput1"
+              id="email"
+              name="email"
               placeholder="name@example.com"
+              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+              [(ngModel)]="userEmail"
+              #email="ngModel"
             />
+
+            <div class="invalid-feedback position-absolute">Invalid email</div>
           </div>
-          <div class="mb-1">
-            <label for="exampleFormControlTextarea1" class="form-label"
-              >Password</label
-            >
+          <div class="row-md-6 mb-4">
+            <label for="password" class="form-label">Password</label>
             <input
               type="password"
+              required
+              [class.is-invalid]="password.touched && password.invalid"
+              [class.is-valid]="password.touched && password.valid"
               class="form-control form-control-sm"
-              id="exampleFormControlTextarea1"
+              id="password"
+              name="password"
+              pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,10}$"
               placeholder="password"
+              [(ngModel)]="userPassword"
+              #password="ngModel"
             />
+
+            <small
+              style="z-index: 1"
+              class="invalid-feedback position-absolute bg-white w-75 p-2 rounded lh-sm"
+            >
+              Password should be 8-10 characters long.<br />Password should
+              contain atleast:<br />1 uppercase letter<br />1 lowercase
+              letter<br />1 digit<br />1 special character
+            </small>
           </div>
           <div class="mb-2">
             <small>
@@ -37,7 +58,11 @@
             </small>
           </div>
           <div>
-            <button type="button" class="btn btn-primary mb-3 w-100">
+            <button
+              type="submit"
+              [disabled]="loginForm.form.untouched || loginForm.form.invalid"
+              class="btn btn-primary mb-3 w-100"
+            >
               Sign in
             </button>
           </div>
@@ -45,7 +70,6 @@
       </div>
     </main>
     <footer class="d-flex flex-column align-items-center">
-      
       <div>
         <small>
           Don't have an account ? Click here to

@@ -8,7 +8,8 @@ import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
 })
 export class ForgotPwdComponent implements OnInit {
 
-  method = 'email';
+  protected method: string = "";
+  protected userEmail: string = "";
 
   constructor(private router: Router, private route: ActivatedRoute) { }
 
@@ -19,11 +20,9 @@ export class ForgotPwdComponent implements OnInit {
     this.method = method;
   }
 
-  forwardRequest(): void {
-    console.log("hi")
-    if(this.method === 'otp')
-      this.router.navigate(["validate-otp"], {relativeTo: this.route});
-    else
-      this.router.navigate(["reset"], {relativeTo: this.route});
+  protected submitForm() :void {
+    alert(
+      "Email: " + this.userEmail + "\nMethod: " + this.method
+    );
   }
 }

@@ -7,10 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ResetPwdComponent implements OnInit {
   
+  protected userPassword: string = "";
+  protected userRePassword: string = "";
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  protected submitForm() : void {
+    alert(
+      "Password: " + this.userPassword + "\nRe-entered Password: " + this.userRePassword
+    );
   }
 
   
