@@ -1,150 +1,155 @@
 package com.demo.cropdeal.user.dto;
 
 import com.demo.cropdeal.user.model.User;
+import com.demo.cropdeal.user.model.cropItem;
+import io.swagger.annotations.ApiModelProperty;
+import org.bson.types.ObjectId;
+
+import java.util.List;
 
 public class UserDto {
 	
+	@ApiModelProperty(notes = "unique id of user")
+	private ObjectId id;
+	@ApiModelProperty(notes = "The user's full name")
+	private String fullName;
 	
-	  private Long userId ;
-   
-	  private String userFullName ;
+	@ApiModelProperty(notes = "type of user Farmer/Dealer")
+	private String roles;
 	
-      private String userType ;
+	@ApiModelProperty(notes = "unique username of user")
+	private String userName;
 	
-	  private String userName ;
-	  
-	  private String password ; 
-	  
-	  private long mobileNo;
-	  
-	  private String emailId;
+	@ApiModelProperty(notes = "password of  user")
+	private String password;
 	
-	  private  String userStatus ;
-
-	  BankDto bank;
-
-	  AddressDto address;
-	  
-	 
+	@ApiModelProperty(notes = "mobile number of user")
+	private String phoneNumber;
 	
-
-	public UserDto(Long userId, String userFullName, String userType, String userName, String password, long mobileNo,
-			String emailId, String userStatus, BankDto bank, AddressDto address) {
-		super();
-		this.userId = userId;
-		this.userFullName = userFullName;
-		this.userType = userType;
-		this.userName = userName;
-		this.password = password;
-		this.mobileNo = mobileNo;
-		this.emailId = emailId;
-		this.userStatus = userStatus;
-		this.bank = bank;
-		this.address = address;
+	@ApiModelProperty(notes = "email id of user")
+	private String email;
 	
-	}
-
+	
+	@ApiModelProperty(notes = "Activeness of user")
+	private Boolean active;
+	
+	@ApiModelProperty(notes = "User's bank account details")
+	BankDto bank;
+	
+	@ApiModelProperty(notes = "Address of user")
+	AddressDto address;
+	
+	private List<cropItem> cropItems;
+	
 	public UserDto() {
+	}
+	
+	public User getUserFromUserDto(UserDto userDto) {
+		var user = new User();
+		
+		user.setAddress(userDto.address.getAddressFromAddressDto(userDto.getAddress()));
+		user.setBank(userDto.bank.getBankFromBankDto(userDto.getBank()));
+		user.setEmail(userDto.getEmail());
+		user.setPhoneNumber(userDto.getPhoneNumber());
+		user.setPassword(userDto.getPassword());
+		user.setFullName(userDto.getFullName());
+		user.setId(userDto.getId());
+		user.setUserName(userDto.getUserName());
+		user.setActive(userDto.getActive());
+		user.setRoles(userDto.getRoles());
+		return user;
 		
 	}
-
-	public Long getUserId() {
-		return userId;
+	
+	public ObjectId getId() {
+		return id;
 	}
-
-	public void setUserId(Long userId) {
-		this.userId = userId;
+	
+	public void setId(ObjectId id) {
+		this.id = id;
 	}
-
-	public String getUserFullName() {
-		return userFullName;
+	
+	public String getFullName() {
+		return fullName;
 	}
-
-	public void setUserFullName(String userFullName) {
-		this.userFullName = userFullName;
+	
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
 	}
-
-	public String getUserType() {
-		return userType;
+	
+	public String getRoles() {
+		return roles;
 	}
-
-	public void setUserType(String userType) {
-		this.userType = userType;
+	
+	public void setRoles(String roles) {
+		this.roles = roles;
 	}
-
+	
 	public String getUserName() {
 		return userName;
 	}
-
+	
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-
+	
 	public String getPassword() {
 		return password;
 	}
-
+	
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
-	public long getMobileNo() {
-		return mobileNo;
+	
+	public String getPhoneNumber() {
+		return phoneNumber;
 	}
-
-	public void setMobileNo(long mobileNo) {
-		this.mobileNo = mobileNo;
+	
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
-
-	public String getEmailId() {
-		return emailId;
+	
+	public String getEmail() {
+		return email;
 	}
-
-	public void setEmailId(String emailId) {
-		this.emailId = emailId;
+	
+	public void setEmail(String email) {
+		this.email = email;
 	}
-
-	public String getUserStatus() {
-		return userStatus;
+	
+	public Boolean getActive() {
+		return active;
 	}
-
-	public void setUserStatus(String userStatus) {
-		this.userStatus = userStatus;
+	
+	public void setActive(Boolean active) {
+		this.active = active;
 	}
-
+	
 	public BankDto getBank() {
 		return bank;
 	}
-
+	
 	public void setBank(BankDto bank) {
 		this.bank = bank;
 	}
-
-	public  AddressDto  getAddress() {
+	
+	public AddressDto getAddress() {
 		return address;
 	}
-
-	public void setAddress( AddressDto  address) {
+	
+	public void setAddress(AddressDto address) {
 		this.address = address;
 	}
-
 	
+	public List<cropItem> getCropItems() {
+		return cropItems;
+	}
 	
-	public User getUserFromUserDto(UserDto userDto) {
-		 var user=new User();
-		 
-		 user.setAddress(userDto.address.getAddressFromAddressDto(userDto.getAddress()));
-		 user.setBank(userDto.bank.getBankFromBankDto(userDto.getBank()));
-		 user.setEmailId(userDto.getEmailId());
-		 user.setMobileNo(userDto.getMobileNo());
-		 user.setPassword(userDto.getPassword());
-		 user.setUserFullName(userDto.getUserFullName());
-		 user.setUserId(userDto.getUserId());
-		 user.setUserName(userDto.getUserName());
-		 user.setUserStatus(userDto.getUserStatus());
-		 user.setUserType(userDto.getUserType());
-		 return user;
-		 
-	 } 
-
+	public void setCropItems(List<cropItem> cropItems) {
+		this.cropItems = cropItems;
+	}
+	
 }
+
+
+
