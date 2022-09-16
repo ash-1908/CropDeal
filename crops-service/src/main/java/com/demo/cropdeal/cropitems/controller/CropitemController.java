@@ -66,4 +66,6 @@ public class CropitemController {
 		cropitemService.deletecropItem(cropid);
 		return new ResponseEntity<String>("crop deleted successfully!",HttpStatus.OK);
 	}
+	
+//	GET LIST OF CROP ITEMS - BASED ON LIST OF OBJECT IDS
 }

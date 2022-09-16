@@ -3,6 +3,7 @@ package com.demo.cropdeal.user.model;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.bson.types.ObjectId;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.*;
@@ -37,11 +38,14 @@ public class User {
 	private Boolean active;
 	
 	@ApiModelProperty(notes = "User's bank account details")
+	@DBRef
 	Bank bank;
 	
 	@ApiModelProperty(notes = "Address of user")
+	@DBRef
 	Address address;
 	
+	@DBRef
 	private List<cropItem> cropItems;
 	
 	public User() {

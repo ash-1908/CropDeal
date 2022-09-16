@@ -43,6 +43,11 @@ public class UserService implements IUserService {
 		
 		if (usernameAbsent && MobileNoAbsent && EmaiLIdAbsent && AccountNoAbsent) {
 			String userRole = user.getRoles().split("_")[1];
+			// first save the address object
+			// after this try calling getId method, if it returns null then do this:
+			// address = addressRepository.save(address); -> now you can get the id
+			// here you will first save address object and bank object, then you will get the id of that object
+			// set the id of bank and address in user object
 			userRepository.save(user);
 			emailSenderService.sendEmail(user.getEmail(),
 				user.getFullName() + " you are registered successfully..as " + userRole, "Registration Status");

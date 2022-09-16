@@ -81,6 +81,14 @@ public class Account implements UserDetails {
 		return active;
 	}
 	
+	public ObjectId getId() {
+		return id;
+	}
+	
+	public void setId(ObjectId id) {
+		this.id = id;
+	}
+	
 	public String getEmail() {
 		return email;
 	}

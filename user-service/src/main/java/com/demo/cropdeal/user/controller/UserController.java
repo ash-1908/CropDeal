@@ -77,4 +77,7 @@ public class UserController {
 		
 		return new ResponseEntity<>(userService.markUserStatus(userId, newStatus), HttpStatus.OK);
 	}
+	
+//	GET CROPITEM LIST - GET USER ID FROM PARAMS
+//	add a cropitem to user crop items list - id from param
 }

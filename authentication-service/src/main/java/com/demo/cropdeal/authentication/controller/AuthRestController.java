@@ -87,8 +87,8 @@ public class AuthRestController {
 	@Operation(summary = "Validate JWT token", description = "This route is for validating JWT token.",
 		tags = {"Validation"})
 	@PostMapping("/validate-token")
-	public Boolean validateToken(@RequestBody MyResponseModel token) {
+	public MyResponseModel validateToken(@RequestBody MyResponseModel token) {
 		accountServiceImpl.validateToken(token.getJwt());
-		return true;
+		return null;
 	}
 }
