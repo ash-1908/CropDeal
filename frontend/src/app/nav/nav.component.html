@@ -23,7 +23,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <!-- buttons for authenticated user -->
-    <div *ngIf="authenticated" class="collapse navbar-collapse" id="navbarNav">
+    <div *ngIf="userIsAuthenticated" class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
           <a class="nav-link" routerLink="user" routerLinkActive="active-link"
@@ -43,7 +43,7 @@
       </ul>
     </div>
     <!-- buttons for un-authenticated user -->
-    <div *ngIf="!authenticated" class="collapse navbar-collapse" id="navbarNav">
+    <div *ngIf="!userIsAuthenticated" class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
           <a class="nav-link" routerLink="auth" routerLinkActive="active-link"
