@@ -9,7 +9,7 @@ import { User } from './user/model/user';
   providedIn: 'root',
 })
 export class MainService {
-// store current user here
+  // store current user here
   private currentUser: ResponseModel = new ResponseModel();
 
   // authentication server url to validate jwt

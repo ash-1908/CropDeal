@@ -9,29 +9,26 @@ import { AuthService } from '../auth.service';
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.component.html',
-  styleUrls: ['./signin.component.css']
+  styleUrls: ['./signin.component.css'],
 })
 export class SigninComponent implements OnInit {
+  protected userEmail: string = '';
+  protected userPassword: string = '';
+  private res = new ResponseModel();
 
-  protected userEmail: string = "";
-  protected userPassword: string = "";
-  res = new ResponseModel();
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
-  constructor(private authService:AuthService, private router: Router) { }
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
-  }
-
+  // call signin method in service, upon success set the current user and set the jwt token in localstorage
   protected submitForm(): void {
-    alert(
-      "Email: " + this.userEmail + "\nPassword: " + this.userPassword
-    );
+    this.authService
+      .signIn(this.userEmail, this.userPassword)
+      .subscribe((res) => this.res = res);
+   
+    this.router.navigate(['../../user/profile/', this.res.id]);
   }
-
-  shareData() : void {
-    // from sign in i get response
-    //convert response to user
-    this.authService.signIn("ad", "dafa");
-  }
-
 }
