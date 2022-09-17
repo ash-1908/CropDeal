@@ -4,25 +4,25 @@ import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-forgot-pwd',
   templateUrl: './forgot-pwd.component.html',
-  styleUrls: ['./forgot-pwd.component.css']
+  styleUrls: ['./forgot-pwd.component.css'],
 })
 export class ForgotPwdComponent implements OnInit {
+  protected sendEmail = true;
+  protected userEmail: string = '';
 
-  protected method: string = "";
-  protected userEmail: string = "";
+  constructor(private router: Router, private route: ActivatedRoute) {}
 
-  constructor(private router: Router, private route: ActivatedRoute) { }
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
+  methodOnChange(method: boolean): void {
+    this.sendEmail = method;
   }
 
-  methodOnChange(method: string): void {
-    this.method = method;
-  }
-
-  protected submitForm() :void {
+  protected submitForm(): void {
     alert(
-      "Email: " + this.userEmail + "\nMethod: " + this.method
+      'Email: ' + this.userEmail + '\nMethod: ' + (this.sendEmail
+        ? 'Sending email'
+        : 'Sending OTP')
     );
   }
 }

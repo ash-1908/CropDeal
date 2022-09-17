@@ -1,18 +1,20 @@
-<div class="positition-relative">
+<div class="p-5">
   <div
-    class="position-absolute top-50 start-50 translate-middle bg-secondary rounded p-4 w-25"
-    style="--bs-bg-opacity: 0.3"
+    class="make-center bg-white rounded p-4 w-25 text-black fw-semibold lh-3"
+    style="--bs-bg-opacity: 0.6"
   >
     <header>
-      <h3>Forgot Password</h3>
+      <h3 class="fw-semibold">Forgot Password</h3>
     </header>
     <main>
       <div>
-        <form #forgotPwdForm="ngForm" (ngSubmit)="submitForm()" class="col py-2">
+        <form
+          #forgotPwdForm="ngForm"
+          (ngSubmit)="submitForm()"
+          class="col py-2"
+        >
           <div class="row-md-6 mb-4">
-            <label for="email" class="form-label"
-              >Email</label
-            >
+            <label for="email" class="form-label">Email</label>
             <input
               type="email"
               required
@@ -25,14 +27,12 @@
               pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
               [(ngModel)]="userEmail"
               #email="ngModel"
+              checked
             />
             <div class="invalid-feedback position-absolute">Invalid email</div>
-
           </div>
           <div class="row-md-6 mb-4">
-            <label for="resetMethod" class="form-label"
-              >Method</label
-            >
+            <label for="resetMethod" class="form-label">Method</label>
             <div class="form-check">
               <input
                 class="form-check-input"
@@ -40,9 +40,8 @@
                 type="radio"
                 name="resetMethod"
                 id="emailMethod"
-                value="email"
-                checked
-                [(ngModel)]="method"
+                [value]="true"
+                [(ngModel)]="sendEmail"
                 #resetMethod="ngModel"
               />
               <label class="form-check-label" for="flexRadioDefault1">
@@ -56,8 +55,8 @@
                 type="radio"
                 name="resetMethod"
                 id="smsMethod"
-                value="otp"
-                [(ngModel)]="method"
+                [value]="false"
+                [(ngModel)]="sendEmail"
                 #resetMethod="ngModel"
               />
               <label class="form-check-label" for="flexRadioDefault2">

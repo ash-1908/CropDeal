@@ -1,10 +1,10 @@
-<div class="positition-relative">
+<div class="p-5">
   <div
-    class="position-absolute top-50 start-50 translate-middle bg-secondary rounded p-4 w-25"
-    style="--bs-bg-opacity: 0.3"
+    class="make-center bg-white rounded p-4 w-25 text-black fw-semibold lh-3"
+    style="--bs-bg-opacity: 0.6"
   >
     <header class="text-center mb-3">
-      <h3>Enter OTP</h3>
+      <h3 class="fw-semibold">Enter OTP</h3>
       <small
         >An OTP has been sent to your mobile number {{ phoneNumber }}</small
       >
@@ -76,7 +76,10 @@
             </div>
           </div>
           <div
-            [class.d-none]="(otp1.valid && otp2.valid && otp3.valid && otp4.valid) || otpForm.form.untouched"
+            [class.d-none]="
+              (otp1.valid && otp2.valid && otp3.valid && otp4.valid) ||
+              otpForm.form.untouched
+            "
             class="text-danger position-absolute lh-sm fs-6 pt-2"
           >
             Invalid OTP
