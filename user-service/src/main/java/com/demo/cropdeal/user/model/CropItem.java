@@ -1,6 +1,5 @@
 package com.demo.cropdeal.user.model;
 
-import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.Id;
