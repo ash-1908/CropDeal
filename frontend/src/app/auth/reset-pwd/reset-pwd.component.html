@@ -8,17 +8,31 @@
     </header>
     <main>
       <div>
-        <form action="">
+        <form #resetPwdForm="ngForm" (ngSubmit)="submitForm()">
           <div class="mb-3">
             <label for="exampleFormControlInput1" class="form-label"
               >Enter new password</label
             >
             <input
               type="password"
+              required
+              name="password"
+              [class.is-invalid]="password.invalid && password.touched"
               class="form-control form-control-sm"
               id="exampleFormControlInput1"
               placeholder="Enter password"
+              [(ngModel)]="userPassword"
+              #password="ngModel"
+              pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,10}$"
             />
+            <small
+              style="z-index: 1"
+              class="invalid-feedback position-absolute bg-white w-75 p-2 rounded lh-sm"
+            >
+              Password should be 8-10 characters long.<br />Password should
+              contain atleast:<br />1 uppercase letter<br />1 lowercase
+              letter<br />1 digit<br />1 special character
+            </small>
           </div>
           <div class="mb-3">
             <label for="exampleFormControlInput1" class="form-label"
@@ -26,13 +40,35 @@
             >
             <input
               type="password"
+              required
+              name="password2"
+              [class.is-invalid]="
+                password2.touched && userRePassword !== userPassword
+              "
               class="form-control form-control-sm"
               id="exampleFormControlInput1"
               placeholder="Re-enter password"
+              [(ngModel)]="userRePassword"
+              #password2="ngModel"
+              pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,10}$"
             />
+            <small
+              style="z-index: 1"
+              class="invalid-feedback position-absolute bg-white w-75 p-2 rounded lh-sm"
+            >
+              Password mismatch.
+            </small>
           </div>
           <div>
-            <button type="button" class="btn btn-primary mb-3 w-100">
+            <button
+              type="submit"
+              class="btn btn-primary mb-3 w-100"
+              [disabled]="
+                resetPwdForm.form.value.password !==
+                  resetPwdForm.form.value.password2 ||
+                resetPwdForm.form.value.password === ''
+              "
+            >
               Reset Password
             </button>
           </div>

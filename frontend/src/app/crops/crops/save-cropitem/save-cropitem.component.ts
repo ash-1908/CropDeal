@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Cropitem } from '../cropitem';
-import { CropitemService } from '../cropitem.service'
+import { CropitemService } from '../cropitem.service';
 import { Router } from '@angular/router';
 
 @Component({

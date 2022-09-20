@@ -10,22 +10,22 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class UpdateCropitemComponent implements OnInit {
 
-  cropid:number;
+  id:string;
   cropitem: Cropitem = new Cropitem();
   constructor(private cropitemService: CropitemService,
     private route: ActivatedRoute,
     private router: Router) { }
 
   ngOnInit(): void {
-    this.cropid = this.route.snapshot.params['cropid'];
+    this.id = this.route.snapshot.params['id'];
 
-    this.cropitemService.getCropitemById(this.cropid).subscribe(data => {
+    this.cropitemService.getCropitemById(this.id).subscribe(data => {
       this.cropitem = data;
     }, error => console.log(error));
   }
   
   onSubmit(){
-    this.cropitemService.updateCropitem(this.cropid, this.cropitem).subscribe( data =>{
+    this.cropitemService.updateCropitem(this.id, this.cropitem).subscribe( data =>{
       this.goToCropitemList();
     }
     , error => console.log(error));

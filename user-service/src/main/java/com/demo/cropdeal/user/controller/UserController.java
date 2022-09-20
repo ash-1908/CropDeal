@@ -14,6 +14,7 @@ import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("/user")
+@CrossOrigin("*")
 public class UserController {
 	
 	@Autowired
@@ -33,14 +34,14 @@ public class UserController {
 	@ApiOperation(value="Delete user details by id",
 	notes = "enter valid user id to be deleted from the  database",
 	response = String.class)
-	public ResponseEntity<String> deleteUser(@PathVariable Long userId) {
+	public ResponseEntity<String> deleteUser(@PathVariable String userId) {
 		
 		return new ResponseEntity<>(userService.deleteUser(userId),HttpStatus.OK);	
 		
 	}
 	
 	@GetMapping("/get-user/{userId}")
-	public ResponseEntity<User> getUser(@PathVariable Long userId) {
+	public ResponseEntity<User> getUser(@PathVariable String userId) {
 		
 		return new ResponseEntity<>(userService.getUser(userId),
 				 HttpStatus.OK);
@@ -55,18 +56,35 @@ public class UserController {
 				 HttpStatus.OK);
 	}
 	
+	@GetMapping("/get-user-by-email/{email}")
+	public ResponseEntity<User> getUserByEmail(@PathVariable String email ) {
+		
+		return new ResponseEntity<>(userService.getUserByEmail(email),
+				 HttpStatus.OK);
+	}
+	
+	@GetMapping("/get-user-username/{username}")
+	public ResponseEntity<User> getUserByUsername(@PathVariable String username ) {
+		
+		return new ResponseEntity<>(userService.getUserByUsername(username),
+				 HttpStatus.OK);
+	}
+	
 	
 	@PutMapping("/update-user/{userId}")
-	public ResponseEntity<User> updateUser(@PathVariable Long userId, @RequestBody User user) {
+	public ResponseEntity<User> updateUser(@PathVariable String userId, @RequestBody User user) {
 		
 		return new ResponseEntity<>(userService.updateUser(userId, user),
 				 HttpStatus.OK);
 	}
 	
 	@PutMapping("/update-user-status/{userId}/{status}")
-	public ResponseEntity<String> updateUserStatus(@PathVariable Long userId, @PathVariable String status) {
+	public ResponseEntity<String> updateUserStatus(@PathVariable String userId, @PathVariable Boolean status) {
 		
 		return new ResponseEntity<>(userService.markUserStatus(userId, status),
 				 HttpStatus.OK);
 	}
 }
+//	GET CROPITEM LIST - GET USER ID FROM PARAMS
+//	add a cropitem to user crop items list - id from param
+

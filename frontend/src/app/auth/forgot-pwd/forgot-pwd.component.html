@@ -8,31 +8,42 @@
     </header>
     <main>
       <div>
-        <form action="">
-          <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label"
+        <form #forgotPwdForm="ngForm" (ngSubmit)="submitForm()" class="col py-2">
+          <div class="row-md-6 mb-4">
+            <label for="email" class="form-label"
               >Email</label
             >
             <input
               type="email"
+              required
+              [class.is-invalid]="email.touched && email.invalid"
+              [class.is-valid]="email.touched && email.valid"
               class="form-control form-control-sm"
-              id="exampleFormControlInput1"
+              id="email"
+              name="email"
               placeholder="name@example.com"
+              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+              [(ngModel)]="userEmail"
+              #email="ngModel"
             />
+            <div class="invalid-feedback position-absolute">Invalid email</div>
+
           </div>
-          <div class="mb-3">
-            <label for="exampleFormControlInput2" class="form-label"
+          <div class="row-md-6 mb-4">
+            <label for="resetMethod" class="form-label"
               >Method</label
             >
             <div class="form-check">
               <input
                 class="form-check-input"
+                required
                 type="radio"
-                name="flexRadioDefault"
-                id="flexRadioDefault1"
+                name="resetMethod"
+                id="emailMethod"
                 value="email"
                 checked
-                (change)="methodOnChange('email')"
+                [(ngModel)]="method"
+                #resetMethod="ngModel"
               />
               <label class="form-check-label" for="flexRadioDefault1">
                 Send an email with a link
@@ -41,19 +52,25 @@
             <div class="form-check">
               <input
                 class="form-check-input"
+                required
                 type="radio"
-                name="flexRadioDefault"
-                id="flexRadioDefault2"
+                name="resetMethod"
+                id="smsMethod"
                 value="otp"
-                (change)="methodOnChange('otp')"
+                [(ngModel)]="method"
+                #resetMethod="ngModel"
               />
               <label class="form-check-label" for="flexRadioDefault2">
                 Send an sms with an OTP
               </label>
             </div>
           </div>
-          <div>
-            <button type="button" class="btn btn-primary mb-3 w-100" (click)="forwardRequest()">
+          <div class="row-md-6">
+            <button
+              type="submit"
+              class="btn btn-primary mb-3 w-100"
+              [disabled]="forgotPwdForm.untouched || forgotPwdForm.invalid"
+            >
               Reset Password
             </button>
           </div>

@@ -6,7 +6,7 @@ import com.demo.cropdeal.authentication.exception.UserNotFoundException;
 import com.demo.cropdeal.authentication.model.Account;
 import com.demo.cropdeal.authentication.model.MyRequestModel;
 import com.demo.cropdeal.authentication.model.MyResponseModel;
-import com.demo.cropdeal.authentication.security.jwt.JwtUtil;
+import com.demo.cropdeal.authentication.security.util.JwtUtil;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

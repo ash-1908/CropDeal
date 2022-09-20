@@ -5,47 +5,89 @@
   >
     <header class="text-center mb-3">
       <h3>Enter OTP</h3>
-      <small >An OTP has been sent to your mobile number {{phoneNumber}}</small>
+      <small
+        >An OTP has been sent to your mobile number {{ phoneNumber }}</small
+      >
     </header>
     <main>
       <div>
-        <form action="">
-          <div class="d-flex gap-2 mb-3">
-            <input
-              type="text"
-              maxlength="1"
-              class="form-control w-25 text-center"
-              aria-label="OTP"
-              aria-describedby="basic-addon1"
-              pattern="^[0-9]"
-            />
-            <input
-              type="text"
-              maxlength="1"
-              class="form-control w-25 text-center"
-              aria-label="OTP"
-              aria-describedby="basic-addon1"
-              pattern="^[0-9]"
-            />
-            <input
-              type="text"
-              maxlength="1"
-              class="form-control w-25 text-center"
-              aria-label="OTP"
-              aria-describedby="basic-addon1"
-              pattern="^[0-9]"
-            />
-            <input
-              type="text"
-              maxlength="1"
-              class="form-control w-25 text-center"
-              aria-label="OTP"
-              aria-describedby="basic-addon1"
-              pattern="^[0-9]"
-            />
+        <form #otpForm="ngForm" (ngSubmit)="submitForm()">
+          <div class="row g-2 positition-relative">
+            <div class="col-md-3">
+              <input
+                type="text"
+                required
+                maxlength="1"
+                [class.is-invalid]="otp1.invalid && otp1.touched"
+                class="form-control text-center"
+                aria-label="OTP"
+                aria-describedby="basic-addon1"
+                pattern="^[0-9]"
+                name="otp1"
+                [(ngModel)]="otpDigit1"
+                #otp1="ngModel"
+              />
+            </div>
+
+            <div class="col-md-3">
+              <input
+                type="text"
+                required
+                maxlength="1"
+                [class.is-invalid]="otp2.invalid && otp2.touched"
+                class="form-control text-center"
+                aria-label="OTP"
+                aria-describedby="basic-addon1"
+                pattern="^[0-9]"
+                name="otp2"
+                [(ngModel)]="otpDigit2"
+                #otp2="ngModel"
+              />
+            </div>
+            <div class="col-md-3">
+              <input
+                type="text"
+                required
+                maxlength="1"
+                [class.is-invalid]="otp3.invalid && otp3.touched"
+                class="form-control text-center"
+                aria-label="OTP"
+                aria-describedby="basic-addon1"
+                pattern="^[0-9]"
+                name="otp3"
+                [(ngModel)]="otpDigit3"
+                #otp3="ngModel"
+              />
+            </div>
+            <div class="col-md-3">
+              <input
+                type="text"
+                required
+                maxlength="1"
+                [class.is-invalid]="otp4.invalid && otp4.touched"
+                class="form-control text-center"
+                aria-label="OTP"
+                aria-describedby="basic-addon1"
+                pattern="^[0-9]"
+                name="otp4"
+                [(ngModel)]="otpDigit4"
+                #otp4="ngModel"
+              />
+            </div>
           </div>
-          <div>
-            <button class="btn btn-primary w-100">Validate OTP</button>
+          <div
+            [class.d-none]="(otp1.valid && otp2.valid && otp3.valid && otp4.valid) || otpForm.form.untouched"
+            class="text-danger position-absolute lh-sm fs-6 pt-2"
+          >
+            Invalid OTP
+          </div>
+          <div class="col-md-12 mt-5">
+            <button
+              class="btn btn-primary w-100"
+              [disabled]="otpForm.form.untouched || otpForm.form.invalid"
+            >
+              Validate OTP
+            </button>
           </div>
         </form>
       </div>

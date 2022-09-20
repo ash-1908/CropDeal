@@ -9,8 +9,7 @@ import org.springframework.security.web.server.SecurityWebFilterChain;
 public class GatewayConfig {
 	@Bean
 	public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
-		http
-			.csrf(csrf -> csrf.disable());
+		http.csrf(csrf -> csrf.disable()).cors().disable().authorizeExchange().anyExchange().permitAll();
 		return http.build();
 	}
 }

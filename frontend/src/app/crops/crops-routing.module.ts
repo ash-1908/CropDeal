@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, Router } from '@angular/router';
 
 import { CropsComponent } from './crops/crops.component';
 import { CropitemListComponent } from './crops/cropitem-list/cropitem-list.component';
@@ -17,8 +17,8 @@ const routes: Routes = [
       { path: 'cropitems', component: CropitemListComponent },
       { path: 'save-cropitem', component: SaveCropitemComponent},
       
-      { path: 'update-cropitem/:cropid', component: UpdateCropitemComponent},
-      {path: 'cropitem-details/:cropid', component: CropitemDetailsComponent}
+      { path: "update-cropitem/:id", component: UpdateCropitemComponent},
+      {path: 'cropitem-details/:id', component: CropitemDetailsComponent}
     ]
 
   },
@@ -29,4 +29,10 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class CropsRoutingModule { }
+export class CropsRoutingModule {
+  constructor(private router: Router) {
+    this.router.errorHandler = (error: any) => {
+        this.router.navigate(['404']); // or redirect to default route
+    }
+  }
+ }

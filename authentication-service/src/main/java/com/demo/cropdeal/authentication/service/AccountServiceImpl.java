@@ -6,7 +6,7 @@ import com.demo.cropdeal.authentication.exception.handler.PhoneNumberNotFoundExc
 import com.demo.cropdeal.authentication.model.Account;
 import com.demo.cropdeal.authentication.model.MyRequestModel;
 import com.demo.cropdeal.authentication.model.MyResponseModel;
-import com.demo.cropdeal.authentication.security.jwt.JwtUtil;
+import com.demo.cropdeal.authentication.security.util.JwtUtil;
 import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,7 +14,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -61,7 +60,7 @@ public class AccountServiceImpl implements UserDetailsService, IAccountService {
 			repository.save(account);
 			account.setPassword(null);
 			String JWT_TOKEN = jwtUtil.generateToken(account);
-			return new MyResponseModel(JWT_TOKEN);
+			return new MyResponseModel(JWT_TOKEN, account.getId(), account.getFullName(), account.getRoles());
 		}
 		// if account object already exist in database throw exception
 		throw new UserAlreadyExistsException("User account already exists.");
@@ -82,7 +81,7 @@ public class AccountServiceImpl implements UserDetailsService, IAccountService {
 			if (passwordEncoder.matches(req.getPassword(), account.getPassword())) {
 				account.setPassword(null);
 				String JWT_TOKEN = jwtUtil.generateToken(account);
-				return new MyResponseModel(JWT_TOKEN);
+				return new MyResponseModel(JWT_TOKEN, account.getId(), account.getFullName(), account.getRoles());
 			}
 			// throw exception if password is wrong
 			throw new InvalidPasswordException("Invalid password.");
@@ -132,7 +131,7 @@ public class AccountServiceImpl implements UserDetailsService, IAccountService {
 		Optional<Account> accountData = repository.findByEmail(email);
 		
 		if (accountData.isEmpty()) throw new UserNotFoundException("User with email: " + email + " not found.");
-
+		
 		Account account = accountData.get();
 //		if method value is otp, only then we will send sms, else we will send email
 		if (method.equalsIgnoreCase("otp")) {
@@ -163,21 +162,24 @@ public class AccountServiceImpl implements UserDetailsService, IAccountService {
 	
 	@Override
 	//	helper method for api gateway to validate token
-	public void validateToken(String token) {
+	public MyResponseModel validateToken(String token) {
 		if (token == null || token.isBlank()) throw new InvalidSessionException("Unauthenticated.");
 //		get the subject from token
 		String subject = jwtUtil.getUsernameFromToken(token);
-		if(subject == null) throw new InvalidSessionException("Invalid session.");
+		if (subject == null) throw new InvalidSessionException("Invalid session.");
 //		fetch the data from backend
 		Optional<Account> accountData = repository.findByEmail(subject);
-		if(accountData.isPresent()) {
+		if (accountData.isPresent()) {
 			Account account = accountData.get();
 //		validate
-			if (!jwtUtil.validateToken(token, account)) {
+			if (jwtUtil.validateToken(token, account)) {
+				MyResponseModel res = new MyResponseModel(account.getId(), account.getFullName(), account.getRoles());
+				return res;
+			} else {
 				throw new InvalidSessionException("Data out of sync.");
 			}
-		}
-		else
+		} else {
 			throw new InvalidSessionException("Invalid session");
+		}
 	}
 }

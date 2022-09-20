@@ -11,4 +11,4 @@ spring:
 spring.datasource:
   url: jdbc:mysql://localhost:3306/cropdeal
   username: root
-  password: Divya@123
+  password: root
