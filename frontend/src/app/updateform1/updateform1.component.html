@@ -2,17 +2,22 @@
 
     <form  #updateForm="ngForm" (submit)="onsubmit(updateForm)">
     
-    
-         <div class="container">
-    
-    
-            <div class="div1">
+        <div id="title" class="row">
+            <div class="col-md-11">
+          
                 <h2>UPDATE USER DETAILS</h2> 
-                <h5>ENTER ONLY THOSE VALUES NEED TO BE UPDATED</h5> 
+                <h4>ENTER ONLY THOSE VALUES NEED TO BE UPDATED</h4> 
                 <hr>
-               
+          
             </div>
-    
+            <div id="back" class="col-md-1">
+               <button (click)="goToAdminPage()" type="button" class="btn btn-outline-info">Back</button>
+            </div>
+
+       </div>
+
+         <div class="container">
+
             <div class="title">USER DETAILS</div>
             <br>
     
@@ -58,7 +63,11 @@
       
             <div class="col-sm-8">
                 <label>Mobile No :</label>&nbsp;
-                <input style="margin-left:5px;" type="number"  placeholder="enter your mobile number" ngModel  name="mobileno" class="input"  #umob="ngModel" > 
+                <input style="margin-left:5px;" type="number"  placeholder="enter your mobile number" ngModel pattern="[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]"  name="mobileno" class="input"  #umob="ngModel" > 
+                <div *ngIf="umob.hasError('pattern')">
+                    <span id="span" class="error_msg">mobile number must be 10 digits</span>
+                </div>
+            
             </div>
     
          </div>

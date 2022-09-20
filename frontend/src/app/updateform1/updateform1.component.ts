@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Address } from '../user/model/address';
 import { Bank } from '../user/model/bank';
 import { Userr } from '../user/model/userr';
@@ -25,7 +26,7 @@ export class Updateform1Component implements OnInit {
    address:Address={};
    val:boolean=false;
 
-  constructor(private service:ServiceService) { }
+  constructor(private service:ServiceService,private router:Router) { }
 
   ngOnInit(): void {
   }
@@ -72,6 +73,12 @@ export class Updateform1Component implements OnInit {
   })
 
 
+  }
+
+
+  
+  goToAdminPage(){
+    this.router.navigate(['admin']);
   }
 
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Address } from '../model/address';
 import { Bank } from '../model/bank';
 import { User } from '../model/user';
@@ -18,10 +18,10 @@ export class UpdateFormComponent implements OnInit {
    user:User={};
    bank:Bank={};
    address:Address={};
-   val:boolean=false;
+   val:boolean;
   
 
-  constructor(private service:ServiceService) { }
+  constructor(private service:ServiceService,private router:Router) { }
 
   ngOnInit(): void {
 
@@ -72,13 +72,30 @@ export class UpdateFormComponent implements OnInit {
    console.log("requested user data is:");
   console.log(this.user);
 
-  this.service.updateUser(this.id,this.user).subscribe(data=>{
-    console.log("data is:");
-    console.log(data);
-  })
+  console.log( this.user.fullName+"empty full name");
+  console.log( this.user.bank.accountHolderName+"empty full bank");
+  console.log( this.user.address+"empty full address")
 
-   setTimeout(()=>window.location.reload(),1500);
-   
+  if(this.user.fullName==""&&this.user.roles=="" && this.user.phoneNumber==0&&this.user.userName==""&&this.user.email==""&&
+  this.bank.accountHolderName==""&& this.bank.accountNo==0&& this.bank.bankBranch==""&& this.bank.bankIFSC==""&& this.bank.bankName==""&&
+  this.address.city==""&&this.address.country==""&&this.address.houseNo==""&&this.address.localityName==""&&this.address.pincode==0&&this.address.state==""&&this.address.streetName==""
+  )
+  {
+   alert('Provide atleast one value')
+
+  }
+  else{
+    this.service.updateUser(this.id,this.user).subscribe(data=>{
+  
+    this.val=true;
+    alert('Value updated Successfully .....')
+     this.router.navigate(['user/profile']);
+
+     });
+    
+    }
+
+
   }
 
 }

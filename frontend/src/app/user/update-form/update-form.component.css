@@ -1,11 +1,4 @@
 
-.container{
-    width: 1100px;
-    margin-left: 250px;
-    background-color: rgb(241, 232, 232);
-
-}
-
 .div1{
    text-align:center;
 }
@@ -24,11 +17,17 @@ a{
 
 }
 
-body{
-    background-image: url('https://wallpapercave.com/wp/wp9212197.jpg');
-    background-size: 100%;
-   filter:saturate(150%);
+#submit{
+    margin-left: 450px;
 }
+
+body{
+    /* background-image: url('https://png.pngtree.com/back_origin_pic/04/48/50/84cd2a9fbc6cbd5522b2f048a56703a8.jpg'); */
+
+    background-image: url('https://wallpapercave.com/wp/eytxmaY.jpg');
+    background-size:100%;
+}
+
 
 span{
     color: red;

@@ -58,7 +58,11 @@
   
         <div class="col-sm-8">
             <label>Mobile No :</label>&nbsp;
-            <input style="margin-left:5px;" type="number"  placeholder="enter your mobile number" ngModel  name="mobileno" class="input"  #umob="ngModel" > 
+            <input style="margin-left:5px;" type="number"  placeholder="enter your mobile number" ngModel pattern="[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]"  name="mobileno" class="input"  #umob="ngModel" > 
+            <div *ngIf="umob.hasError('pattern')">
+                <span id="span" class="error_msg">mobile number must be 10 digits</span>
+            </div>
+        
         </div>
 
      </div>
@@ -142,7 +146,7 @@
         <div class="col-sm-4">
             <br>
             <label>House No:</label>&nbsp;
-            <input style="margin-left:30px;" type="text" placeholder="enter adhar number" ngModel pattern="[0-9]+"   name="houseno" #hno="ngModel"  class="i1"> 
+            <input style="margin-left:30px;" type="text" placeholder="enter house number" ngModel pattern="[0-9]+"   name="houseno" #hno="ngModel"  class="i1"> 
               <div *ngIf="hno.hasError('pattern')">
                   <span  id="span" class="error_msg"> only numbers allowed and no spaces</span>
              </div>
@@ -214,9 +218,12 @@
     </div>
 
     <br>
-    <input type="submit" value="update profile" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
 
-    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    
+    <input id="submit" type="submit" value="update profile" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+   
+
+    <div  *ngIf="val" class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">

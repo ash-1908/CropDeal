@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Address } from '../user/model/address';
 import { Bank } from '../user/model/bank';
 import { User } from '../user/model/user';
@@ -30,10 +31,16 @@ export class AdduserformComponent implements OnInit {
    addstatus:string
    userDb:any;
 
-  constructor(private service:ServiceService) { }
+  constructor(private service:ServiceService, private router:Router) { }
 
   ngOnInit(): void {
   }
+
+    
+  goToAdminPage(){
+    this.router.navigate(['admin']);
+  }
+
 
   onsubmit(RegisterForm:NgForm):void{
 

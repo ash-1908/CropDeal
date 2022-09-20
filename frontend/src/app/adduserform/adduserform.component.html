@@ -2,16 +2,20 @@
 
     <form  #RegisterForm="ngForm" (submit)="onsubmit(RegisterForm)">
     
+        <div id="title1" class="row">
+            <div class="col-md-11">
+          
+                <h2>User Registration</h2> 
+                <hr>
+          
+            </div>
+            <div id="back" class="col-md-1">
+               <button (click)="goToAdminPage()" type="button" class="btn btn-outline-info">Back</button>
+            </div>
+
+       </div>
     
          <div class="container">
-    
-    
-            <div class="div1">
-                <h2>User Registration Form</h2> 
-              
-                <hr>
-               
-            </div>
     
             <div class="title">USER DETAILS</div>
             <br>
@@ -83,7 +87,7 @@
       
             <div class="col-sm-8">
                 <label>Mobile No :</label>&nbsp;
-                <input required style="margin-left:5px;" type="number" pattern="[0-9]{10}$" placeholder="enter your mobile number" ngModel  name="mobileno" class="input"  #umob="ngModel" > 
+                <input required style="margin-left:5px;" type="number" pattern="[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]" placeholder="enter your mobile number" ngModel  name="mobileno" class="input"  #umob="ngModel" > 
            
                 
                 <div *ngIf="umob.errors && (umob.dirty || umob.touched)">

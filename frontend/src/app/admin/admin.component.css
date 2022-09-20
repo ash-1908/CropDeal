@@ -12,3 +12,19 @@ th{
   
 }
 
+
+body{
+    background-image: url('https://graphicalnetworks.com/wp-content/uploads/revslider/web-product-light-hero193/data-center-dcim.jpg');
+    background-size:100%;
+}
+div.row{
+    background-image: url('https://i1.wp.com/media.giphy.com/media/xTiTnxpQ3ghPiB2Hp6/giphy.gif?resize=500%2C281&ssl=1');
+    background-size:100%;
+    padding-top: 20px;
+}
+
+#heading{
+    color: white;
+    padding-left: 100px;
+ 
+}
