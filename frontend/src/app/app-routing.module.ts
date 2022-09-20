@@ -1,10 +1,23 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AdduserformComponent } from './adduserform/adduserform.component';
+import { AdminComponent } from './admin/admin.component';
+import { HomeComponent } from './home/home.component';
 import { NavComponent } from './nav/nav.component';
+import { Updateform1Component } from './updateform1/updateform1.component';
 
 const routes: Routes = [
   {
-    path: '', component: NavComponent
+    path: '', component: HomeComponent
+  },
+  {
+     path:'admin',component:AdminComponent
+  },
+  {
+    path:'register',component:AdduserformComponent
+  },
+  {
+    path:'admin/user/update' ,component:Updateform1Component
   },
   {
     path: 'auth', loadChildren: () => import("./auth/auth.module").then(m => m.AuthModule) 

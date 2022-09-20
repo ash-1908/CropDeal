@@ -1,5 +1,8 @@
 package com.demo.cropdeal.cropitems.model;
 
+import org.bson.types.ObjectId;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,84 +10,70 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity
-@Table(name="crop")
+
+@Document("crops")
 public class Cropitem {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long cropid;
+	private ObjectId id;
 	
-	@Column(name = "crop_name", nullable = false)
-	private String cropname;
+	private String name;
 	
-	@Column(name = "crop_type")
-	private String croptype;
+	private String type;
 	
-	@Column(name = "crop_qnt")
-	private String cropqnt;
+	private String qnt;
 	
-	@Column(name = "crop_price")
-	private String cropprice;
-	
-	/*public long getId() {
-		return cropid;
-	}
-
-	public void setId(long cropid) {
-		this.cropid = cropid;
-	}
-*/
-	public String getCropname() {
-		return cropname;
-	}
-
-	public long getCropid() {
-		return cropid;
-	}
-
-	public void setCropid(long cropid) {
-		this.cropid = cropid;
-	}
-
-	public void setCropname(String cropname) {
-		this.cropname = cropname;
-	}
-
-	public String getCroptype() {
-		return croptype;
-	}
-
-	public void setCroptype(String croptype) {
-		this.croptype = croptype;
-	}
-
-	public String getCropqnt() {
-		return cropqnt;
-	}
-
-	public void setCropqnt(String cropqnt) {
-		this.cropqnt = cropqnt;
-	}
-
-	public String getCropprice() {
-		return cropprice;
-	}
-
-	public void setCropprice(String cropprice) {
-		this.cropprice = cropprice;
-	}
-
-	public Cropitem(long cropid, String cropname, String croptype, String cropqnt, String cropprice) {
-		super();
-		this.cropid = cropid;
-		this.cropname = cropname;
-		this.croptype = croptype;
-		this.cropqnt = cropqnt;
-		this.cropprice = cropprice;
-	}
+	private String price;
 	
 	public Cropitem() {
-		
+	}
+	
+	public Cropitem(String name, String type, String qnt, String price) {
+		this.name = name;
+		this.type = type;
+		this.qnt = qnt;
+		this.price = price;
+	}
+	
+	
+	
+	public ObjectId getId() {
+		return id;
+	}
+
+	public void setId(ObjectId id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public String getType() {
+		return type;
+	}
+	
+	public void setType(String type) {
+		this.type = type;
+	}
+	
+	public String getQnt() {
+		return qnt;
+	}
+	
+	public void setQnt(String qnt) {
+		this.qnt = qnt;
+	}
+	
+	public String getPrice() {
+		return price;
+	}
+	
+	public void setPrice(String price) {
+		this.price = price;
 	}
 }

@@ -1,0 +1,84 @@
+<body>
+<div class="container mt-3">
+
+  <div class="row">
+    <div class="col-md-10"><h2>User Details</h2></div>
+    <div  class="col-md-2"><button (click)="register()" type="button" class="btn btn-outline-primary">Add User</button></div>
+  </div>
+    <br>
+    <br>
+    <div class="table-responsive">
+  
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Full Name</th>
+            <th>User Type</th>
+            <th>Mobile Number</th>
+            <th>Email Id</th>
+            <th>User Status</th>
+            <th>City</th>
+            <th>State</th>
+            <th>Country</th>
+          </tr>
+        </thead>
+        <br>
+        <tbody>
+          <tr *ngFor="let user of users;let i =index">
+            <td>{{user.fullName}} </td>
+            <td>{{user.roles}}</td>
+            <td>{{user.phoneNumber}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.active}}</td>
+            <td>{{user.address?.city}}</td>
+            <td>{{user.address?.state}}</td>
+            <td>{{user.address?.country}}</td>
+            
+            <td><button (click)="updateUser(user.id)"  type="button" class="btn btn-outline-success">Update</button></td>
+          
+            <td><button type="button" (click)="deleteUser(user.id)" class="btn btn-outline-danger">Delete</button></td>
+           
+            <td>
+            <div class="btn-group" role="group" aria-label="Basic example">
+              <button (click)="markUser(user.id,true)" type="button" class="btn btn-outline-success">Active</button>
+              <button  (click)="markUser(user.id,false)" type="button"class="btn btn-outline-danger">Inactive</button>
+            </div>
+            </td>
+
+          <td>
+
+              <!-- <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Delete user</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                       Are u  sure u want to delete {{fullname}}  account 
+                  </div>
+                  <div class="modal-footer">
+                    <button (click)="check(user.id)"  type="button" class="btn btn-secondary" data-bs-dismiss="modal">yes</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                 
+                  </div>
+      
+                </div>
+              </div>
+            </div>  -->
+         
+
+          </td>
+
+          </tr>
+        </tbody>
+
+      </table>
+
+
+    </div>
+
+
+    
+  </div>
+</body>

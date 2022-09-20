@@ -1,4 +1,5 @@
 
+<body>
 
 <h2>Profile</h2>
 <div  class="container-fluid">
@@ -14,11 +15,11 @@
       
       </div>
      
-      <a  class="btn btn-primary" id="profile" routerLink="/user/update/{{user.userName}}" role="button">update profile</a>
+      <!-- <a id="updatebtn" class="nav-link" routerLink="/user/update"><button type="button" class="btn btn-outline-primary">UPDATE DETAILS</button></a> -->
    </div>
   
   </div>
-
+  
   <div  class="col-sm-5">
     <div class="card" style="width: 30rem;">
       <h4 class=" text-center" style="background-color: rgb(185, 221, 245);">User Details</h4>
@@ -29,7 +30,7 @@
               <h6 class="mb-0">User Type  :</h6>
            </div>
            <div class="col-sm-7 text-secondary">
-               {{user. userType}}
+               {{user.roles}}
            </div>
            <hr>   
 
@@ -37,7 +38,7 @@
                <h6 class="mb-0">Full Name  :</h6>
             </div>
             <div class="col-sm-7 text-secondary">
-                {{user.userFullName}}
+                {{user.fullName}}
             </div>
             <hr> 
 
@@ -54,7 +55,7 @@
                <h6 class="mb-0">Mobile number  :</h6>
             </div>
             <div class="col-sm-7 text-secondary">
-                {{user.mobileNo}}
+                {{user.phoneNumber}}
             </div>
            <hr>
 
@@ -63,7 +64,7 @@
                <h6 class="mb-0">Email Id  :</h6>
             </div>
             <div class="col-sm-7 text-secondary">
-                   {{user.emailId}}
+                   {{user.email}}
             </div>
       
            <hr>
@@ -221,6 +222,6 @@
 </div>
 
 
- 
+</body>
 
  

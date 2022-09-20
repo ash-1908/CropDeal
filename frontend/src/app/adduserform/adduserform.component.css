@@ -1,0 +1,14 @@
+.div1{
+    background-color: rgb(188, 183, 184);
+}
+body{
+    font-weight: 500;
+    background-image: url('https://www.betalogics.com/wp-content/uploads/2020/04/Bg-light-blue-for-counter.jpg');
+    background-size: 100%;
+    filter:saturate(100%);
+}
+
+span{
+    color: red;
+    font-size:medium;
+}

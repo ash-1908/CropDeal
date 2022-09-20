@@ -1,64 +1,81 @@
 package com.demo.cropdeal.user.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import org.bson.types.ObjectId;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 
-@Entity
-@Table(name="Crop")
-public class cropItem {
+@Document("crops")
+public class CropItem {
+	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name = "crop_id")
-	private String cropid;
-	private String cropname;
-	private String croptype;
-	private String cropqnt;
-	private double cropprice;
+	private String id;
 	
-	@ManyToOne
-	 @JoinColumn(name = "user_id")
-	private User user;
+	private String name;
 	
-	private cropItem() { //outside cannot instantiate
+	private String type;
+	
+	private String qnt;
+	
+	private String price;
+	
+	public CropItem() {
+	}
+	
+	public CropItem(String name, String type, String qnt, String price) {
+		this.name = name;
+		this.type = type;
+		this.qnt = qnt;
+		this.price = price;
+	}
+	
+	
+	
+	public String getId() {
+		return id;
+	}
 
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
 	}
 	
-	//setter and getter method is used to access variable outside the class
-	public String getCropid() {
-		return cropid;
+	public void setName(String name) {
+		this.name = name;
 	}
-	public void setCropid(String cropid) {
-		this.cropid = cropid;
+	
+	public String getType() {
+		return type;
 	}
-	public String getCropname() {
-		return cropname;
+	
+	public void setType(String type) {
+		this.type = type;
 	}
-	public void setCropname(String cropname) {
-		this.cropname = cropname;
+	
+	public String getQnt() {
+		return qnt;
 	}
-	public String getCroptype() {
-		return croptype;
+	
+	public void setQnt(String qnt) {
+		this.qnt = qnt;
 	}
-	public void setCroptype(String croptype) {
-		this.croptype = croptype;
+	
+	public String getPrice() {
+		return price;
 	}
-	public String getCropqnt() {
-		return cropqnt;
+	
+	public void setPrice(String price) {
+		this.price = price;
 	}
-	public void setCropqnt(String cropqnt) {
-		this.cropqnt = cropqnt;
+
+	@Override
+	public String toString() {
+		return "CropItem [id=" + id + ", name=" + name + ", type=" + type + ", qnt=" + qnt + ", price=" + price + "]";
 	}
-	public double getCropprice() {
-		return cropprice;
-	}
-	public void setCropprice(double cropprice) {
-		this.cropprice = cropprice;
-	}
-		
+	
+	
 }
+

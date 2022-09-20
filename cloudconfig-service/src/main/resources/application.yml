@@ -11,4 +11,4 @@ spring:
     config:
       server:
         git:
-          default-label: main
+          default-label: mongo

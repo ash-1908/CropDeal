@@ -9,8 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./save-cropitem.component.css']
 })
 export class SaveCropitemComponent implements OnInit {
-
-  cropitem: Cropitem = new Cropitem();
+  cropitem:Cropitem=new Cropitem();
 
   constructor(private cropitemService:CropitemService,
     private router: Router) { }
@@ -18,13 +17,13 @@ export class SaveCropitemComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  createCropitem(){
-    this.cropitemService.saveCropitem(this.cropitem).subscribe( data => {
-        console.log(data);
-        this.goToCropitemList();
-      },
-      error => console.log(error));
-  }
+  // createCropitem(){
+  //   this.cropitemService.saveCropitem(this.cropitem).subscribe( data => {
+  //       console.log(data);
+  //       this.goToCropitemList();
+  //     },
+  //     error => console.log(error));
+  // }
 
   goToCropitemList(){
     this.router.navigate(['crops/cropitems']);
@@ -32,7 +31,7 @@ export class SaveCropitemComponent implements OnInit {
 
   onSubmit(){
     console.log(this.cropitem);
-    this.createCropitem();
+    //this.createCropitem();
   }
 
 }

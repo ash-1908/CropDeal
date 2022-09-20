@@ -2,13 +2,13 @@ package com.demo.cropdeal.user.service;
 
 import com.demo.cropdeal.user.dto.UserDto;
 import com.demo.cropdeal.user.model.User;
+import org.bson.types.ObjectId;
 
 public interface IUserService {
 	
      String addUser(UserDto userDto);
-     String deleteUser(Long userId);
-     User getUser(Long userId);
-     User updateUser(Long userId,User user);
-     
-     
+     String deleteUser(String userId);
+     User getUser(String userId);
+     User updateUser(String id,User user);
+        
 }

@@ -1,17 +1,17 @@
-import { Address } from "./address";
-import { Bank } from "./bank";
+import { Address } from './address';
+import { Bank } from './bank';
 
-export interface User{
-   
-     userId ?: number;
-	 userFullName ?:String;
-	 userType ?:String;
-	 userName ?:String;
-	 password ?:String; 
-	 mobileNo ?: number;
-	 emailId ?:String;
-	 userStatus ?:String;
-     bank?:Bank;
-     address?:Address;
-
+export class User {
+  id?: string;
+  fullName?: String;
+  roles?: String;
+  userName?: String;
+  password?: String;
+  phoneNumber?: number;
+  email?: String;
+  active?:boolean;
+  bank?: Bank;
+  address?: Address;
+  cropIds?:string[];
+  // LIST OF CROPITEMS
 }

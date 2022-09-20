@@ -16,7 +16,7 @@ interface IAccountService {
 	
 	String forgotPassword(String url, String email, String method);
 	
-	void validateToken(String token);
+	MyResponseModel validateToken(String token);
 	
 	
 }

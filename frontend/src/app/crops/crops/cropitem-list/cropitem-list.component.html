@@ -1,31 +1,62 @@
-
-<div class = "row">
-    <h2 > Cropitem List</h2>
+<div class="row">
+  <h2>Cropitem List</h2>
 </div>
 
 <table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Crop Name</th>
-            <th>Crop Type</th>
-            <th>Crop Quantity</th>
-            <th>Crop Price</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor = "let cropitem of cropitems" >
-            <td> {{ cropitem.cropname}}</td>
-            <td> {{ cropitem.croptype}}</td>
-            <td> {{ cropitem.cropqnt}}</td>
-            <td> {{ cropitem.cropprice}}</td>
+  <thead>
+    <tr>
+      <th>Crop Name</th>
+      <th>Crop Type</th>
+      <th>Crop Quantity</th>
+      <th>Crop Price</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let cropitem of cropitems">
+      <td>{{ cropitem.cropname }}</td>
+      <td>{{ cropitem.croptype }}</td>
+      <td>{{ cropitem.cropqnt }}</td>
+      <td>{{ cropitem.cropprice }}</td>
 
-            <td>
-                <button (click) = "updateCropitem(cropitem.cropid)" class = "btn btn-outline-primary"> Update</button>
-                <button (click) = "deleteCropitem(cropitem.cropid)" class = "btn btn-outline-danger" style="margin-left: 10px"> Delete</button>
-                <button (click) = "cropitemDetails(cropitem.cropid)" class = "btn btn-outline-primary" style="margin-left: 10px"> View</button>
-            </td>
-            
-        </tr>
-    </tbody>
+      <td *ngIf="userIsFarmerFlag">
+        <button
+          (click)="updateCropitem(cropitem.cropid)"
+          class="btn btn-outline-primary"
+        >
+          Update
+        </button>
+        <button
+          (click)="deleteCropitem(cropitem.cropid)"
+          class="btn btn-outline-danger"
+          style="margin-left: 10px"
+        >
+          Delete
+        </button>
+        <button
+          (click)="cropitemDetails(cropitem.cropid)"
+          class="btn btn-outline-primary"
+          style="margin-left: 10px"
+        >
+          View
+        </button>
+      </td>
+
+      <td *ngIf="!userIsFarmerFlag">
+        <button
+          class="btn btn-outline-primary"
+        >
+          Unsubscribe
+        </button>
+        
+        <button
+          (click)="cropitemDetails(cropitem.cropid)"
+          class="btn btn-outline-primary"
+          style="margin-left: 10px"
+        >
+          View
+        </button>
+      </td>
+    </tr>
+  </tbody>
 </table>

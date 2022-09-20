@@ -2,6 +2,7 @@ package com.demo.cropdeal.cropitems.controller;
 
 import java.util.List;
 
+import org.bson.types.ObjectId;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -44,14 +45,14 @@ public class CropitemController {
 	// build get cropitem by id REST API
 		// http://localhost:8085/api/cropitems/1
 	@GetMapping("/cropitems/{cropid}")
-	public ResponseEntity<Cropitem> getcropItemById(@PathVariable("cropid")long cropitemId){
+	public ResponseEntity<Cropitem> getcropItemById(@PathVariable("cropid") ObjectId cropitemId){
 		return new ResponseEntity<Cropitem>(cropitemService.getcropItemById(cropitemId),HttpStatus.OK);
 	}
 	
 	// build update cropitem REST API
 		// http://localhost:8085/api/cropitems/1
 	@PutMapping("/cropitems/{cropid}")
-	public ResponseEntity<Cropitem> updatecropItem(@PathVariable("cropid") long cropid
+	public ResponseEntity<Cropitem> updatecropItem(@PathVariable("cropid") ObjectId cropid
 			             ,@RequestBody Cropitem cropitem){
 		return new ResponseEntity<Cropitem>(cropitemService.updatecropItem(cropitem,cropid),HttpStatus.OK);
 		
@@ -60,9 +61,11 @@ public class CropitemController {
 	// build delete cropitem REST API
 		// http://localhost:8085/api/cropitems/1
 	@DeleteMapping("/cropitems/{cropid}")
-	public ResponseEntity<String>deletecropItem(@PathVariable("cropid")long cropid){
+	public ResponseEntity<String>deletecropItem(@PathVariable("cropid")ObjectId cropid){
 		// delete cropitem from DB
 		cropitemService.deletecropItem(cropid);
 		return new ResponseEntity<String>("crop deleted successfully!",HttpStatus.OK);
 	}
+	
+//	GET LIST OF CROP ITEMS - BASED ON LIST OF OBJECT IDS
 }

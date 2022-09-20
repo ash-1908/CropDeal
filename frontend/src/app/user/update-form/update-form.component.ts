@@ -13,40 +13,42 @@ import { ServiceService } from '../service/service.service';
 })
 export class UpdateFormComponent implements OnInit {
   
-   id:any;
+   id:string="63285c9fcbbc536e9426d312";
    username:string="";
    user:User={};
    bank:Bank={};
    address:Address={};
-
+   val:boolean=false;
   
 
-  constructor(private service:ServiceService,private actRoute:ActivatedRoute) { }
+  constructor(private service:ServiceService) { }
 
   ngOnInit(): void {
 
-    this.actRoute.params.subscribe(params=>{
-      this.username=params['username'];
+    // this.actRoute.params.subscribe(params=>{
+    //   this.username=params['username'];
       
-    });
+    // });
 
-    this.service.getUserByUserName(this.username).subscribe(data=>{
-      this.id=data.userId;
-      console.log(this.id,"and data  of user is");
-      console.log("=>",data);
+    // this.service.getUserById(this.id).subscribe(data=>{
+    //   this.id=data.userId;
+    //   console.log(this.id,"and data  of user is");
+    //   console.log("=>",data);
       
-    });
+    // });
   }
  
 
   
   onsubmit(updateForm:NgForm):void{
-   this.user.userType=updateForm.value.usertype;
-   this.user.userFullName=updateForm.value.fullname;
+
+    console.log(updateForm.value)
+   this.user.roles=updateForm.value.usertype;
+   this.user.fullName=updateForm.value.fullname;
    this.user.userName=updateForm.value.username;
-   this.user.emailId=updateForm.value.email;
-   this.user.mobileNo=updateForm.value.mobileno;
-   this.user.userStatus="";
+   this.user.email=updateForm.value.email;
+   this.user.phoneNumber=updateForm.value.mobileno;
+   this.user.active=true;
 
 
    this.bank.accountHolderName=updateForm.value.accountname;
@@ -67,7 +69,6 @@ export class UpdateFormComponent implements OnInit {
    this.user.bank=this.bank;
    this.user.address=this.address;
 
-
    console.log("requested user data is:");
   console.log(this.user);
 
@@ -76,7 +77,8 @@ export class UpdateFormComponent implements OnInit {
     console.log(data);
   })
 
-
+   setTimeout(()=>window.location.reload(),1500);
+   
   }
 
 }

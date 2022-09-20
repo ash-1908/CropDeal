@@ -1,0 +1,387 @@
+<body>
+
+    <form  #RegisterForm="ngForm" (submit)="onsubmit(RegisterForm)">
+    
+    
+         <div class="container">
+    
+    
+            <div class="div1">
+                <h2>User Registration Form</h2> 
+              
+                <hr>
+               
+            </div>
+    
+            <div class="title">USER DETAILS</div>
+            <br>
+    
+            <label>Select user type : </label>  &nbsp;
+            <input  type="radio" ngModel name="usertype"   #utype="ngModel" value="ROLE_FARMER" > Farmer    
+             &nbsp; &nbsp; &nbsp;<input type="radio" ngModel name="usertype" #utype="ngModel" value="ROLE_DEALER"> Dealer
+    
+             <br> <br>
+            
+        <div class="row">
+    
+            <div class="col-sm-4">
+               <label>Full Name : </label> &nbsp;
+                <input required style="margin-left:26px;" type="text"placeholder="enter your full name" ngModel pattern="[a-zA-Z ]+"   name="fullname" #fname="ngModel"  class="i1"> 
+               
+                <div *ngIf="fname.errors && (fname.dirty || fname.touched)">
+                   <div *ngIf="fname.hasError('pattern')">
+                         <span  id="span" class="error_msg"> name can contain only space and alphabets</span>
+                   </div>
+                   <div *ngIf="fname.hasError('required')">
+                        <span  id="span" class="error_msg"> name is required</span>
+                    </div>
+                </div>
+             </div>
+          
+    
+           
+            <div class="col-sm-8">
+                <label>User Name :</label>&nbsp;
+                <input required [maxLength]="15" type="text" placeholder="enter  user name" ngModel pattern="[a-zA-Z0-9]+"   name="username" #uname="ngModel" class="input"> 
+             
+              <div *ngIf="uname.errors && (uname.dirty || uname.touched)">
+               
+                 <div *ngIf="uname.hasError('pattern')">
+                    <span  id="span" class="error_msg"> username can contain only  alphabets , numbers</span>
+                 </div>
+                 <div *ngIf="uname.hasError('required')">
+                    <span  id="span" class="error_msg"> username is required</span>
+                 </div>
+
+               </div>
+
+
+            </div>
+    
+        </div>
+    
+         <br>
+         <div class="row">
+    
+            <div class="col-sm-4">
+                <label>Email Id:</label>&nbsp;
+                <input required style="margin-left:50px;" class="i1"  type="email"  placeholder="enter email" ngModel  name="email"  pattern="[a-zA-Z0-9]+@[a-zA-Z]+[.][a-zA-Z]+" #uemail="ngModel"  class="i1" > 
+                <br>
+
+                <div *ngIf="uemail.errors && (uemail.dirty || uemail.touched)">
+               
+                    <div *ngIf="uemail.hasError('pattern')">
+                        <span id="span" class="error_msg">email cannot have space and special characters (except:@ and .)  example=abc002@gmail.com</span>
+                    </div>
+                    <div *ngIf="uemail.hasError('required')">
+                       <span  id="span" class="error_msg"> email is required</span>
+                    </div>
+   
+                </div>
+
+             </div>
+      
+            <div class="col-sm-8">
+                <label>Mobile No :</label>&nbsp;
+                <input required style="margin-left:5px;" type="number" pattern="[0-9]{10}$" placeholder="enter your mobile number" ngModel  name="mobileno" class="input"  #umob="ngModel" > 
+           
+                
+                <div *ngIf="umob.errors && (umob.dirty || umob.touched)">
+               
+                    <div *ngIf="uemail.hasError('pattern')">
+                        <span id="span" class="error_msg">mobile number must be 10 digits without spaces</span>
+                    </div>
+                    <div *ngIf="umob.hasError('required')">
+                       <span  id="span" class="error_msg"> mobile number required</span>
+                    </div>
+   
+                </div>
+           
+           
+            </div>
+    
+         </div>
+      
+         
+    
+           <hr>
+    
+       
+           <div class="row">
+    
+            <div class="title">ACCOUNT DETAILS</div>
+            <br>
+    
+            <div class="col-sm-4">
+                <br>
+                <label>Account name :</label>&nbsp;
+                <input  required type="text" placeholder="account holder name" ngModel pattern="[a-zA-Z ]+"   name="accountname" #aname="ngModel" class="i1"> 
+                
+                
+                <div *ngIf="aname.errors && (aname.dirty || aname.touched)">
+                                  
+                     <div *ngIf="aname.hasError('pattern')">
+                        <span  id="span" class="error_msg"> name can contain only space and alphabets</span>
+                     </div>
+                    <div *ngIf="aname.hasError('required')">
+                       <span  id="span" class="error_msg"> account name required</span>
+                    </div>
+   
+                </div>  
+
+            </div>
+
+    
+            <div class="col-sm-4">
+                <label>Account Number :</label>&nbsp;
+                <input required style="margin-left:10px;" type="text" placeholder="enter account no" ngModel pattern="[0-9]+"   name="accountno" #accno="ngModel" class="input"> 
+                <br>
+                
+                
+                <div *ngIf="accno.errors && (accno.dirty || accno.touched)">
+               
+                    <div *ngIf="accno.hasError('pattern')">
+                        <span  id="span" class="error_msg">account no can contain only numbers</span>
+                    </div>
+                    <div *ngIf="accno.hasError('required')">
+                       <span  id="span" class="error_msg"> account number required</span>
+                    </div>
+   
+                </div>
+                
+                
+            </div>
+          
+    
+           
+            <div class="col-sm-4">
+                <br>
+                <label>Bank name :</label>&nbsp;
+                <input required type="text" placeholder="enter bank name" ngModel pattern="[a-zA-Z ]+"   name="bankname" #bname="ngModel" class="input"> 
+                
+                
+                <div *ngIf="bname.errors && (bname.dirty || bname.touched)">
+                   
+                    <div *ngIf="bname.hasError('pattern')">
+                        <span  id="span" class="error_msg"> name can contain only space and alphabets</span>
+                       </div>
+                    <div *ngIf="bname.hasError('required')">
+                       <span  id="span" class="error_msg"> bank name is required</span>
+                    </div>
+   
+                </div>
+                
+            </div>
+    
+        </div>
+    
+         <br>
+         <div class="row">
+    
+            <div class="col-sm-4">
+                <label>Bank branch:</label>&nbsp;
+                <input required style="margin-left:18px;" class="i1"  type="text" placeholder="enter bank branch" ngModel pattern="[a-zA-Z ]+"   name="bankbranch" #branch="ngModel" > 
+        
+                
+                <div *ngIf="branch.errors && (branch.dirty || branch.touched)">
+               
+                    <div *ngIf="branch.hasError('pattern')">
+                        <span  id="span" class="error_msg">  can contain only space and alphabets</span>
+                    </div>
+                    <div *ngIf="branch.hasError('required')">
+                       <span  id="span" class="error_msg"> branch is required</span>
+                    </div>
+   
+                </div>
+
+            </div>
+      
+            <div class="col-sm-8">
+                <label>IFSC code :</label>&nbsp;
+                <input required style="margin-left:10px;" type="text" placeholder="enter IFSC" ngModel pattern="[a-zA-Z0-9]+"   name="ifsccode" #ifsc="ngModel" class="input"> 
+                <br>
+                
+                
+                <div *ngIf="ifsc.errors && (ifsc.dirty || ifsc.touched)">
+               
+                    <div *ngIf="ifsc.hasError('pattern')">
+                        <span  id="span" class="error_msg"> can contain only  alphabets , numbers</span>
+                    </div>
+                    <div *ngIf="ifsc.hasError('required')">
+                       <span  id="span" class="error_msg"> ifsc code is required</span>
+                    </div>
+   
+                </div>
+
+            </div>
+    
+         </div>
+    
+    
+    
+         <hr>
+    
+      
+    
+         <br>
+         <div class="row">
+    
+            <div class="title">ADDRESS DETAILS</div>
+            <br>
+    
+            <div class="col-sm-4">
+                <br>
+                <label>House No:</label>&nbsp;
+                <input required style="margin-left:30px;" type="text" placeholder="enter house number" ngModel pattern="[0-9]+"   name="houseno" #hno="ngModel"  class="i1"> 
+                 
+                
+                <div *ngIf="hno.errors && (hno.dirty || hno.touched)">
+               
+                    <div *ngIf="hno.hasError('pattern')">
+                        <span  id="span" class="error_msg"> only numbers allowed and no spaces</span>
+                   </div>
+                    <div *ngIf="hno.hasError('required')">
+                       <span  id="span" class="error_msg"> house number is required</span>
+                    </div>
+   
+                </div>
+                
+            </div>
+          
+    
+           
+            <div class="col-sm-8">
+                <br>
+                <label>Street Name:</label>&nbsp;
+                <input required type="text" placeholder="enter street name" ngModel  name="streetname" #sname="ngModel" class="input"> 
+           
+                
+                <div *ngIf="sname.errors && (sname.dirty || sname.touched)">
+               
+                    <div *ngIf="sname.hasError('required')">
+                       <span  id="span" class="error_msg"> street name is required</span>
+                    </div>
+   
+                </div>
+           
+            </div>
+    
+        </div>
+    
+         <br>
+         <div class="row">
+    
+            <div class="col-sm-4">
+                <label>Locality :</label>&nbsp;
+                 <input required style="margin-left:42px;" type="text" placeholder="enter locality name" ngModel pattern="[a-zA-Z ]+"   name="localityname" #lname="ngModel"  class="i1"> 
+                 <br>
+                 
+                <div *ngIf="lname.errors && (lname.dirty || lname.touched)">
+               
+                    <div *ngIf="lname.hasError('pattern')">
+                        <span  id="span" class="error_msg">  can contain only space and alphabets</span>
+                    </div>
+                    <div *ngIf="lname.hasError('required')">
+                       <span  id="span" class="error_msg"> locality name is required</span>
+                    </div>
+   
+                </div>
+                 
+            </div>
+      
+            <div class="col-sm-8">
+                <label>pincode:</label>&nbsp;
+                <input  required style="margin-left:30px;" type="text" placeholder="enter pincode" ngModel pattern="[0-9]+"   name="pincode" #pin="ngModel" class="input"> 
+               
+               
+                <div *ngIf="pin.errors && (pin.dirty || pin.touched)">
+               
+                    <div *ngIf="pin.hasError('pattern')">
+                        <span  id="span" class="error_msg"> only numbers allowed</span>
+                    </div>
+                    <div *ngIf="pin.hasError('required')">
+                       <span  id="span" class="error_msg"> pincode is required</span>
+                    </div>
+   
+                </div>
+            
+            </div>
+    
+         </div>
+    
+         <br>
+         <div class="row">
+    
+            <div class="col-sm-4">
+                <label>City :</label>&nbsp;
+                <input required style="margin-left:70px;" type="text" placeholder="enter city" ngModel    name="city" #ucity="ngModel"  class="i1"> 
+                <br>
+                
+                
+                <div *ngIf="ucity.errors && (ucity.dirty || ucity.touched)">
+                    
+                    <div *ngIf="ucity.hasError('pattern')">
+                        <span  id="span" class="error_msg">  can contain only space and alphabets</span>
+                     </div>
+                    <div *ngIf="ucity.hasError('required')">
+                       <span  id="span" class="error_msg"> city is required</span>
+                    </div>
+   
+                </div>
+                
+            </div>
+      
+            <div class="col-sm-8">
+                <label>State :</label>&nbsp;
+                <input required style="margin-left:50px;" type="text" placeholder="enter state" ngModel pattern="[a-zA-Z ]+"   name="state" #ustate="ngModel" class="input"> 
+                 <br>
+                
+                
+                 <div *ngIf="ustate.errors && (ustate.dirty || ustate.touched)">
+               
+                    <div *ngIf="ustate.hasError('pattern')">
+                        <span  id="span" class="error_msg">  can contain only space and alphabets</span>
+                    </div>
+                    <div *ngIf="ustate.hasError('required')">
+                       <span  id="span" class="error_msg"> state is required</span>
+                    </div>
+   
+                </div>
+            
+            </div>
+    
+         </div>
+    
+         <br>
+         <div class="col-sm-4">
+            <label>Country:</label>&nbsp;
+            <input required style="margin-left:45px;" type="text" placeholder="enter country" ngModel    name="country" #ucountry="ngModel"  class="i1"> 
+            <br>
+            
+            
+            <div *ngIf="ucountry.errors && (ucountry.dirty || ucountry.touched)">
+               
+                <div *ngIf="ucountry.hasError('pattern')">
+                    <span  id="span" class="error_msg">  can contain only space and alphabets</span>
+                </div>
+                <div *ngIf="ucountry.hasError('required')">
+                   <span  id="span" class="error_msg"> required</span>
+                </div>
+
+            </div>
+            
+        </div>
+    
+        <br>
+        <input type="submit" [disabled]="!RegisterForm.form.valid" value="Register User" class="btn btn-primary" >
+    
+    
+    
+        </div>
+    
+      
+          
+    
+    </form>
+    
+    </body>
