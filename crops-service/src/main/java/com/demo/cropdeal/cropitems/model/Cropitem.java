@@ -1,6 +1,7 @@
 package com.demo.cropdeal.cropitems.model;
 
 import org.bson.types.ObjectId;
+
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.Column;
@@ -15,7 +16,7 @@ import javax.persistence.Table;
 public class Cropitem {
 
 	@Id
-	private ObjectId id;
+	private String id;
 	
 	private String name;
 	
@@ -25,6 +26,21 @@ public class Cropitem {
 	
 	private String price;
 	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+	
+	
+
+	public Cropitem(String id) {
+		super();
+		this.id = id;
+	}
+
 	public Cropitem() {
 	}
 	

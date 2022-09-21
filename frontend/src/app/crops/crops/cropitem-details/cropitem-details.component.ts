@@ -10,15 +10,15 @@ import { CropitemService } from '../cropitem.service';
 })
 export class CropitemDetailsComponent implements OnInit {
 
-  cropid: number
+  id: string
   cropitem: Cropitem
   constructor(private route: ActivatedRoute, private cropitemService: CropitemService) { }
 
   ngOnInit(): void {
-    this.cropid = this.route.snapshot.params['cropid'];
+    this.id = this.route.snapshot.params['id'];
 
     this.cropitem = new Cropitem();
-    this.cropitemService.getCropitemById(this.cropid).subscribe( data => {
+    this.cropitemService.getCropitemById(this.id).subscribe( data => {
       this.cropitem = data;
     });
   

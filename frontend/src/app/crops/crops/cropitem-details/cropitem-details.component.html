@@ -1,16 +1,20 @@
 <h3> View Cropitem Details</h3>
 <div>
     <div>
-        <label> <b> Crop Name: </b></label> {{cropitem.cropname}}
+        <label> <b> Crop Name: </b></label> {{cropitem.name}}
     </div>
     <div>
-        <label> <b> Crop type: </b></label> {{cropitem.croptype}}
+        <label> <b> Crop type: </b></label> {{cropitem.type}}
     </div>
     <div>
-        <label> <b> Crop Quantity: </b></label> {{cropitem.cropqnt}}
+        <label> <b> Crop Quantity: </b></label> {{cropitem.qnt}}
     </div>
     <div>
-        <label> <b> Crop Price: </b></label> {{cropitem.cropprice}}
+        <label> <b> Crop Price: </b></label> {{cropitem.price}}
     </div>
+</div>
+
+<div class="container">
+    <router-outlet></router-outlet>
 </div>
 

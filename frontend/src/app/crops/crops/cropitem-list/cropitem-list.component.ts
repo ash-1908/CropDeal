@@ -13,7 +13,7 @@ export class CropitemListComponent implements OnInit {
   private userRole: string = '';
   protected userIsFarmerFlag: boolean = true;
 
-  cropitems: Cropitem[] = [];
+  cropitems: Cropitem[];
 
 
   constructor(
@@ -43,21 +43,21 @@ export class CropitemListComponent implements OnInit {
     });
   }
 
-  updateCropitem(cropid: number) {
-    this.router.navigate(['crops/update-cropitem', cropid]);
+  updateCropitem(id: string) {
+    this.router.navigate(['crops/update-cropitem', id]);
   }
 
-  deleteCropitem(cropid: number) {
+  deleteCropitem(id: string) {
     if (confirm('Are you sure delete the crop?'))
-      this.cropitemService.deleteCropitem(cropid).subscribe((data) => {
-        alert('Crop deleted Successfully');
-        //console.log(data);
-        this.ngOnInit();
-        //this.getCropitems();
-      });
+      this.cropitemService.deleteCropitem(id).subscribe((data) => {
+    
+        console.log(data);
+        this.getCropitems();
+      })
+      window.location.reload();
   }
 
-  cropitemDetails(cropid: number) {
-    this.router.navigate(['crops/cropitem-details', cropid]);
+  cropitemDetails(id: string) {
+    this.router.navigate(['crops/cropitem-details', id]);
   }
 }

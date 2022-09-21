@@ -14,27 +14,27 @@
   </thead>
   <tbody>
     <tr *ngFor="let cropitem of cropitems">
-      <td>{{ cropitem.cropname }}</td>
-      <td>{{ cropitem.croptype }}</td>
-      <td>{{ cropitem.cropqnt }}</td>
-      <td>{{ cropitem.cropprice }}</td>
+      <td>{{ cropitem.name }}</td>
+      <td>{{ cropitem.type }}</td>
+      <td>{{ cropitem.qnt }}</td>
+      <td>{{ cropitem.price }}</td>
 
       <td *ngIf="userIsFarmerFlag">
         <button
-          (click)="updateCropitem(cropitem.cropid)"
+          (click)="updateCropitem(cropitem.id)"
           class="btn btn-outline-primary"
         >
           Update
         </button>
         <button
-          (click)="deleteCropitem(cropitem.cropid)"
+          (click)="deleteCropitem(cropitem.id)"
           class="btn btn-outline-danger"
           style="margin-left: 10px"
         >
           Delete
         </button>
         <button
-          (click)="cropitemDetails(cropitem.cropid)"
+          (click)="cropitemDetails(cropitem.id)"
           class="btn btn-outline-primary"
           style="margin-left: 10px"
         >
@@ -50,7 +50,7 @@
         </button>
         
         <button
-          (click)="cropitemDetails(cropitem.cropid)"
+          (click)="cropitemDetails(cropitem.id)"
           class="btn btn-outline-primary"
           style="margin-left: 10px"
         >
@@ -60,3 +60,7 @@
     </tr>
   </tbody>
 </table>
+
+<div class="container">
+  <router-outlet></router-outlet>
+</div>
