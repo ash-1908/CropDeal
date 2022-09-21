@@ -48,17 +48,24 @@ export class AuthService {
   }
 
   // post user email and preferred password reset method, return acknowledgement of further communication
-  public forgotPassword(email: string, method: string): Observable<ResponseModel> {
+  public forgotPassword(
+    email: string,
+    method: string
+  ): Observable<ResponseModel> {
     let endpoint = 'forgot-password?email=' + email + '&method=' + method;
-    return this.http.post<ResponseModel>(this.rootUrl + endpoint, {}).pipe(catchError(this.handleError));
+    return this.http
+      .post<ResponseModel>(this.rootUrl + endpoint, {})
+      .pipe(tap(this.setUserId), catchError(this.handleError));
   }
   // post user email and otp, return if the otp is valid
-  public validateOtp(email: string, resetCode: string): Observable<boolean> {
+  public validateOtp(id: string, resetCode: string): Observable<boolean> {
     let endpoint = 'forgot-password/otp';
-    return this.http.post<boolean>(this.rootUrl + endpoint, {
-      email,
-      resetCode,
-    }).pipe(catchError(this.handleError));
+    return this.http
+      .post<boolean>(this.rootUrl + endpoint, {
+        id,
+        resetCode,
+      })
+      .pipe(catchError(this.handleError));
   }
 
   // post jwt and receive refreshed jwt if valid
@@ -102,6 +109,9 @@ export class AuthService {
     localStorage.setItem('user_id', authResult.id);
     localStorage.setItem('user_role', authResult.role);
   }
+  private setUserId(authResult: ResponseModel) {
+    localStorage.setItem('user_id', authResult.id);
+  }
   private removeUser() {
     localStorage.clear();
   }
@@ -109,12 +119,10 @@ export class AuthService {
   private handleError(error: HttpErrorResponse) {
     let errorMsg = '';
     console.error('An error occurred:', error.error);
-    
+
     // client side network error
-    if(error.status === 0)
-      errorMsg = 'Network error';
-    else 
-      errorMsg = error.error.msg;
+    if (error.status === 0) errorMsg = 'Network error';
+    else errorMsg = error.error.msg;
 
     return throwError(() => new Error(errorMsg));
   }

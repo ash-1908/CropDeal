@@ -95,11 +95,13 @@ public class AccountServiceImpl implements UserDetailsService, IAccountService {
 	public Boolean validateOTP(MyRequestModel req) {
 		String otp = req.getResetCode();
 		String id = req.getId();
-		if ((id != null && !id.isBlank()) && (otp != null && !otp.isBlank())) {
-			Account accountData = repository.findById(new ObjectId(id)).get();
-			return accountData.getResetCode().equals(otp);
-		}
-		return false;
+		if (id == null || id.isBlank())
+			throw new RuntimeException("User id cannot be null");
+		if (otp == null && otp.isBlank())
+			throw new RuntimeException("OTP cannot be null");
+		
+		Account accountData = repository.findById(new ObjectId(id)).get();
+		return accountData.getResetCode().equals(otp);
 	}
 	
 	@Override
@@ -142,13 +144,14 @@ public class AccountServiceImpl implements UserDetailsService, IAccountService {
 			if (account.getPhoneNumber() == null) throw new PhoneNumberNotFoundException("Phone number not found.");
 			
 			Integer otp = (int)
-				Math.floor(Math.random() * 10000 + Math.random() * 1000 + Math.random() * 100 + Math.random() * 10);
+				(Math.floor(Math.random() * 10000 + Math.random() * 1000 + Math.random() * 100 + Math.random() * 10));
 			
 			account.setResetCode(otp.toString());
 			repository.save(account);
 			
-			smsService.sendOTP(account.getPhoneNumber(), otp.toString());
+//			smsService.sendOTP(account.getPhoneNumber(), otp.toString());
 			
+			response.setId(account.getId());
 			response.setPhone(account.getPhoneNumber());
 			return response;
 		} else {
