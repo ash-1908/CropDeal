@@ -3,7 +3,7 @@ package com.demo.cropdeal.user.repository;
 import com.demo.cropdeal.user.model.Address;
 import com.demo.cropdeal.user.model.Bank;
 import com.demo.cropdeal.user.model.User;
-import com.demo.cropdeal.user.service.GetUserTest;
+//import com.demo.cropdeal.user.service.GetUserTest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -23,7 +23,7 @@ class UserRepositoryTestCase {
 	@Mock
 	private UserRepository userRepository;
 	
-	GetUserTest getUser;
+	//GetUserTest getUser;
 	
 	List<User> list = new ArrayList<>();
 	

@@ -1,7 +1,7 @@
 package com.demo.cropdeal.user.dto;
 
 import com.demo.cropdeal.user.model.User;
-import com.demo.cropdeal.user.model.cropItem;
+import com.demo.cropdeal.user.model.CropItem;
 import io.swagger.annotations.ApiModelProperty;
 import org.bson.types.ObjectId;
 
@@ -10,7 +10,7 @@ import java.util.List;
 public class UserDto {
 	
 	@ApiModelProperty(notes = "unique id of user")
-	private ObjectId id;
+	private String id;
 	@ApiModelProperty(notes = "The user's full name")
 	private String fullName;
 	
@@ -39,7 +39,7 @@ public class UserDto {
 	@ApiModelProperty(notes = "Address of user")
 	AddressDto address;
 	
-	private List<cropItem> cropItems;
+	private List<CropItem> cropItems;
 	
 	public UserDto() {
 	}
@@ -61,11 +61,11 @@ public class UserDto {
 		
 	}
 	
-	public ObjectId getId() {
+	public String getId() {
 		return id;
 	}
 	
-	public void setId(ObjectId id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	
@@ -141,11 +141,11 @@ public class UserDto {
 		this.address = address;
 	}
 	
-	public List<cropItem> getCropItems() {
+	public List<CropItem> getCropItems() {
 		return cropItems;
 	}
 	
-	public void setCropItems(List<cropItem> cropItems) {
+	public void setCropItems(List<CropItem> cropItems) {
 		this.cropItems = cropItems;
 	}
 	

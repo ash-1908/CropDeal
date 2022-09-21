@@ -3,17 +3,18 @@ package com.demo.cropdeal.user.service;
 import com.demo.cropdeal.user.dto.UserDto;
 import com.demo.cropdeal.user.model.Address;
 import com.demo.cropdeal.user.model.Bank;
+import com.demo.cropdeal.user.model.CropItem;
 import com.demo.cropdeal.user.model.User;
+import com.demo.cropdeal.user.repository.AddressRepository;
 import com.demo.cropdeal.user.repository.BankRepository;
 import com.demo.cropdeal.user.repository.UserRepository;
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 
 @Service
@@ -26,8 +27,13 @@ public class UserService implements IUserService {
 	BankRepository bankRepository;
 	
 	@Autowired
+	AddressRepository addressRepository;
+	
+	@Autowired
 	EmailSenderService emailSenderService;
 	
+	@Autowired
+	RestTemplate restTemplate;
 	
 	@Override
 	public String addUser(UserDto userDto) {
@@ -42,13 +48,22 @@ public class UserService implements IUserService {
 		boolean AccountNoAbsent = bankRepository.getByAccountNo(user.getBank().getAccountNo()) == null;
 		
 		if (usernameAbsent && MobileNoAbsent && EmaiLIdAbsent && AccountNoAbsent) {
+			
 			String userRole = user.getRoles().split("_")[1];
-			// first save the address object
-			// after this try calling getId method, if it returns null then do this:
-			// address = addressRepository.save(address); -> now you can get the id
-			// here you will first save address object and bank object, then you will get the id of that object
-			// set the id of bank and address in user object
-			userRepository.save(user);
+			
+			user.setRoles(userRole);
+			
+			//bank id 6324e2a86879610ec04cdc35  address id 6324e2a86879610ec04cdc36  user id:6324e2a86879610ec04cdc37
+			
+			User user1;
+			Bank bank=bankRepository.save(user.getBank());
+			
+			Address address=addressRepository.save(user.getAddress());
+			user1=userRepository.save(user);
+			System.out.println("bank id "+bank.getId()+"address id "+address.getId()+"user id:"+user1.getId());
+			
+			
+			
 			emailSenderService.sendEmail(user.getEmail(),
 				user.getFullName() + " you are registered successfully..as " + userRole, "Registration Status");
 			return "user Added";
@@ -76,7 +91,7 @@ public class UserService implements IUserService {
 	}
 	
 	@Override
-	public String deleteUser(ObjectId userId) {
+	public  String deleteUser(String userId) {
 		
 		/*
 		 * fetch user from db
@@ -88,16 +103,23 @@ public class UserService implements IUserService {
 		 */
 		var user = userRepository.getById(userId);
 		if (user != null) {
+			
+			long accountNo=user.getBank().getAccountNo();
+			String addressId=user.getAddress().getId();
+    		bankRepository.deleteByAccountNo(accountNo);
+		    addressRepository.deleteById(addressId);
 			userRepository.deleteById(userId);
+			System.out.println("deleted user bank details "+bankRepository.getByAccountNo(user.getBank().getAccountNo()));
 			
 			return "user deleted successfully";
 			
 		}
-		return "invalid id user not present";
+		else
+		    return "invalid id user not present";
 	}
 	
 	@Override
-	public User getUser(ObjectId userId) {
+	public User getUser(String userId) {
 		
 		/*
 		 * if user data is present in database then return user
@@ -137,34 +159,27 @@ public class UserService implements IUserService {
 	}
 	
 	
-	public User getUserByUsername(String username) {
-		
-		
-		var user = userRepository.getByUserName(username);
-		if (user != null) {
-			return user;
-		}
-		
-		return null;
-	}
-	
 	
 	public List<User> getAllUsers() {
 		List<User> users = userRepository.findAll();
 		if (users != null) {
+			System.out.println(users);
 			return users;
+			
 		} else {
 			return new ArrayList<>();
 		}
 		
 	}
+
 	
-	public String markUserStatus(ObjectId userId, Boolean status) {
+	public String markUserStatus(String userId, boolean userStatus) {
 		User user = userRepository.getById(userId);
+		
 		if (user != null) {
-			user.setActive(status);
+			user.setActive(userStatus);
 			userRepository.save(user);
-			if (userRepository.getById(userId).getActive().equals(status)) {
+			if (userRepository.getById(userId).getActive().equals(userStatus)) {
 				return "updated user status as " + (user.getActive() ? "active" : "in-active");
 			} else {
 				return "user not updated";
@@ -176,9 +191,38 @@ public class UserService implements IUserService {
 		
 	}
 	
+	public CropItem addCrops(String userId,CropItem cropItem){
+		
+		List<String> list=userRepository.getById(userId).getCropIds();
+		String url="http://localhost:8083/api/v1/cropitems";
+		System.out.println(cropItem);
+		CropItem crop=restTemplate.postForObject(url,cropItem,CropItem.class);
+		if(crop!=null) {
+			list.add(crop.getId());
+			System.out.println("crop id is "+crop.getId());
+			System.out.println("crop is : "+crop);
+			User user=userRepository.getById(userId);
+			user.setCropIds(list);
+			user=userRepository.save(user); 
+			System.out.println(user);
+			return crop;
+			
+		}
+		else
+			return new CropItem();
+	}
+	
+	public List<String> getUserCropIdList(String userId){
+		User user=userRepository.getById(userId);
+		if(user.getCropIds()!=null) {
+			return user.getCropIds();
+		}
+		else 
+			return new ArrayList<>();
+	}
 	
 	@Override
-	public User updateUser(ObjectId userId, User user) {
+	public User updateUser(String userId, User user) {
 		
 		//fetch user from database using given id
 		var user1 = userRepository.getById(userId);
@@ -192,6 +236,18 @@ public class UserService implements IUserService {
        */
 		
 		if (user != null) {
+			
+			
+			if (user.getRoles() != null && user.getRoles().isBlank() == false) {
+				
+				String userRole = user.getRoles().split("_")[1];
+				user1.setRoles(userRole);
+			}
+			
+			if(user.getUserName()!=null&&user.getUserName().isBlank()==false) {
+				user1.setUserName(user.getUserName());
+			}
+			
 			if (user.getEmail() != null && user.getEmail().isBlank() == false) {
 				user1.setEmail(user.getEmail());
 			}
@@ -204,24 +260,22 @@ public class UserService implements IUserService {
 			if (user.getFullName().length() != 0) {
 				user1.setFullName(user.getFullName());
 			}
-			user1.setActive(user.getActive());
-			
-		/*
-		 * 
-		 if(user.getUserStatus()!=null ) {
-			user1.setUserStatus(user.getUserStatus());
-		}
 		
-		*/
-			
+	
 			var bank1 = updateBank(user, user1);
 			
 			var address1 = updateAddress(user, user1);
-			
+			bankRepository.save(bank1);
 			user1.setBank(bank1);
+			
+			addressRepository.save(address1);
 			user1.setAddress(address1);
+	
 			
 			userRepository.save(user1);
+
+			
+			
 			return user1;
 		}
 		
@@ -300,12 +354,12 @@ public class UserService implements IUserService {
 				address1.setStreetName(user.getAddress().getStreetName());
 			}
 			
-		} else {
-			address1 = user1.getAddress();
-		}
+		} 
 		return address1;
 		
 	}
+
+
 	
 	
 }

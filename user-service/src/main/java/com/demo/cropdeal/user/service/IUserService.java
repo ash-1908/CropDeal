@@ -7,9 +7,8 @@ import org.bson.types.ObjectId;
 public interface IUserService {
 	
      String addUser(UserDto userDto);
-     String deleteUser(ObjectId userId);
-     User getUser(ObjectId userId);
-     User updateUser(ObjectId userId,User user);
-     
-     
+     String deleteUser(String userId);
+     User getUser(String userId);
+     User updateUser(String id,User user);
+        
 }

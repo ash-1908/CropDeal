@@ -7,12 +7,13 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepository extends MongoRepository<User, ObjectId> {
+public interface UserRepository extends MongoRepository<User, String> {
 
-	User getById(ObjectId userId);
+	User getById(String userId);
     User getByUserName(String username);
 	User getByPhoneNumber(String mobileNo);
 	User getByEmail(String emailId);
+	void deleteById(String userId);
     
 	
 }

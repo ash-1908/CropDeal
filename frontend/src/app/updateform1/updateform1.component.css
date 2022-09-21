@@ -1,0 +1,31 @@
+.title{
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    color: crimson;
+    
+}
+
+span{
+    color: red
+}
+
+#back{
+    padding-top: 20px;
+    color: white;
+}
+
+body{
+    /* background-image: url('https://png.pngtree.com/back_origin_pic/04/48/50/84cd2a9fbc6cbd5522b2f048a56703a8.jpg'); */
+
+    background-image: url('https://graphicalnetworks.com/wp-content/uploads/revslider/web-product-light-hero193/data-center-dcim.jpg');
+    background-size:100%;
+}
+
+#title{
+    background-image: url('https://i1.wp.com/media.giphy.com/media/xTiTnxpQ3ghPiB2Hp6/giphy.gif?resize=500%2C281&ssl=1');
+    background-size:100%;
+}
+
+h2,h4{
+    padding-left: 100px;
+    color: white;
+}

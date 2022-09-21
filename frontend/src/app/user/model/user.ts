@@ -2,15 +2,16 @@ import { Address } from './address';
 import { Bank } from './bank';
 
 export class User {
-  userId?: number;
-  userFullName?: String;
-  userType?: String;
+  id?: string;
+  fullName?: String;
+  roles?: String;
   userName?: String;
   password?: String;
-  mobileNo?: number;
-  emailId?: String;
-  userStatus?: String;
+  phoneNumber?: number;
+  email?: String;
+  active?:boolean;
   bank?: Bank;
   address?: Address;
+  cropIds?:string[];
   // LIST OF CROPITEMS
 }

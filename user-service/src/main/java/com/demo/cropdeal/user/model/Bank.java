@@ -1,6 +1,5 @@
 package com.demo.cropdeal.user.model;
 
-import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.Id;
@@ -9,7 +8,7 @@ import javax.persistence.Id;
 public class Bank {
 	
 	@Id
-	private ObjectId id;
+	private String id;
 	private Long accountNo;
 	
 	private String accountHolderName;
@@ -33,14 +32,16 @@ public class Bank {
 	public Bank() {
 	}
 	
-	public ObjectId getId() {
+	
+	
+	public String getId() {
 		return id;
 	}
-	
-	public void setId(ObjectId id) {
+
+	public void setId(String id) {
 		this.id = id;
 	}
-	
+
 	public Long getAccountNo() {
 		return accountNo;
 	}

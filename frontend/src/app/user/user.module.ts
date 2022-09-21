@@ -15,7 +15,7 @@ import { TokenInterceptorServiceService } from './tokeninterceptorservice/token-
   declarations: [
     UserComponent,
     NavbarComponent,
-    UpdateFormComponent
+    UpdateFormComponent,
   ],
   imports: [
     CommonModule,

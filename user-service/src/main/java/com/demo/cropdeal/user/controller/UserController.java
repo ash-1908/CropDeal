@@ -1,6 +1,7 @@
 package com.demo.cropdeal.user.controller;
 
 import com.demo.cropdeal.user.dto.UserDto;
+import com.demo.cropdeal.user.model.CropItem;
 import com.demo.cropdeal.user.model.User;
 import com.demo.cropdeal.user.service.UserService;
 import io.swagger.annotations.ApiOperation;
@@ -28,17 +29,9 @@ public class UserController {
 		return new ResponseEntity<>(userService.addUser(userDto), HttpStatus.OK);
 	}
 	
-	@DeleteMapping("/delete-user/{userId}")
-	@ApiOperation(value = "Delete user details by id", notes = "enter valid user id to be deleted from the  database",
-		response = String.class)
-	public ResponseEntity<String> deleteUser(@PathVariable ObjectId userId) {
-		
-		return new ResponseEntity<>(userService.deleteUser(userId), HttpStatus.OK);
-		
-	}
 	
 	@GetMapping("/get-user/{userId}")
-	public ResponseEntity<User> getUser(@PathVariable ObjectId userId) {
+	public ResponseEntity<User> getUser(@PathVariable String userId) {
 		
 		return new ResponseEntity<>(userService.getUser(userId), HttpStatus.OK);
 	}
@@ -47,7 +40,6 @@ public class UserController {
 	
 	@GetMapping("/get-all-users")
 	public ResponseEntity<List<User>> getAllUsers() {
-		
 		return new ResponseEntity<>(userService.getAllUsers(), HttpStatus.OK);
 	}
 	
@@ -57,25 +49,46 @@ public class UserController {
 		return new ResponseEntity<>(userService.getUserByEmail(email), HttpStatus.OK);
 	}
 	
-	@GetMapping("/get-user-username/{username}")
-	public ResponseEntity<User> getUserByUsername(@PathVariable String username) {
+	
+	@PutMapping("/add-crop/{userId}")
+	public ResponseEntity<CropItem> addCrop(@PathVariable String userId,@RequestBody CropItem cropItem){
 		
-		return new ResponseEntity<>(userService.getUserByUsername(username), HttpStatus.OK);
+		return new ResponseEntity<CropItem>(userService.addCrops(userId, cropItem),HttpStatus.OK);
+		
+		
 	}
 	
 	
+	@GetMapping("/get-cropIds/{userId}")
+   public ResponseEntity<List<String>> getUserCropIdList(@PathVariable String userId){
+		
+		return new ResponseEntity<>(userService.getUserCropIdList(userId),HttpStatus.OK);
+		
+		
+	}
+	
+	
+	@DeleteMapping("/delete-user/{userId}")
+	@ApiOperation(value = "Delete user details by id", notes = "enter valid user id to be deleted from the  database",
+		response = String.class)
+	public ResponseEntity<String> deleteUser(@PathVariable String userId) {
+		
+		return new ResponseEntity<>(userService.deleteUser(userId), HttpStatus.OK);
+		
+	}
+	
+	
+	
 	@PutMapping("/update-user/{userId}")
-	public ResponseEntity<User> updateUser(@PathVariable ObjectId userId, @RequestBody User user) {
+	public ResponseEntity<User> updateUser(@PathVariable String userId, @RequestBody User user) {
 		
 		return new ResponseEntity<>(userService.updateUser(userId, user), HttpStatus.OK);
 	}
 	
-	@PutMapping("/update-user-status/{userId}/{status}")
-	public ResponseEntity<String> updateUserStatus(@PathVariable ObjectId userId, @PathVariable String status) {
+	@PatchMapping("/update-user-status/{userId}")
+	public ResponseEntity<String> updateUserStatus(@PathVariable String userId, @RequestBody Boolean status) {
 		
-		Boolean newStatus = status.equalsIgnoreCase("active") ? true : false;
-		
-		return new ResponseEntity<>(userService.markUserStatus(userId, newStatus), HttpStatus.OK);
+		return new ResponseEntity<String>(userService.markUserStatus(userId, status), HttpStatus.OK);
 	}
 	
 //	GET CROPITEM LIST - GET USER ID FROM PARAMS

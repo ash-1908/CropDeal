@@ -8,7 +8,7 @@ import javax.persistence.Id;
 public class AddressDto {
 	
 	@Id
-	private ObjectId id;
+	private String id;
 	
 	private String houseNo;
 	
@@ -38,11 +38,11 @@ public class AddressDto {
 		this.country = country;
 	}
 	
-	public ObjectId getId() {
+	public String getId() {
 		return id;
 	}
 	
-	public void setId(ObjectId id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	

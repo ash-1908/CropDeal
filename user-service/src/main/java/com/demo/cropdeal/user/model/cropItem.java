@@ -1,15 +1,14 @@
 package com.demo.cropdeal.user.model;
 
-import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.Id;
 
 @Document("crops")
-public class cropItem {
+public class CropItem {
 	
 	@Id
-	private ObjectId id;
+	private String id;
 	
 	private String name;
 	
@@ -19,16 +18,26 @@ public class cropItem {
 	
 	private String price;
 	
-	public cropItem() {
+	public CropItem() {
 	}
 	
-	public cropItem(String name, String type, String qnt, String price) {
+	public CropItem(String name, String type, String qnt, String price) {
 		this.name = name;
 		this.type = type;
 		this.qnt = qnt;
 		this.price = price;
 	}
 	
+	
+	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -60,5 +69,12 @@ public class cropItem {
 	public void setPrice(String price) {
 		this.price = price;
 	}
+
+	@Override
+	public String toString() {
+		return "CropItem [id=" + id + ", name=" + name + ", type=" + type + ", qnt=" + qnt + ", price=" + price + "]";
+	}
+	
+	
 }
 

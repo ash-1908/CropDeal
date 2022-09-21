@@ -14,7 +14,7 @@ import java.util.List;
 public class User {
 	@ApiModelProperty(notes = "unique id of user")
 	@Id
-	private ObjectId id;
+	private String id;
 	@ApiModelProperty(notes = "The user's full name")
 	private String fullName;
 	
@@ -45,20 +45,21 @@ public class User {
 	@DBRef
 	Address address;
 	
-	@DBRef
-	private List<cropItem> cropItems;
+	private List<String> cropIds;
 	
 	public User() {
 	}
 	
-	public ObjectId getId() {
+	
+	
+	public String getId() {
 		return id;
 	}
 	
-	public void setId(ObjectId id) {
+	public void setId(String id) {
 		this.id = id;
 	}
-	
+
 	public String getFullName() {
 		return fullName;
 	}
@@ -130,12 +131,21 @@ public class User {
 	public void setAddress(Address address) {
 		this.address = address;
 	}
-	
-	public List<cropItem> getCropItems() {
-		return cropItems;
+
+	public List<String> getCropIds() {
+		return cropIds;
+	}
+
+	public void setCropIds(List<String> cropIds) {
+		this.cropIds = cropIds;
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", fullName=" + fullName + ", roles=" + roles + ", userName=" + userName
+				+ ", password=" + password + ", phoneNumber=" + phoneNumber + ", email=" + email + ", active=" + active
+				+ ", bank=" + bank + ", address=" + address + ", cropIds=" + cropIds + "]";
 	}
 	
-	public void setCropItems(List<cropItem> cropItems) {
-		this.cropItems = cropItems;
-	}
+	
 }

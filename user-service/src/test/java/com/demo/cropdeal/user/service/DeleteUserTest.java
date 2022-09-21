@@ -91,8 +91,8 @@ class DeleteUserTest {
 		
 		list.add(user);
 		
-		when(userRepository.getById(Mockito.any(ObjectId.class))).thenReturn(user);
-		assertEquals("user deleted successfully", userService.deleteUser(user.getId()));
+		when(userRepository.getById(Mockito.any(String.class))).thenReturn(user);
+		assertEquals("user deleted successfully", userService.deleteUser(user.getEmail()));
 		
 		
 	}
