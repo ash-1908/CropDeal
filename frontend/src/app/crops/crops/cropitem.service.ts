@@ -11,6 +11,7 @@ export class CropitemService {
 
   private baseURL = "http://localhost:8083/api/v1/cropitems/";
   private AUTH_URL = "http://localhost:8081/validate-token";
+  private addCropUrl="http://localhost:8082/user/add-crop/";
 
   constructor(private httpClient:HttpClient) { }
 
@@ -42,6 +43,14 @@ export class CropitemService {
     // cropItemList.push(cropItem);
     // return of(cropItemList);
   }
+
+
+   
+  //  saveCropitem(cropitem: Cropitem): Observable<Cropitem>{
+
+  //    return this.httpClient.post<Cropitem>(this.addCropUrl +"6324e2a86879610ec04cdc37", cropitem);
+   
+  // }
 
    saveCropitem(cropitem: Cropitem): Observable<Object>{
      return this.httpClient.post(`${this.baseURL}`, cropitem);

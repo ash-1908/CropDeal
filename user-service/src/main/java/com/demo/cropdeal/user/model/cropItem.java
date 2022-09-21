@@ -6,7 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import javax.persistence.Id;
 
 @Document("crops")
-public class cropItem {
+public class Cropitem {
 	
 	@Id
 	private String id;
@@ -19,10 +19,10 @@ public class cropItem {
 	
 	private String price;
 	
-	public cropItem() {
+	public Cropitem() {
 	}
 	
-	public cropItem(String name, String type, String qnt, String price) {
+	public Cropitem(String name, String type, String qnt, String price) {
 		this.name = name;
 		this.type = type;
 		this.qnt = qnt;

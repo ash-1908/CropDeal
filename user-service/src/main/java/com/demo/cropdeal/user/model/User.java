@@ -46,7 +46,7 @@ public class User {
 	Address address;
 	
 	@DBRef
-	private List<cropItem> cropItems;
+	private List<Cropitem> cropItems;
 	
 	public User() {
 	}
@@ -131,11 +131,11 @@ public class User {
 		this.address = address;
 	}
 	
-	public List<cropItem> getCropItems() {
+	public List<Cropitem> getCropItems() {
 		return cropItems;
 	}
 	
-	public void setCropItems(List<cropItem> cropItems) {
+	public void setCropItems(List<Cropitem> cropItems) {
 		this.cropItems = cropItems;
 	}
 }

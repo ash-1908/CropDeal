@@ -1,7 +1,7 @@
 package com.demo.cropdeal.user.dto;
 
 import com.demo.cropdeal.user.model.User;
-import com.demo.cropdeal.user.model.cropItem;
+import com.demo.cropdeal.user.model.Cropitem;
 import io.swagger.annotations.ApiModelProperty;
 import org.bson.types.ObjectId;
 
@@ -39,7 +39,7 @@ public class UserDto {
 	@ApiModelProperty(notes = "Address of user")
 	AddressDto address;
 	
-	private List<cropItem> cropItems;
+	private List<Cropitem> cropItems;
 	
 	public UserDto() {
 	}
@@ -141,11 +141,11 @@ public class UserDto {
 		this.address = address;
 	}
 	
-	public List<cropItem> getCropItems() {
+	public List<Cropitem> getCropItems() {
 		return cropItems;
 	}
 	
-	public void setCropItems(List<cropItem> cropItems) {
+	public void setCropItems(List<Cropitem> cropItems) {
 		this.cropItems = cropItems;
 	}
 	

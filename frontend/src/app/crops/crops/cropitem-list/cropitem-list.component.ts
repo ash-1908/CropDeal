@@ -54,6 +54,7 @@ export class CropitemListComponent implements OnInit {
         console.log(data);
         this.getCropitems();
       })
+      window.location.reload();
   }
 
   cropitemDetails(id: string) {
