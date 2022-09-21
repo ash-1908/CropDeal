@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 public class Account implements UserDetails {
 	
 	@Id
-	private ObjectId id;
+	private String id;
 	private String email;
 	private String password;
 	private String fullName;
@@ -81,11 +81,11 @@ public class Account implements UserDetails {
 		return active;
 	}
 	
-	public ObjectId getId() {
+	public String getId() {
 		return id;
 	}
 	
-	public void setId(ObjectId id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	

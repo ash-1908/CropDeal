@@ -1,6 +1,7 @@
 package com.demo.cropdeal.authentication.model;
 
 public class MyRequestModel {
+	protected String id;
 	protected String email;
 	protected String password;
 	protected String fullName;
@@ -8,6 +9,14 @@ public class MyRequestModel {
 	protected String roles;
 	protected String phoneNumber;
 	protected String resetCode;
+	
+	public String getId() {
+		return id;
+	}
+	
+	public void setId(String id) {
+		this.id = id;
+	}
 	
 	public String getEmail() {
 		return email;
@@ -69,7 +78,7 @@ public class MyRequestModel {
 	public Boolean signUpValidation() {
 		// returns true if object is valid
 		return (email != null && !email.isBlank()) && (password != null && !password.isBlank()) &&
-			(fullName != null && !fullName.isBlank()) && (active != null && active) && (roles != null && !roles.isBlank());
+			(fullName != null && !fullName.isBlank()) && (roles != null && !roles.isBlank());
 	}
 	
 	public Boolean signInValidation() {

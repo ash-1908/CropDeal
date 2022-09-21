@@ -37,11 +37,6 @@ const routes: Routes = [
         component: ResetPwdComponent,
       },
       {
-        path: 'forgot-password/validate-otp',
-
-        component: ValidateOtpComponent,
-      },
-      {
         path: '**',
         redirectTo: 'signin',
       },

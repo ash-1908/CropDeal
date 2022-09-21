@@ -5,28 +5,47 @@ import org.bson.types.ObjectId;
 public class MyResponseModel {
 	
 	private String jwt;
-	private ObjectId id;
+	private String id;
 	private String name;
 	private String role;
+	
+	private String email;
+	
+	private String phone;
 	
 	public MyResponseModel(){}
 	
 	public MyResponseModel(String jwt) {
 		this.jwt = jwt;
 	}
-	public MyResponseModel( ObjectId id, String name, String role) {
+	public MyResponseModel( String id, String name, String role) {
 		
 		this.id = id;
 		this.name = name;
 		this.role = role;
 	}
-	public MyResponseModel(String jwt, ObjectId id, String name, String role) {
+	public MyResponseModel(String jwt, String id, String name, String role) {
 		this.jwt = jwt;
 		this.id = id;
 		this.name = name;
 		this.role = role;
 	}
 	
+	public String getEmail() {
+		return email;
+	}
+	
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
+	public String getPhone() {
+		return phone;
+	}
+	
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
 	
 	public String getJwt() {
 		return jwt;
@@ -36,11 +55,11 @@ public class MyResponseModel {
 		this.jwt = jwt;
 	}
 	
-	public ObjectId getId() {
+	public String getId() {
 		return id;
 	}
 	
-	public void setId(ObjectId id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	

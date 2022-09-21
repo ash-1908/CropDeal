@@ -9,10 +9,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -59,7 +56,7 @@ public class AuthRestController {
 		description = "This route is for password reset. User will be validated and " + "given options for resetting.",
 		tags = {"Reset password"})
 	@PostMapping("/forgot-password")
-	public ResponseEntity<String> forgotPassword(HttpServletRequest req, @RequestParam String email,
+	public ResponseEntity<MyResponseModel> forgotPassword(HttpServletRequest req, @RequestParam String email,
 	                                             @RequestParam String method) {
 		
 		return ResponseEntity.ok(accountServiceImpl.forgotPassword(req.getRequestURL().toString(), email, method));
@@ -78,7 +75,7 @@ public class AuthRestController {
 	//	VALIDATE OTP
 	@Operation(summary = "Validate OTP", description = "This route is for password reset using SMS.",
 		tags = {"Reset password"})
-	@PostMapping("/otp-reset")
+	@PostMapping("/forgot-password/otp")
 	public ResponseEntity<Boolean> validateOTP(@RequestBody MyRequestModel req) {
 		
 		return ResponseEntity.ok(accountServiceImpl.validateOTP(req));
@@ -88,7 +85,11 @@ public class AuthRestController {
 		tags = {"Validation"})
 	@PostMapping("/validate-token")
 	public MyResponseModel validateToken(@RequestBody MyResponseModel token) {
-		accountServiceImpl.validateToken(token.getJwt());
+		return accountServiceImpl.validateToken(token.getJwt());
+	}
+	
+	@GetMapping("/get/user-phone")
+	public String getUserPhone(@RequestBody MyRequestModel req) {
 		return null;
 	}
 }

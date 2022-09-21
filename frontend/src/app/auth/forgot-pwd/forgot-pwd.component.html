@@ -2,12 +2,13 @@
   <div
     class="make-center bg-white rounded p-4 w-25 text-black fw-semibold lh-3"
     style="--bs-bg-opacity: 0.6"
+    *ngIf="!showModal"
   >
     <header>
       <h3 class="fw-semibold">Forgot Password</h3>
     </header>
     <main>
-      <div>
+      <div class="position-relative">
         <form
           #forgotPwdForm="ngForm"
           (ngSubmit)="submitForm()"
@@ -72,6 +73,9 @@
             >
               Reset Password
             </button>
+            <div *ngIf="error" class="text-center text-danger">
+              {{ error }}
+            </div>
           </div>
         </form>
       </div>
@@ -85,4 +89,5 @@
       </div>
     </footer>
   </div>
+  <app-validate-otp *ngIf="showModal" [phone]="serverAck"></app-validate-otp>
 </div>

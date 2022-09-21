@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { catchError, Observable, Subject, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, of, startWith, Subject, tap, throwError } from 'rxjs';
 import { ResponseModel } from 'src/assets/model/ResponseModel';
 import { User } from './user/model/user';
 
@@ -9,20 +9,30 @@ import { User } from './user/model/user';
   providedIn: 'root',
 })
 export class MainService {
-  // store current user here
-  private currentUser: ResponseModel = new ResponseModel();
+  // user login status
+  private userIsAuthenticated = new BehaviorSubject<boolean>(false);
+  public userIsAuthenticated$ = this.userIsAuthenticated.asObservable();
 
   // authentication server url to validate jwt
-  private VALIDATE_TOKEN_URL = 'http://localhost:8081/validate-token';
+  // private VALIDATE_TOKEN_URL = 'http://localhost:8081/validate-token';
 
   constructor(private http: HttpClient, private router: Router) {}
 
   // validate jwt and return response from server
-  public validateJwt(jwt: string): Observable<ResponseModel> {
-    return this.http
-      .post<ResponseModel>(this.VALIDATE_TOKEN_URL, { jwt })
-      .pipe(catchError(this.handleError));
-  }
+  // public validateJwt(): Observable<ResponseModel> {
+  //   let jwt = localStorage.getItem("jwt") || '';
+  //   return this.http
+  //     .post<ResponseModel>(this.VALIDATE_TOKEN_URL, { jwt })
+  //     .pipe(tap(this.setRefreshedToken), catchError(this.handleError));
+    
+  // }
+
+  // private setRefreshedToken(res: ResponseModel): any {
+  //   localStorage.setItem("jwt", res.jwt);
+  //   localStorage.setItem("user_id", res.id);
+  //   localStorage.setItem("user_name", res.name);
+  //   localStorage.setItem("user_role", res.role);
+  // }
   //  handle error
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {
@@ -41,12 +51,8 @@ export class MainService {
     }
   }
 
-  // getter and setter for current user
-  getCurrentUser(): ResponseModel {
-    return this.currentUser;
+  public setUserIsAuthenticated(status: boolean) {
+    this.userIsAuthenticated.next(status);
   }
 
-  setCurrentUser(user: ResponseModel): void {
-    this.currentUser = user;
-  }
 }

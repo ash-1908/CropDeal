@@ -8,6 +8,7 @@ import com.demo.cropdeal.authentication.model.MyRequestModel;
 import com.demo.cropdeal.authentication.model.MyResponseModel;
 import com.demo.cropdeal.authentication.security.util.JwtUtil;
 import net.bytebuddy.utility.RandomString;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -93,9 +94,10 @@ public class AccountServiceImpl implements UserDetailsService, IAccountService {
 	
 	public Boolean validateOTP(MyRequestModel req) {
 		String otp = req.getResetCode();
-		if (otp != null && !otp.isBlank()) {
-			Optional<Account> accountData = repository.findByResetCode(otp);
-			return accountData.isPresent();
+		String id = req.getId();
+		if ((id != null && !id.isBlank()) && (otp != null && !otp.isBlank())) {
+			Account accountData = repository.findById(new ObjectId(id)).get();
+			return accountData.getResetCode().equals(otp);
 		}
 		return false;
 	}
@@ -125,7 +127,8 @@ public class AccountServiceImpl implements UserDetailsService, IAccountService {
 	}
 	
 	@Override
-	public String forgotPassword(String url, String email, String method) {
+	public MyResponseModel forgotPassword(String url, String email, String method) {
+		MyResponseModel response = new MyResponseModel();
 		if (email == null || email.isBlank()) throw new InvalidCredentialsException("Email field cannot be empty.");
 		
 		Optional<Account> accountData = repository.findByEmail(email);
@@ -138,14 +141,16 @@ public class AccountServiceImpl implements UserDetailsService, IAccountService {
 			
 			if (account.getPhoneNumber() == null) throw new PhoneNumberNotFoundException("Phone number not found.");
 			
-			Double otp = Math.floor(Math.random() * 10000 + Math.random() * 1000 + Math.random() * 100 + Math.random() * 10);
+			Integer otp = (int)
+				Math.floor(Math.random() * 10000 + Math.random() * 1000 + Math.random() * 100 + Math.random() * 10);
 			
 			account.setResetCode(otp.toString());
 			repository.save(account);
 			
 			smsService.sendOTP(account.getPhoneNumber(), otp.toString());
 			
-			return "Sms sent.";
+			response.setPhone(account.getPhoneNumber());
+			return response;
 		} else {
 			final String resetCode = RandomString.make(20);
 			
@@ -156,7 +161,8 @@ public class AccountServiceImpl implements UserDetailsService, IAccountService {
 			
 			emailService.resetPasswordMail(account.getUsername(), account.getFullName(), link);
 			
-			return "Email sent.";
+			response.setEmail(account.getEmail());
+			return response;
 		}
 	}
 	

@@ -1,6 +1,6 @@
 package com.demo.cropdeal.authentication.security;
 
-import com.demo.cropdeal.authentication.security.filters.MyJwtFilter;
+//import com.demo.cropdeal.authentication.security.filters.MyJwtFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,16 +9,19 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @EnableWebSecurity
 @Configuration
 public class SecurityConfiguration {
-	private final MyJwtFilter myJwtFilter;
-	
-	@Autowired
-	public SecurityConfiguration(MyJwtFilter myJwtFilter) {
-		this.myJwtFilter = myJwtFilter;
-	}
+//	private final MyJwtFilter myJwtFilter;
+//
+//	@Autowired
+//	public SecurityConfiguration(MyJwtFilter myJwtFilter) {
+//		this.myJwtFilter = myJwtFilter;
+//	}
 	
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -28,11 +31,21 @@ public class SecurityConfiguration {
 			.permitAll()
 			.and()
 			.sessionManagement()
-			.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-			.and().cors().disable();
-		http.addFilterBefore(myJwtFilter, UsernamePasswordAuthenticationFilter.class);
+			.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+//		http.addFilterBefore(myJwtFilter, UsernamePasswordAuthenticationFilter.class);
 		
 		return http.build();
+	}
+	
+	@Bean
+	public WebMvcConfigurer corsConfigurer() {
+		return new WebMvcConfigurerAdapter() {
+			@Override
+			public void addCorsMappings(CorsRegistry registry) {
+				registry.addMapping("/**")
+					.allowedMethods("*");
+			}
+		};
 	}
 	
 	

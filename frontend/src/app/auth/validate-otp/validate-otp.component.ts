@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-validate-otp',
@@ -7,21 +9,34 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ValidateOtpComponent implements OnInit {
 
-  protected phoneNumber: string = '+91****83838'
+  @Input()
+  public phone: string = ''
   protected otpDigit1: string = "";
   protected otpDigit2: string = "";
   protected otpDigit3: string = "";
   protected otpDigit4: string = "";
   private otp: string = "";
+  protected otpIsCorrect: boolean;
+  protected errorMsg: string ="";
 
-  constructor() { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
   }
 
   protected submitForm() : void {
     this.otp = this.otpDigit1+this.otpDigit2+this.otpDigit3+this.otpDigit4;
-    alert("OTP: " + this.otp);
+    let id: string = localStorage.getItem("user_id") || '';
+    this.authService.validateOtp(id, this.otp).subscribe(
+      res => this.otpIsCorrect = res
+    );
+    if(this.otpIsCorrect) {
+      this.errorMsg = ""
+      this.router.navigate(["./reset"])
+    }
+    else {
+      this.errorMsg = "Wrong OTP";
+    }
   }
 
 }

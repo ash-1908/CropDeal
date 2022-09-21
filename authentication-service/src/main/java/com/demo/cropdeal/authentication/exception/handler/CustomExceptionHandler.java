@@ -1,9 +1,6 @@
 package com.demo.cropdeal.authentication.exception.handler;
 
-import com.demo.cropdeal.authentication.exception.InvalidCredentialsException;
-import com.demo.cropdeal.authentication.exception.InvalidPasswordException;
-import com.demo.cropdeal.authentication.exception.UserAlreadyExistsException;
-import com.demo.cropdeal.authentication.exception.UserNotFoundException;
+import com.demo.cropdeal.authentication.exception.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -38,5 +35,19 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
 	public ResponseEntity<CustomExceptionBody> userNotFoundExceptionHandler (UserNotFoundException ex, HttpServletRequest req) {
 		CustomExceptionBody exception = new CustomExceptionBody(ex.getMessage(), req.getRequestURI(), LocalDateTime.now());
 		return new ResponseEntity<>(exception, HttpStatus.NOT_FOUND);
+	}
+	
+	@ExceptionHandler (InvalidSessionException.class)
+	public ResponseEntity<CustomExceptionBody> invalidSessionExceptionHandler (InvalidSessionException ex,
+	                                                                    HttpServletRequest req) {
+		CustomExceptionBody exception = new CustomExceptionBody(ex.getMessage(), req.getRequestURI(), LocalDateTime.now());
+		return new ResponseEntity<>(exception, HttpStatus.NETWORK_AUTHENTICATION_REQUIRED);
+	}
+	
+	@ExceptionHandler (Exception.class)
+	public ResponseEntity<CustomExceptionBody> generalExceptionHandler (Exception ex,
+	                                                                           HttpServletRequest req) {
+		CustomExceptionBody exception = new CustomExceptionBody(ex.getMessage(), req.getRequestURI(), LocalDateTime.now());
+		return new ResponseEntity<>(exception, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 }

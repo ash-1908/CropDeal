@@ -1,13 +1,11 @@
 <div class="p-5">
   <div
-    class="make-center bg-white rounded p-4 w-25 text-black fw-semibold lh-3"
+    class="make-center bg-white border rounded p-4 w-25 text-black fw-semibold lh-3"
     style="--bs-bg-opacity: 0.6"
   >
     <header class="text-center mb-3">
       <h3 class="fw-semibold">Enter OTP</h3>
-      <small
-        >An OTP has been sent to your mobile number {{ phoneNumber }}</small
-      >
+      <small>An OTP has been sent to your mobile number {{ phone }}</small>
     </header>
     <main>
       <div>
@@ -91,6 +89,9 @@
             >
               Validate OTP
             </button>
+            <div class="text-center text-danger pt-2">
+              {{ errorMsg }}
+            </div>
           </div>
         </form>
       </div>

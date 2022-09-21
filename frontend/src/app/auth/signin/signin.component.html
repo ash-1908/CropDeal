@@ -65,6 +65,9 @@
             >
               Sign in
             </button>
+            <div class="text-center text-danger" *ngIf="error">
+              {{error}}
+            </div>
           </div>
         </form>
       </div>

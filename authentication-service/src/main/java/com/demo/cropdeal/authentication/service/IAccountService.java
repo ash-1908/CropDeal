@@ -14,7 +14,7 @@ interface IAccountService {
 	
 	MyResponseModel resetPassword(MyRequestModel req, String resetToken);
 	
-	String forgotPassword(String url, String email, String method);
+	MyResponseModel forgotPassword(String url, String email, String method);
 	
 	MyResponseModel validateToken(String token);
 	
