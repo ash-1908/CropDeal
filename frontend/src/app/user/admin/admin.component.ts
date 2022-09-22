@@ -27,10 +27,6 @@ export class AdminComponent implements OnInit {
     
   }
 
-  register(){
-    this.router.navigate(['register']);
-  }
-
 
   updateUser(id:string):void{
 
