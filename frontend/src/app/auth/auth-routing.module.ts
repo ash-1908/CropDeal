@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AdminSignupComponent } from './admin-signup/admin-signup.component';
 import { AuthComponent } from './auth/auth.component';
 import { ForgotPwdComponent } from './forgot-pwd/forgot-pwd.component';
 import { ResetPwdComponent } from './reset-pwd/reset-pwd.component';
 import { SigninComponent } from './signin/signin.component';
 import { SignupComponent } from './signup/signup.component';
-import { ValidateOtpComponent } from './validate-otp/validate-otp.component';
 
 const routes: Routes = [
   {
@@ -26,6 +26,11 @@ const routes: Routes = [
         path: 'signup',
 
         component: SignupComponent,
+      },
+      {
+        path: 'signup/admin',
+
+        component: AdminSignupComponent,
       },
       {
         path: 'forgot-password',
