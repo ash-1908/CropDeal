@@ -16,7 +16,6 @@ const routes: Routes = [
       { path: 'register', component: AdduserformComponent },
       { path: 'profile/:id', component: UserComponent },
       { path: 'update', component: UpdateFormComponent },
-      { path: 'crops/save-cropitem', component: SaveCropitemComponent },
     ],
   },
 ];

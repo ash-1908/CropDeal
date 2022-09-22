@@ -39,11 +39,7 @@ export class AdduserformComponent implements OnInit {
   }
 
   onsubmit(RegisterForm: NgForm): void {
-    // console.log("data in ng form"+updateForm.value.usertype)
-    // console.log("data in ng form"+updateForm.value.username)
-    // console.log("data in ng form"+updateForm.value.accountno)
-
-    // this.id=this.service.getId();
+    
     this.user.roles = RegisterForm.value.usertype;
     this.user.fullName = RegisterForm.value.fullname;
     this.user.userName = RegisterForm.value.username;
