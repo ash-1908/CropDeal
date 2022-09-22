@@ -28,6 +28,6 @@ export class SignupComponent implements OnInit {
     this.authService
       .signUp(this.userEmail, this.userPassword, this.userFullName, this.userIsFarmer)
       .subscribe((res) => (this.res = res));
-    this.router.navigate(['../../user/profile/', this.res.id]);
+    this.router.navigate(['../../user/register/']);
   }
 }

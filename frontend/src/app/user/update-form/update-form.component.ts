@@ -13,7 +13,7 @@ import { ServiceService } from '../service/service.service';
 })
 export class UpdateFormComponent implements OnInit {
   
-   id:string="63285c9fcbbc536e9426d312";
+   id = localStorage.getItem("user_id");
    username:string="";
    user:User={};
    bank:Bank={};
@@ -85,6 +85,7 @@ export class UpdateFormComponent implements OnInit {
 
   }
   else{
+    if(this.id != null)
     this.service.updateUser(this.id,this.user).subscribe(data=>{
   
     this.val=true;

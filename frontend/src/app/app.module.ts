@@ -11,9 +11,17 @@ import { ServiceService } from './user/service/service.service';
 import { TokenInterceptorServiceService } from './user/tokeninterceptorservice/token-interceptor-service.service';
 import { HomeComponent } from './components/home/home.component';
 import { AuthService } from './auth/auth.service';
+import { Updateform1Component } from './updateform1/updateform1.component';
+import { AdduserformComponent } from './user/adduserform/adduserform.component';
 
 @NgModule({
-  declarations: [AppComponent, NavComponent, HomeComponent],
+  declarations: [
+    AppComponent,
+    NavComponent,
+    HomeComponent,
+    Updateform1Component,
+    AdduserformComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

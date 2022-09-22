@@ -44,16 +44,15 @@ public class UserService implements IUserService {
 		
 		boolean usernameAbsent = userRepository.getByUserName(user.getUserName()) == null;
 		boolean MobileNoAbsent = userRepository.getByPhoneNumber(user.getPhoneNumber()) == null;
-		boolean EmaiLIdAbsent = userRepository.getByEmail(user.getEmail()) == null;
 		boolean AccountNoAbsent = bankRepository.getByAccountNo(user.getBank().getAccountNo()) == null;
 		
-		if (usernameAbsent && MobileNoAbsent && EmaiLIdAbsent && AccountNoAbsent) {
+		if (usernameAbsent && MobileNoAbsent && AccountNoAbsent) {
+			User userFromDB = userRepository.getByEmail(user.getEmail());
 			
-			String userRole = user.getRoles().split("_")[1];
-			
-			user.setRoles(userRole);
-			
-			//bank id 6324e2a86879610ec04cdc35  address id 6324e2a86879610ec04cdc36  user id:6324e2a86879610ec04cdc37
+			user.setId(userFromDB.getId());
+			user.setPassword(userFromDB.getPassword());
+			user.setRoles(userFromDB.getRoles());
+			user.setEmail(userFromDB.getEmail());
 			
 			User user1;
 			Bank bank=bankRepository.save(user.getBank());
@@ -65,7 +64,7 @@ public class UserService implements IUserService {
 			
 			
 			emailSenderService.sendEmail(user.getEmail(),
-				user.getFullName() + " you are registered successfully..as " + userRole, "Registration Status");
+				user.getFullName() + " you are registered successfully..as " + user.getRoles(), "Registration Status");
 			return "user Added";
 		} else {
 			if (usernameAbsent == false) {
@@ -76,9 +75,7 @@ public class UserService implements IUserService {
 				s1 = s1 + "  *mobile number already exists*";
 			}
 			
-			if (EmaiLIdAbsent == false) {
-				s1 = s1 + "  *email already taken*";
-			}
+			
 			if (AccountNoAbsent == false) {
 				s1 = s1 + "  *account number already exists*";
 			}

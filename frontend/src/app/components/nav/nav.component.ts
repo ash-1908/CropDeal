@@ -15,7 +15,8 @@ export class NavComponent implements OnInit {
 
   constructor(
     private mainService: MainService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {
     this.mainService.userIsAuthenticated$.subscribe(
       (res) => (this.userIsAuthenticated = res)
@@ -34,5 +35,6 @@ export class NavComponent implements OnInit {
     this.authService.signOut();
     this.mainService.setUserIsAuthenticated(false);
     this.userIsAuthenticated = false;
+    this.router.navigate(['/']);
   }
 }

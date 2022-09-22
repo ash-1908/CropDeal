@@ -149,7 +149,7 @@ public class AccountServiceImpl implements UserDetailsService, IAccountService {
 			account.setResetCode(otp.toString());
 			repository.save(account);
 			
-//			smsService.sendOTP(account.getPhoneNumber(), otp.toString());
+			smsService.sendOTP(account.getPhoneNumber(), otp.toString());
 			
 			response.setId(account.getId());
 			response.setPhone(account.getPhoneNumber());
