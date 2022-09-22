@@ -20,54 +20,34 @@
       <div class="title">USER DETAILS</div>
       <br />
 
-      <label>Select user type : </label> &nbsp;
-      <input
-        type="radio"
-        ngModel
-        name="usertype"
-        #utype="ngModel"
-        value="ROLE_FARMER"
-      />
-      Farmer &nbsp; &nbsp; &nbsp;<input
-        type="radio"
-        ngModel
-        name="usertype"
-        #utype="ngModel"
-        value="ROLE_DEALER"
-      />
-      Dealer
-
-      <br />
-      <br />
-
       <div class="row">
-        <div class="col-sm-4">
-          <label>Full Name : </label> &nbsp;
+        <div class="col-sm-3">
+          <label>Mobile No :</label>&nbsp;
           <input
             required
-            style="margin-left: 26px"
-            type="text"
-            placeholder="enter your full name"
+            style="margin-left: 5px"
+            type="number"
+            pattern="[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]"
+            placeholder="enter your mobile number"
             ngModel
-            pattern="[a-zA-Z ]+"
-            name="fullname"
-            #fname="ngModel"
-            class="i1"
+            name="mobileno"
+            class="input"
+            #umob="ngModel"
           />
 
-          <div *ngIf="fname.errors && (fname.dirty || fname.touched)">
-            <div *ngIf="fname.hasError('pattern')">
-              <span id="span" class="error_msg">
-                name can contain only space and alphabets</span
+          <div *ngIf="umob.errors && (umob.dirty || umob.touched)">
+            <div *ngIf="umob.hasError('pattern')">
+              <span id="span" class="error_msg"
+                >mobile number must be 10 digits without spaces</span
               >
             </div>
-            <div *ngIf="fname.hasError('required')">
-              <span id="span" class="error_msg"> name is required</span>
+            <div *ngIf="umob.hasError('required')">
+              <span id="span" class="error_msg"> mobile number required</span>
             </div>
           </div>
         </div>
 
-        <div class="col-sm-8">
+        <div class="col-sm-9">
           <label>User Name :</label>&nbsp;
           <input
             required
@@ -89,64 +69,6 @@
             </div>
             <div *ngIf="uname.hasError('required')">
               <span id="span" class="error_msg"> username is required</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <br />
-      <div class="row">
-        <div class="col-sm-4">
-          <label>Email Id:</label>&nbsp;
-          <input
-            required
-            style="margin-left: 50px"
-            class="i1"
-            type="email"
-            placeholder="enter email"
-            ngModel
-            name="email"
-            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
-            #uemail="ngModel"
-            class="i1"
-          />
-          <br />
-
-          <div *ngIf="uemail.errors && (uemail.dirty || uemail.touched)">
-            <div *ngIf="uemail.hasError('pattern')">
-              <span id="span" class="error_msg"
-                >email cannot have space and special characters (except:@ and .)
-                example=abc002@gmail.com</span
-              >
-            </div>
-            <div *ngIf="uemail.hasError('required')">
-              <span id="span" class="error_msg"> email is required</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-sm-8">
-          <label>Mobile No :</label>&nbsp;
-          <input
-            required
-            style="margin-left: 5px"
-            type="number"
-            pattern="[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]"
-            placeholder="enter your mobile number"
-            ngModel
-            name="mobileno"
-            class="input"
-            #umob="ngModel"
-          />
-
-          <div *ngIf="umob.errors && (umob.dirty || umob.touched)">
-            <div *ngIf="uemail.hasError('pattern')">
-              <span id="span" class="error_msg"
-                >mobile number must be 10 digits without spaces</span
-              >
-            </div>
-            <div *ngIf="umob.hasError('required')">
-              <span id="span" class="error_msg"> mobile number required</span>
             </div>
           </div>
         </div>
@@ -187,6 +109,7 @@
         <div class="col-sm-4">
           <label>Account Number :</label>&nbsp;
           <input
+            id="accNo"
             required
             style="margin-left: 10px"
             type="text"

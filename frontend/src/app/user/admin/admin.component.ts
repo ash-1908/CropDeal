@@ -1,9 +1,9 @@
 import { Binary } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from '../user/model/user';
-import { Userr } from '../user/model/userr';
-import { ServiceService } from '../user/service/service.service';
+import { User } from '../model/user';
+import { Userr } from '../model/userr';
+import { ServiceService } from '../service/service.service';
 
 @Component({
   selector: 'app-admin',
@@ -34,7 +34,7 @@ export class AdminComponent implements OnInit {
 
   updateUser(id:string):void{
 
-    this.userService.setId(id)
+    this.userService.getId();
     this.userId=id;
     console.log(this.userId)
     this.router.navigate(['admin/user/update']);
