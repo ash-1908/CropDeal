@@ -21,9 +21,6 @@ public class CropitemServiceImpl implements CropitemService {
 	@Autowired
 	EmailSenderService emailsenderService;
 
-    @Autowired
-	RestTemplate restTemplate;
-	
 	public CropitemServiceImpl(CropitemRepository cropitemRepository) {
 		super();
 		this.cropitemRepository = cropitemRepository;

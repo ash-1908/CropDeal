@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import com.demo.cropdeal.cropitems.model.Cropitem;
+import com.demo.cropdeal.cropitems.model.User;
 import com.demo.cropdeal.cropitems.service.CropitemService;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -35,8 +36,15 @@ public class CropitemController {
 //	@RequestMapping("/userId")
 //	public List<User>getCropitemByFarmerId(@PathVariable("userId")String userId){
 //		RestTemplate restTemplate=new RestTemplate();
-//		String url;
-//		restTemplate.getForObject(url:"http://localhost:8082/", User.class);
+//		String url="http://localhost:8082/add-crop/{userId}";
+//	User users=restTemplate.getForObject(url,User.class,userId);
+//	
+//	Cropitem cropitem=CropitemRepository.getById(id);
+//	cropitem.setCropIds(list);
+//	user=userRepository.save(user); 
+//	System.out.println(user);
+//	return crop;
+//	return User;
 //	}
 	
 	// build create cropitem REST API
@@ -76,6 +84,5 @@ public class CropitemController {
 		return new ResponseEntity<String>("crop deleted successfully!",HttpStatus.OK);
 	}
 	
-//	GET LIST OF CROP ITEMS - BASED ON LIST OF OBJECT IDS
 	
 }
