@@ -27,14 +27,15 @@ export class Updateform1Component implements OnInit {
 
   constructor(private service: ServiceService, private router: Router) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.id=this.service.getId();
+  }
 
   onsubmit(updateForm: NgForm): void {
     console.log('data in ng form' + updateForm.value.usertype);
     console.log('data in ng form' + updateForm.value.username);
     console.log('data in ng form' + updateForm.value.accountno);
-
-    this.id = this.service.getId();
+    
     this.user.roles = updateForm.value.usertype;
     this.user.fullName = updateForm.value.fullname;
     this.user.userName = updateForm.value.username;

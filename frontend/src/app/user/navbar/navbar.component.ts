@@ -9,7 +9,21 @@ import { ServiceService } from '../service/service.service';
 })
 export class NavbarComponent implements OnInit {
   userId = localStorage.getItem('user_id');
-  constructor() {}
+  userType:boolean;
+  constructor() { 
+  }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+
+    let role=localStorage.getItem("user_role");
+    if(role=='ROLE_ADMIN'){
+         this.userType=false;
+    }
+    else
+    {
+     this.userType=true
+    }
+    
+
+  }
 }

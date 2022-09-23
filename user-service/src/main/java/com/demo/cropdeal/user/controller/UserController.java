@@ -51,9 +51,9 @@ public class UserController {
 	
 	
 	@PutMapping("/add-crop/{userId}")
-	public ResponseEntity<CropItem> addCrop(@PathVariable String userId,@RequestBody CropItem cropItem){
+	public ResponseEntity<Boolean> addCrop(@PathVariable String userId,@PathVariable String cropId){
 		
-		return new ResponseEntity<CropItem>(userService.addCrops(userId, cropItem),HttpStatus.OK);
+		return new ResponseEntity<Boolean>(userService.addCrops(userId, cropId),HttpStatus.OK);
 		
 		
 	}

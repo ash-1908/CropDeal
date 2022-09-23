@@ -5,6 +5,7 @@ import { AdduserformComponent } from './adduserform/adduserform.component';
 import { AdminComponent } from './admin/admin.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { UpdateFormComponent } from './update-form/update-form.component';
+import { Updateform1Component } from './updateformAdmin/updateform1.component';
 
 import { UserComponent } from './user/user.component';
 
@@ -18,6 +19,8 @@ const routes: Routes = [
       { path: 'profile/:id', component: UserComponent },
       { path: 'update', component: UpdateFormComponent },
       {path:'admin/homepage' ,component:AdminComponent},
+       {path:'admin/update',component:Updateform1Component}
+
     ],
   },
 ];
