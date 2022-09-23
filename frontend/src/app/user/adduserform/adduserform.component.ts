@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { Address } from '../model/address';
 import { Bank } from '../model/bank';
 import { User } from '../model/user';
@@ -14,11 +15,13 @@ import { ServiceService } from '../service/service.service';
 })
 export class AdduserformComponent implements OnInit {
   id: string;
+  user1:User
   username: string = '';
   user: User = {
     roles: '',
     email: '',
     active: true,
+    fullName:'',
   };
   roles: string = '';
   bank: Bank = {};
@@ -32,7 +35,13 @@ export class AdduserformComponent implements OnInit {
 
   constructor(private service: ServiceService, private router: Router) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+
+  
+    let signupId=localStorage.getItem("user_id")?localStorage.getItem("user_id"):"";
+    this.user.id=signupId?signupId:"";
+
+  }
 
   goToAdminPage() {
     this.router.navigate(['admin']);
@@ -40,10 +49,10 @@ export class AdduserformComponent implements OnInit {
 
   onsubmit(RegisterForm: NgForm): void {
     
-    this.user.roles = RegisterForm.value.usertype;
-    this.user.fullName = RegisterForm.value.fullname;
+    // this.user.roles = RegisterForm.value.usertype;
+    // this.user.fullName = RegisterForm.value.fullname;
     this.user.userName = RegisterForm.value.username;
-    this.user.email = RegisterForm.value.email;
+    // this.user.email = RegisterForm.value.email;
     this.user.phoneNumber = RegisterForm.value.mobileno;
     //this.user.active=true;
 

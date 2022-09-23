@@ -8,6 +8,8 @@ import com.demo.cropdeal.user.model.User;
 import com.demo.cropdeal.user.repository.AddressRepository;
 import com.demo.cropdeal.user.repository.BankRepository;
 import com.demo.cropdeal.user.repository.UserRepository;
+
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -47,12 +49,13 @@ public class UserService implements IUserService {
 		boolean AccountNoAbsent = bankRepository.getByAccountNo(user.getBank().getAccountNo()) == null;
 		
 		if (usernameAbsent && MobileNoAbsent && AccountNoAbsent) {
-			User userFromDB = userRepository.getByEmail(user.getEmail());
+			User userFromDB = userRepository.getById(user.getId());
 			
 			user.setId(userFromDB.getId());
 			user.setPassword(userFromDB.getPassword());
 			user.setRoles(userFromDB.getRoles());
 			user.setEmail(userFromDB.getEmail());
+			user.setFullName(userFromDB.getFullName());
 			
 			User user1;
 			Bank bank=bankRepository.save(user.getBank());
