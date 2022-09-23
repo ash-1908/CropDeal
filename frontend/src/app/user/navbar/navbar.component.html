@@ -3,8 +3,12 @@
     <button type="button" class="btn btn-primary">MY PROFILE</button>
   </a>
 
-  <a class="nav-link" routerLink="update">
+  <a   *ngIf="userType" class="nav-link" routerLink="update">
     <button type="button" class="btn btn-primary">UPDATE DETAILS</button>
+  </a>
+
+  <a   *ngIf="userType==false" class="nav-link" routerLink="admin/homepage">
+    <button type="button" class="btn btn-primary">All Users Record</button>
   </a>
 
 

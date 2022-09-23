@@ -23,17 +23,16 @@ export class AdminComponent implements OnInit {
    }
 
   ngOnInit(): void {
-
     
   }
 
 
   updateUser(id:string):void{
 
-    this.userService.getId();
+    this.userService.setId(id);
     this.userId=id;
     console.log(this.userId)
-    this.router.navigate(['admin/user/update']);
+    this.router.navigate(['/user/admin/update']);
 
     
   }

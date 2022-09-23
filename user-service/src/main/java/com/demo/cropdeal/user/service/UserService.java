@@ -188,25 +188,15 @@ public class UserService implements IUserService {
 		
 	}
 	
-	public CropItem addCrops(String userId,CropItem cropItem){
+	public Boolean addCrops(String userId,String cropId){
 		
-		List<String> list=userRepository.getById(userId).getCropIds();
-		String url="http://localhost:8083/api/v1/cropitems";
-		System.out.println(cropItem);
-		CropItem crop=restTemplate.postForObject(url,cropItem,CropItem.class);
-		if(crop!=null) {
-			list.add(crop.getId());
-			System.out.println("crop id is "+crop.getId());
-			System.out.println("crop is : "+crop);
-			User user=userRepository.getById(userId);
-			user.setCropIds(list);
-			user=userRepository.save(user); 
-			System.out.println(user);
-			return crop;
-			
-		}
-		else
-			return new CropItem();
+		User user=userRepository.getById(userId);
+		List<String> list=user.getCropIds();
+		list.add(cropId);
+		user.setCropIds(list);
+		userRepository.save(user);
+		return true;
+		
 	}
 	
 	public List<String> getUserCropIdList(String userId){

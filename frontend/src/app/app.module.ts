@@ -13,6 +13,7 @@ import { HomeComponent } from './components/home/home.component';
 import { AuthService } from './auth/auth.service';
 import { Updateform1Component } from './user/updateformAdmin/updateform1.component';
 import { AdduserformComponent } from './user/adduserform/adduserform.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { AdduserformComponent } from './user/adduserform/adduserform.component';
     NgbModule,
     HttpClientModule,
     FormsModule,
+    CommonModule
   ],
   providers: [
     ServiceService,

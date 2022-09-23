@@ -9,6 +9,9 @@ import { FormsModule } from '@angular/forms';
 import { UpdateFormComponent } from './update-form/update-form.component';
 import { ServiceService } from './service/service.service';
 import { TokenInterceptorServiceService } from './tokeninterceptorservice/token-interceptor-service.service';
+import { BrowserModule } from '@angular/platform-browser';
+import { AdminComponent } from './admin/admin.component';
+
 
 
 @NgModule({
@@ -16,6 +19,8 @@ import { TokenInterceptorServiceService } from './tokeninterceptorservice/token-
     UserComponent,
     NavbarComponent,
     UpdateFormComponent,
+    AdminComponent
+
   ],
   imports: [
     CommonModule,
