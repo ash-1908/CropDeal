@@ -17,6 +17,8 @@ export class CropitemService {
 
   getUser(): Observable<ResponseModel> {
     let req = new ResponseModel();
+
+    //add user_id
     req.jwt = localStorage.getItem("jwt") || "";
     // if(req.jwt !== "")
     //   return this.httpClient.post<ResponseModel>(this.AUTH_URL, req);

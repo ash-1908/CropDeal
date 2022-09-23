@@ -33,6 +33,7 @@
           />
           <div class="card-body">
             <h4 class="text-center">{{ user.userName }}</h4>
+            <h4 *ngIf="userType==false" class="text-center">Admin</h4>
             <br />
           </div>
 
@@ -63,21 +64,21 @@
               </div>
               <hr />
 
-              <div class="col-sm-5">
+              <div *ngIf="userType" class="col-sm-5">
                 <h6 class="mb-0">Username :</h6>
               </div>
-              <div class="col-sm-7 text-secondary">
+              <div *ngIf="userType" class="col-sm-7 text-secondary">
                 {{ user.userName }}
               </div>
-              <hr />
+              <hr *ngIf="userType" />
 
-              <div class="col-sm-5">
+              <div *ngIf="userType" class="col-sm-5">
                 <h6 class="mb-0">Mobile number :</h6>
               </div>
-              <div class="col-sm-7 text-secondary">
+              <div *ngIf="userType" class="col-sm-7 text-secondary">
                 {{ user.phoneNumber }}
               </div>
-              <hr />
+              <hr *ngIf="userType" />
 
               <div class="col-sm-5">
                 <h6 class="mb-0">Email Id :</h6>
@@ -92,7 +93,7 @@
         </div>
       </div>
 
-      <div class="col-sm-5">
+      <div *ngIf="userType" class="col-sm-5">
         <div class="card" style="width: 31rem">
           <h4 class="text-center" style="background-color: rgb(185, 221, 245)">
             Account Details
@@ -145,7 +146,7 @@
       </div>
     </div>
 
-    <div class="row">
+    <div *ngIf="userType" class="row">
       <div class="col-sm-2"></div>
 
       <div class="col-sm-10">

@@ -9,6 +9,7 @@ import { ResetPwdComponent } from './reset-pwd/reset-pwd.component';
 import { ValidateOtpComponent } from './validate-otp/validate-otp.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { AdminSignupComponent } from './admin-signup/admin-signup.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { HttpClientModule } from '@angular/common/http';
     SignupComponent,
     ForgotPwdComponent,
     ResetPwdComponent,
-    ValidateOtpComponent
+    ValidateOtpComponent,
+    AdminSignupComponent
   ],
   imports: [
     CommonModule,

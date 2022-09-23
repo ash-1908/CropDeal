@@ -19,6 +19,8 @@ export class UserComponent implements OnInit {
   address: any;
   res: ResponseModel = new ResponseModel();
 
+  userType:boolean;
+
   constructor(
     private service: ServiceService,
     private actRoute: ActivatedRoute
@@ -28,8 +30,22 @@ export class UserComponent implements OnInit {
       this.user = data;
       this.bank = data.bank;
       this.address = data.address;
+
+
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+
+   let role=localStorage.getItem("user_role");
+   if(role=='ROLE_ADMIN'){
+        this.userType=false;
+   }
+   else
+   {
+    this.userType=true
+   }
+   
+
+  }
 }

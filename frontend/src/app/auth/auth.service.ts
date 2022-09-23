@@ -46,6 +46,22 @@ export class AuthService {
       })
       .pipe(tap(this.setUser), catchError(this.handleError));
   }
+  public signUpAdmin(
+    email: string,
+    password: string,
+    fullName: string,
+    roleAdmin: string
+  ): Observable<ResponseModel> {
+    let endpoint = 'signup';
+    return this.http
+      .post<ResponseModel>(this.rootUrl + endpoint, {
+        email: email,
+        password: password,
+        fullName: fullName,
+        roles: roleAdmin,
+      })
+      .pipe(tap(this.setUser), catchError(this.handleError));
+  }
 
   // post user email and preferred password reset method, return acknowledgement of further communication
   public forgotPassword(

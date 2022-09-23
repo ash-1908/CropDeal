@@ -4,7 +4,7 @@
     style="--bs-bg-opacity: 0.6"
   >
     <header>
-      <h3 class="fw-semibold">Sign up</h3>
+      <h3 class="fw-semibold">Sign up Admin</h3>
     </header>
     <main>
       <div>
@@ -72,41 +72,7 @@
               Invalid name
             </small>
           </div>
-          <div class="row-md-6 mb-4">
-            <label for="userRole" class="form-label">Role</label>
-            <div class="d-flex justify-content-betweeen gap-5">
-              <div class="form-check">
-                <input
-                  class="form-check-input"
-                  required
-                  type="radio"
-                  name="userRole"
-                  id="farmerRole"
-                  [value]="true"
-                  [(ngModel)]="userIsFarmer"
-                  #farmerRole="ngModel"
-                />
-                <label class="form-check-label" for="flexRadioDefault1">
-                  Farmer
-                </label>
-              </div>
-              <div class="form-check">
-                <input
-                  class="form-check-input"
-                  required
-                  type="radio"
-                  name="userRole"
-                  id="dealerRole"
-                  [value]="false"
-                  [(ngModel)]="userIsFarmer"
-                  #dealerRole="ngModel"
-                />
-                <label class="form-check-label" for="flexRadioDefault2">
-                  Dealer
-                </label>
-              </div>
-            </div>
-          </div>
+
           <div class="row-md-6">
             <button
               type="submit"

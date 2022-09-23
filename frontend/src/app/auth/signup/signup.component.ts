@@ -14,20 +14,31 @@ export class SignupComponent implements OnInit {
   protected userPassword: string = '';
   protected userFullName: string = '';
   protected userIsFarmer: boolean = true;
-  private res: ResponseModel = new ResponseModel();
+  protected res: ResponseModel = new ResponseModel();
+  protected error = '';
 
-  constructor(
-    private authService: AuthService,
-    private router: Router
-  ) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
+    this.error = '';
   }
 
   protected submitForm(): void {
     this.authService
-      .signUp(this.userEmail, this.userPassword, this.userFullName, this.userIsFarmer)
-      .subscribe((res) => (this.res = res));
-    this.router.navigate(['../../user/register/']);
+      .signUp(
+        this.userEmail,
+        this.userPassword,
+        this.userFullName,
+        this.userIsFarmer
+      )
+      .subscribe({
+        next: (res) => {
+          this.res = res;
+          this.router.navigate(['../../user/register/']);
+        },
+        error: (error) => {
+          this.error = error;
+        }
+      });
   }
 }

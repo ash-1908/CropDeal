@@ -25,17 +25,6 @@ export class UpdateFormComponent implements OnInit {
 
   ngOnInit(): void {
 
-    // this.actRoute.params.subscribe(params=>{
-    //   this.username=params['username'];
-      
-    // });
-
-    // this.service.getUserById(this.id).subscribe(data=>{
-    //   this.id=data.userId;
-    //   console.log(this.id,"and data  of user is");
-    //   console.log("=>",data);
-      
-    // });
   }
  
 
