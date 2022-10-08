@@ -3,7 +3,7 @@ server.port: 8888
 spring.cloud.config.server.git:
   uri: "https://github.com/ash-1908/cropdeal-auth-config.git"
   username: ash-1908
-  password: '{cipher}68d610c6288411d059a8a064f8e8a62765bdf63509b95994dd0962612ae01a5a0b929cc8ff81bbdd0d45cf675cc74ad9e2a135b369d8873a56cee820ae8ff0dc'
+  password: '{cipher}3c2780bb26e333f291a6f4a933b19c11200e0441854399be3216a3d9d0f286c55ebbf231cc4f35d4e50d753364607b41d25dadc473873f9f6cd064283d03fd78'
 encrypt:
   key: '[B@53978f13'
 spring:
