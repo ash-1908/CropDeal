@@ -54,8 +54,8 @@ export class CropitemService {
    
   // }
 
-   saveCropitem(cropitem: Cropitem): Observable<Object>{
-     return this.httpClient.post(`${this.baseURL}`, cropitem);
+   saveCropitem(cropitem: Cropitem): Observable<Cropitem>{
+     return this.httpClient.post<Cropitem>(`${this.baseURL}`, cropitem);
    }
 
  

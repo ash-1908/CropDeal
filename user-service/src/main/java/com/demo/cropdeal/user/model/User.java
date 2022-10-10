@@ -7,6 +7,7 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @ApiModel(description = "Details about the user")
@@ -45,7 +46,7 @@ public class User {
 	@DBRef
 	Address address;
 	
-	private List<String> cropIds;
+	private List<String> cropIds = new ArrayList<>();
 	
 	public User() {
 	}

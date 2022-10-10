@@ -87,6 +87,6 @@ export class ServiceService {
   }
 
   public addCropToUser(userId: string, cropId: string) :Observable<boolean> {
-    return this.http.put<boolean>(this.BASE_URL + this.ADD_CROP_TO_USER_API + '/' + userId + "/" + cropId, {});
+    return this.http.put<boolean>(this.BASE_URL + this.ADD_CROP_TO_USER_API + userId + "/" + cropId, {});
   }
 }
