@@ -3,6 +3,7 @@ package com.demo.cropdeal.cropitems.controller;
 
 import java.util.List;
 
+import com.demo.cropdeal.cropitems.model.MyRequestModel;
 import org.bson.types.ObjectId;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +21,8 @@ import org.springframework.web.client.RestTemplate;
 import com.demo.cropdeal.cropitems.model.Cropitem;
 import com.demo.cropdeal.cropitems.model.User;
 import com.demo.cropdeal.cropitems.service.CropitemService;
+
+import javax.ws.rs.core.Response;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -84,5 +87,8 @@ public class CropitemController {
 		return new ResponseEntity<String>("crop deleted successfully!",HttpStatus.OK);
 	}
 	
-	
+	@GetMapping("/cropitems/list")
+	public ResponseEntity<List<Cropitem>> findAllCropItemsInList(@RequestBody MyRequestModel req) {
+		return new ResponseEntity<>(cropitemService.findByIdInList(req.getIdList()), HttpStatus.OK);
+	}
 }

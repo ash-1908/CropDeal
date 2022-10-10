@@ -12,5 +12,6 @@ public interface CropitemService {
 	Cropitem getcropItemById(String id);
 	Cropitem updatecropItem(Cropitem cropitem,String id);
 	void deletecropItem(String id);
+	List<Cropitem> findByIdInList(List<String> idList);
 	
 }

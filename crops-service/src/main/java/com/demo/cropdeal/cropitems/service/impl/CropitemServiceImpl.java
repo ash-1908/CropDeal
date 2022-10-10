@@ -1,6 +1,7 @@
 package com.demo.cropdeal.cropitems.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -112,4 +113,18 @@ public class CropitemServiceImpl implements CropitemService {
 			return new ArrayList<>();
 	}
 	*/
+	@Override
+	public List<Cropitem> findByIdInList(List<String> idList) {
+		// exception
+		if(idList == null || idList.size() == 0) return null;
+		
+		// working
+		Optional<List<Cropitem>> cropList = cropitemRepository.findAllById(idList);
+		
+		// exception
+		if(cropList.isEmpty()) return null;
+		
+		return cropList.get();
+	}
+	
 }
