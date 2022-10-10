@@ -34,7 +34,7 @@ export class SigninComponent implements OnInit {
       next: (res) => {
         this.res = res;
         this.mainService.setUserIsAuthenticated(true);
-        this.router.navigate([`../../user/profile/${res.id}`]);
+        this.router.navigate([`../../user/profile`]);
       },
       error: (error) => {
         this.error = error;

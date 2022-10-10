@@ -25,8 +25,8 @@ export class UserComponent implements OnInit {
     private service: ServiceService,
     private actRoute: ActivatedRoute
   ) {
-    let id = this.actRoute.snapshot.params['id'];
-    this.service.getUserById(id).subscribe((data) => {
+    let userId = localStorage.getItem("user_id") || '';
+    this.service.getUserById(userId).subscribe((data) => {
       this.user = data;
       this.bank = data.bank;
       this.address = data.address;

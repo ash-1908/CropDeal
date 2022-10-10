@@ -14,9 +14,9 @@ const routes: Routes = [
     path: '',
     component: NavbarComponent,
     children: [
-      { path: '', redirectTo: '', pathMatch: 'full' },
+      { path: '', redirectTo: 'profile', pathMatch: 'full' },
       { path: 'register', component: AdduserformComponent },
-      { path: 'profile/:id', component: UserComponent },
+      { path: 'profile', component: UserComponent },
       { path: 'update', component: UpdateFormComponent },
       {path:'admin/homepage' ,component:AdminComponent},
        {path:'admin/update',component:Updateform1Component}

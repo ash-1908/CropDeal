@@ -15,13 +15,13 @@ import { ServiceService } from '../service/service.service';
 })
 export class AdduserformComponent implements OnInit {
   id: string;
-  user1:User
+  user1: User;
   username: string = '';
   user: User = {
     roles: '',
     email: '',
     active: true,
-    fullName:'',
+    fullName: '',
   };
   roles: string = '';
   bank: Bank = {};
@@ -36,11 +36,10 @@ export class AdduserformComponent implements OnInit {
   constructor(private service: ServiceService, private router: Router) {}
 
   ngOnInit(): void {
-
-  
-    let signupId=localStorage.getItem("user_id")?localStorage.getItem("user_id"):"";
-    this.user.id=signupId?signupId:"";
-
+    let signupId = localStorage.getItem('user_id')
+      ? localStorage.getItem('user_id')
+      : '';
+    this.user.id = signupId ? signupId : '';
   }
 
   goToAdminPage() {
@@ -48,7 +47,6 @@ export class AdduserformComponent implements OnInit {
   }
 
   onsubmit(RegisterForm: NgForm): void {
-    
     // this.user.roles = RegisterForm.value.usertype;
     // this.user.fullName = RegisterForm.value.fullname;
     this.user.userName = RegisterForm.value.username;
@@ -82,11 +80,12 @@ export class AdduserformComponent implements OnInit {
         console.log('Added database data is:');
         console.log(data);
         console.log('error is :');
+        this.router.navigate(['../../user/profile']);
       },
 
       (err: any) => {
         alert(JSON.parse(JSON.stringify(err.error.text)));
-        window.location.reload();
+       
       }
     );
   }

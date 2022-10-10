@@ -79,7 +79,7 @@ export class UpdateFormComponent implements OnInit {
   
     this.val=true;
     alert('Value updated Successfully .....')
-     this.router.navigate(['user/profile']);
+     this.router.navigate(['./profile']);
 
      });
     
