@@ -17,7 +17,11 @@ export class SignupComponent implements OnInit {
   protected res: ResponseModel = new ResponseModel();
   protected error = '';
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private mainService: MainService
+  ) {}
 
   ngOnInit(): void {
     this.error = '';
@@ -34,11 +38,13 @@ export class SignupComponent implements OnInit {
       .subscribe({
         next: (res) => {
           this.res = res;
+          this.mainService.setUserIsAuthenticated(true);
+
           this.router.navigate(['../../user/register/']);
         },
         error: (error) => {
           this.error = error;
-        }
+        },
       });
   }
 }
