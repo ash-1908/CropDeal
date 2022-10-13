@@ -23,6 +23,7 @@ export class ServiceService {
   private markUserStatusApi: string;
   private addUserApi: string;
   private ADD_CROP_TO_USER_API: string = 'add-crop/';
+  private GET_CROPS_OF_USER_API: string = 'get-crops/'
 
   public user: User = new User();
 
@@ -88,5 +89,9 @@ export class ServiceService {
 
   public addCropToUser(userId: string, cropId: string) :Observable<boolean> {
     return this.http.put<boolean>(this.BASE_URL + this.ADD_CROP_TO_USER_API + userId + "/" + cropId, {});
+  }
+
+  public getUserCrops(userId: string) : Observable<string[]> {
+    return this.http.get<string[]>(this.BASE_URL + this.GET_CROPS_OF_USER_API + userId);
   }
 }
