@@ -87,7 +87,7 @@ public class CropitemController {
 		return new ResponseEntity<String>("crop deleted successfully!",HttpStatus.OK);
 	}
 	
-	@GetMapping("/cropitems/list")
+	@PostMapping("/cropitems/list")
 	public ResponseEntity<List<Cropitem>> findAllCropItemsInList(@RequestBody MyRequestModel req) {
 		return new ResponseEntity<>(cropitemService.findByIdInList(req.getIdList()), HttpStatus.OK);
 	}
